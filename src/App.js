@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import AddNotesBtn from "./components/AddNotesBtn";
+import NotesInput from "./components/NotesInput";
+import NotesRender from "./components/NotesRender";
 
 function App() {
+  const [addNote, setAddNote] = useState(false);
+  const [text, setText] = useState("");
+  const [notes, setNotes] = useState([]);
+  const [noteColor, setNoteColor] = useState('red')
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <AddNotesBtn 
+        addNote={addNote} 
+        setAddNote={setAddNote} 
+      />
+      {
+        addNote && 
+          <NotesInput
+            addNote={addNote} 
+            setAddNote={setAddNote} 
+            text={text}
+            setText={setText}
+            notes={notes}
+            setNotes={setNotes}
+            noteColor={noteColor}
+            setNoteColor={setNoteColor}
+          />
+      }
+      <NotesRender notes={notes}/>
+    </>
   );
 }
 
