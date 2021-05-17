@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./App.css";
-import AddNotesBtn from "./components/AddNotesBtn";
-import NotesInput from "./components/NotesInput";
-import NotesRender from "./components/NotesRender";
+import AddNotesBtn from "./components/note/AddNotesBtn";
+import NotesInput from "./components/note/NotesInput";
+import NotesRender from "./components/note/NotesRender";
 
 function App() {
   const [addNote, setAddNote] = useState(false);
