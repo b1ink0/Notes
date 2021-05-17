@@ -7,7 +7,7 @@ import NotesRender from "./components/NotesRender";
 function App() {
   const [addNote, setAddNote] = useState(false);
   const [text, setText] = useState("");
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState([{color: "red", id: 219.83046983412092, note: "a"},{color: "red", id: 29.83046983412092, note: "b"},{color: "red", id: 21.83046983412092, note: "c"}]);
   const [noteColor, setNoteColor] = useState('red')
   return (
     <>
