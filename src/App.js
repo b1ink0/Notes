@@ -16,8 +16,8 @@ function App() {
       <StateProvider>
         <Router>
             <Switch>
-              <PrivateRoute exact path='/' component={NotesRender}/>
-              <Route path="/login" component={LogIn}/>
+              <PrivateRoute exact path='/Notes' component={NotesRender}/>
+              <Route path="/Notes/login" component={LogIn}/>
             </Switch>
         </Router>
       </StateProvider>

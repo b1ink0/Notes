@@ -7,11 +7,11 @@ export default function LogIn() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const history = useHistory()
-  const { logIn, logOut } = useAuth()
+  const { logIn } = useAuth()
 
   auth.onAuthStateChanged(user => {
     if (user){
-      history.push('/')
+      history.push('/Notes')
     }
     return
   })
@@ -25,7 +25,7 @@ export default function LogIn() {
       auth.onAuthStateChanged((user)=> {
         if (user) {
           console.log('push')
-          history.push('/')
+          history.push('/Notes')
         }
         return
       })

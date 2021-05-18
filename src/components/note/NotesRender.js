@@ -21,7 +21,7 @@ export default function NotesRender() {
       auth.onAuthStateChanged((user) => {
         if (!user) {
           console.log("log out");
-          history.push("/login");
+          history.push("/Notes/login");
         }
         return;
       });
