@@ -6,17 +6,18 @@
 .addNotesBtn
 {
     @include flex;
-    position: absolute;
+    position: fixed;
     width: 70px;
     height: 70px;
     background: cyan;
     border-radius: 50%;
-    bottom: 10px;
     cursor: pointer;
+    bottom: 20px;
+    right: 20px;
     div:nth-child(1), div:nth-child(2)
     {
         position: absolute;
-        height: 10px;
+        height: 7px;
         width: 50px;
         background: white;
         border-radius: 1rem;

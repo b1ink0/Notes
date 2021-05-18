@@ -9,6 +9,68 @@
     width: 100%;
     min-height: 100vh;
     position: relative;
+    form
+    {
+        @include flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        width: 100%;
+        min-height: 100vh;
+        .titleInput
+        {
+            width: 95%;
+            height: 50px;
+            background: none;
+            border: 2px solid gray;
+            border-radius: 15px;
+            font-size: 25px;
+            margin-top: 60px;
+            outline: none;
+            padding: 10px;
+        }
+        textarea 
+        {
+            width: 95%;
+            min-height: 450px;
+            margin-top: 20px;
+            background: none;
+            border: 2px solid gray;
+            border-radius: 15px;
+            font-size: 25px;
+            outline: none;
+            padding: 10px;
+        }
+        .colorInput
+        {
+            @include flex;
+            justify-content: space-evenly;
+            width: 95%;
+            height: 50px;
+            .colorContainer
+            {
+                @include flex;
+                position: relative;
+                div
+                {
+                    position: absolute;
+                    width: 20px;
+                    height: 20px;
+                    // background: #000;
+                    border-radius: 50%;
+                }
+            }
+        }
+        button
+        {
+            background: rgb(0, 177, 0);
+            border: none;
+            width: 95%;
+            height: 40px;
+            font-size: 25px;
+            color: white;
+            border-radius: 15px;
+        }
+    }
     .inputCloseBtn
     {
         @include flex;
@@ -18,8 +80,8 @@
         border: none;
         width: 30px;
         height: 30px;
-        right: 20px;
-        top: 20px;
+        right: 10px;
+        top: 10px;
         cursor: pointer;
         div
         {
@@ -36,9 +98,7 @@
         div:nth-child(2)
         {
             transform: rotate(-45deg);
-        }
-       
-        
+        }    
     }
 }
 .close-1

@@ -11,6 +11,7 @@ export const StateProvider = ( { children } ) => {
     const [text, setText] = useState("");
     const [notes, setNotes] = useState([]);
     const [noteColor, setNoteColor] = useState("red");
+    const [title, setTitle] = useState('')
 
     const value = {
         addNote,
@@ -20,7 +21,9 @@ export const StateProvider = ( { children } ) => {
         notes,
         setNotes,
         noteColor,
-        setNoteColor
+        setNoteColor,
+        title,
+        setTitle
     }
     return (
         <StateContext.Provider value={value}>
