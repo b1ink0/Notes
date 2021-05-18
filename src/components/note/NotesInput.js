@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
+import { useStateContext } from "../../context/StateContext";
+import './note-sass/NotesInput.scss'
 
-export default function NotesInput({
-  setAddNote,
-  text,
-  setText,
-  notes,
-  setNotes,
-  noteColor,
-  setNoteColor,
-}) {
+export default function NotesInput() {
+  const {
+    setAddNote,
+    notes,
+    setNotes,
+    text,
+    setText,
+    noteColor,
+    setNoteColor,
+  } = useStateContext();
+  const [close, setClose] = useState(false)
   const colors = ["red", "green", "blue"];
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,8 +28,15 @@ export default function NotesInput({
     setAddNote(false);
     setNoteColor("red");
   };
+  const handleClose = () => {
+    setClose(true)
+    setTimeout(()=> {
+      setAddNote(false)
+      setClose(false)
+    },500)
+  }
   return (
-    <>
+    <div className='formContainer'>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -46,7 +57,10 @@ export default function NotesInput({
         </div>
         <button type="submit">Submit</button>
       </form>
-      <button onClick={e => setAddNote(false)}>Cancel</button>
-    </>
+      <button className='inputCloseBtn' onClick={handleClose}>
+        <div className={close ? 'close-1' : ''}></div>
+        <div className={close ? 'close-2' : ''}></div>
+      </button>
+    </div>
   );
 }

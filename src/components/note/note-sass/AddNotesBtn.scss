@@ -1,0 +1,28 @@
+@mixin  flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.addNotesBtn
+{
+    @include flex;
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background: cyan;
+    border-radius: 50%;
+    bottom: 10px;
+    cursor: pointer;
+    div:nth-child(1), div:nth-child(2)
+    {
+        position: absolute;
+        height: 10px;
+        width: 50px;
+        background: white;
+        border-radius: 1rem;
+    }
+    div:nth-child(2)
+    {
+        transform: rotate(90deg);
+    }
+}

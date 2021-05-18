@@ -1,35 +1,27 @@
 import { useState } from "react";
-import "./App.css";
+import "./App.scss";
 import AddNotesBtn from "./components/note/AddNotesBtn";
 import NotesInput from "./components/note/NotesInput";
 import NotesRender from "./components/note/NotesRender";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import LogIn from "./components/auth/LogIn";
+import { AuthProvider } from "./context/AuthContext";
+import PrivateRoute from "./components/auth/PrivateRoute";
+import { StateProvider } from "./context/StateContext";
 
 function App() {
-  const [addNote, setAddNote] = useState(false);
-  const [text, setText] = useState("");
-  const [notes, setNotes] = useState([]);
-  const [noteColor, setNoteColor] = useState('red')
+
   return (
-    <>
-      <AddNotesBtn 
-        addNote={addNote} 
-        setAddNote={setAddNote} 
-      />
-      {
-        addNote && 
-          <NotesInput
-            addNote={addNote} 
-            setAddNote={setAddNote} 
-            text={text}
-            setText={setText}
-            notes={notes}
-            setNotes={setNotes}
-            noteColor={noteColor}
-            setNoteColor={setNoteColor}
-          />
-      }
-      <NotesRender notes={notes}/>
-    </>
+    <AuthProvider>
+      <StateProvider>
+        <Router>
+            <Switch>
+              <PrivateRoute exact path='/' component={NotesRender}/>
+              <Route path="/login" component={LogIn}/>
+            </Switch>
+        </Router>
+      </StateProvider>
+    </AuthProvider>
   );
 }
 

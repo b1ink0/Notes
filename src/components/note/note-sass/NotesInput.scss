@@ -1,0 +1,59 @@
+@mixin  flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.formContainer
+{
+    @include flex;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    .inputCloseBtn
+    {
+        @include flex;
+        position: absolute;
+        background: none;
+        outline: none;
+        border: none;
+        width: 30px;
+        height: 30px;
+        right: 20px;
+        top: 20px;
+        cursor: pointer;
+        div
+        {
+            position: absolute;
+            width: 30px;
+            height: 5px;
+            background: gray;
+            border-radius: 12px;
+        }
+        div:nth-child(1)
+        {
+            transform: rotate(45deg);
+        }
+        div:nth-child(2)
+        {
+            transform: rotate(-45deg);
+        }
+       
+        
+    }
+}
+.close-1
+{
+    animation: close-1 0.5s forwards;
+}
+.close-2
+{
+    animation: close-2 0.5s forwards;
+}
+@keyframes close-1 {
+    0%{transform: rotate(90deg) translateY(0px); width: 30px; opacity: 1;}
+    100%{transform: rotate(0deg) translateY(0px); width:30px; opacity: 0;}
+}
+@keyframes close-2 {
+    0%{transform: rotate(45deg) translateY(0px); width: 30px; opacity: 1;}
+    100%{transform: rotate(0deg) translateY(0px); width:30px; opacity: 0;}
+}
