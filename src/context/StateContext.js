@@ -10,7 +10,10 @@ export const StateProvider = ( { children } ) => {
     const [addNote, setAddNote] = useState(false);
     const [text, setText] = useState("");
     const [notes, setNotes] = useState([]);
-    const [noteColor, setNoteColor] = useState("red");
+    const [noteBackgroundColor, setNoteBackgroundColor] = useState("white");
+    const [textColor, setTextColor] = useState('black')
+    const [font, setFont] = useState('Sans-serif')
+    const [fontSize, setFontSize] = useState('25')
     const [title, setTitle] = useState('')
 
     const value = {
@@ -20,8 +23,14 @@ export const StateProvider = ( { children } ) => {
         setText,
         notes,
         setNotes,
-        noteColor,
-        setNoteColor,
+        noteBackgroundColor,
+        setNoteBackgroundColor,
+        textColor,
+        setTextColor,
+        font,
+        setFont,
+        fontSize,
+        setFontSize,
         title,
         setTitle
     }

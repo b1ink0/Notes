@@ -1,0 +1,83 @@
+@mixin  flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.fontSelect
+{
+    @include flex();
+    justify-content: flex-start;
+    width: 165px;
+    height: 70px;
+    border-radius: 25px;
+    border: 2px gray solid;
+    position: absolute;
+    padding: 10px;
+    right: 16.7vw;
+    top: 0;
+    z-index: 2;
+    .title
+    {
+        font-size: 20px;
+    }
+    .selectDefault
+    {
+        font-size: 20px;
+        padding-left: 10px;
+    }
+    .fontCon
+    {
+        height: 0px;
+        opacity: 0;
+        pointer-events: none;
+        overflow: hidden;
+        border: 1px gray solid;
+        transition: all 0.3s;
+        position: absolute;
+        background-color: white;
+        border-radius: 25px;
+        left: -4.5vw;
+        z-index: 6;
+        .fontOption
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 200px;
+            height: 50px;
+            input
+            {
+                position: absolute;
+                opacity: 0;
+                width: 200px;
+                height: 50px;
+            }
+            div
+            {
+                @include flex;
+                text-align: center;
+                position: absolute;
+                pointer-events: none;
+                width: 200px;
+                height: 50px;
+                border-bottom: 1px gray solid;
+                font-size: 25px;
+            }
+        }
+        .fontOption:hover
+        {
+            background: rgb(236, 236, 236);
+        }
+    }
+}
+.fontSelect
+{
+    .fontOption:nth-child(5)
+    {
+        div 
+        {
+            border-bottom: 1px rgba(128, 128, 128, 0) solid;
+        }
+    }
+}
