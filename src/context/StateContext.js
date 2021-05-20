@@ -10,8 +10,8 @@ export const StateProvider = ( { children } ) => {
     const [addNote, setAddNote] = useState(false);
     const [text, setText] = useState("");
     const [notes, setNotes] = useState([]);
-    const [noteBackgroundColor, setNoteBackgroundColor] = useState("white");
-    const [textColor, setTextColor] = useState('black')
+    const [noteBackgroundColor, setNoteBackgroundColor] = useState("#ffffff");
+    const [textColor, setTextColor] = useState('#000000')
     const [font, setFont] = useState('Sans-serif')
     const [fontSize, setFontSize] = useState('25')
     const [title, setTitle] = useState('')
@@ -32,7 +32,7 @@ export const StateProvider = ( { children } ) => {
         fontSize,
         setFontSize,
         title,
-        setTitle
+        setTitle,
     }
     return (
         <StateContext.Provider value={value}>

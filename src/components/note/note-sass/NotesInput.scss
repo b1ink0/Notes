@@ -9,6 +9,7 @@
     width: 100%;
     min-height: 100vh;
     position: relative;
+    background-color: #ececec;
     form
     {
         @include flex;
@@ -21,12 +22,16 @@
             width: 95%;
             height: 50px;
             background: none;
-            border: 2px solid gray;
+            // border: 2px solid gray;
+            border: none;
             border-radius: 15px;
+            background: white;
             font-size: 25px;
             margin-top: 60px;
             outline: none;
             padding: 10px;
+            box-shadow: 6px 6px 5px #bbb, 
+                        0 10px 5px rgba(0,0,0,0);
         }
         textarea 
         {
@@ -34,19 +39,24 @@
             min-height: 450px;
             margin-top: 20px;
             background: none;
-            border: 2px solid gray;
+            // border: 2px solid gray;
+            border: none;
             border-radius: 15px;
             font-size: 25px;
             outline: none;
+            resize: none;
             padding: 10px;
+            box-shadow: 6px 6px 5px #bbb, 
+                        0 10px 5px rgba(0,0,0,0);
         }
         .selectContainer
         {
             @include flex;
             flex-direction: column;
             width: 95vw;
+            height: 80px;
             position: relative;
-            margin-top: 15px;
+            margin-top: 20px;
             margin-bottom: 15px;
         }
         .colorInput
@@ -71,13 +81,15 @@
         }
         button
         {
-            background: rgb(0, 177, 0);
+            background: rgb(201, 144, 255);
             border: none;
             width: 95%;
             height: 40px;
             font-size: 25px;
             color: white;
             border-radius: 15px;
+            box-shadow: 6px 6px 5px #bbb, 
+                        0 10px 5px rgba(0,0,0,0);
         }
     }
     .inputCloseBtn

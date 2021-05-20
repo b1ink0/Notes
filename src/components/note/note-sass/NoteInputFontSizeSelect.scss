@@ -6,15 +6,20 @@
 .fontSizeSelect
 {
     @include flex();
-    width: 60px;
-    height: 70px;
+    width: 14.5vw;
+    height: 80px;
     border-radius: 25px;
-    border: 2px gray solid;
+    // border: 2px gray solid;
+    border: none;
+    background: white;
     position: absolute;
     padding: 10px;
     right: 0;
     top: 0;
     z-index: 1;
+    cursor: pointer;
+    box-shadow: 5px 5px 5px #bbb, 
+                        0 10px 5px rgba(0,0,0,0);
     .title
     {
         font-size: 20px;
@@ -35,6 +40,7 @@
         background-color: white;
         border-radius: 25px;
         right: -0.5vw;
+        cursor: pointer;
         .fontSizeOption
         {
             display: flex;
@@ -43,12 +49,14 @@
             position: relative;
             width: 65px;
             height: 50px;
+            cursor: pointer;
             input
             {
                 position: absolute;
                 opacity: 0;
                 width: 65px;
                 height: 50px;
+                cursor: pointer;
             }
             div
             {
@@ -60,6 +68,7 @@
                 height: 50px;
                 border-bottom: 1px gray solid;
                 font-size: 25px;
+                cursor: pointer;
             }
         }
         .fontSizeOption:hover
@@ -70,7 +79,7 @@
 }
 .fontSizeSelect
 {
-    .fontSizeOption:nth-child(5)
+    .fontSizeOption:nth-child(4)
     {
         div 
         {

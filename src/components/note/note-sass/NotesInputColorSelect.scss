@@ -8,42 +8,85 @@
             @include flex;
             justify-content: flex-start;
             width: 100%;
+            position: absolute;
+            cursor: pointer;
+            
             .select
             {
                 @include flex;
                 justify-content: flex-start;
-                width: 150px;
-                height: 30px;
-                border: 2px solid gray;
+                width: 36.5vw;
+                height: 33px;
+                // border: 2px solid gray;
+                border: none;
                 border-radius: 50px;
                 position: relative;
                 padding-left: 10px;
                 transition:all 0.5s;
                 background: rgb(255, 255, 255);
                 z-index: 3;
+                box-shadow: 5px 5px 5px #bbb, 
+                        0 10px 5px rgba(0,0,0,0);
                 p 
                 {
                     text-align: center;
                     position: absolute;
                     font-size: 20px;
+                    padding-bottom: 4px;
                 }
                 .selected
                 {
+                    @include flex;
                     width: 20px;
                     height: 20px;
                     position: absolute;
                     right: 5px;
                     border-radius: 50%;
                     border: 1px solid rgb(87, 87, 87);
+                    #tick-mark {
+                        position: relative;
+                        display: inline-block;
+                        width: 12px;
+                        height: 12px;
+                        right: 3px;
+                        top: 2px;
+                    }
+                    
+                    #tick-mark::before {
+                        position: absolute;
+                        left: -3px;
+                        top: 30%;
+                        height: 50%;
+                        width: 3px;
+                        background-color: #ffffff;
+                        // border: 0.1px solid gray;
+                        content: "";
+                        transform: translateX(10px) rotate(-45deg);
+                        transform-origin: left bottom;
+                    }
+                    
+                    #tick-mark::after {
+                        position: absolute;
+                        left: -3px;
+                        bottom: 2px;
+                        height: 3px;
+                        width: 100%;
+                        background-color: #ffffff;
+                        // border: 0.1px solid gray;
+                        content: "";
+                        transform: translateX(10px) rotate(-45deg);
+                        transform-origin: left bottom;
+                    }
                 }
                 .optionCon
                 {
                     @include flex;
                     width: 50%;
                     height: 30px;
-                    padding-left: 95px;
+                    padding-left: 110px;
                     opacity: 0;
                     transition: all 0.4s;
+                    cursor: pointer;
                     .option
                     {
                         @include flex;
@@ -53,6 +96,9 @@
                         input
                         {
                             opacity: 0;
+                            cursor: pointer;
+                            width: 20px;
+                            height: 20px;
                         }
                         div
                         {
@@ -67,3 +113,8 @@
                 }
             }
         }
+.option:nth-child(6) div
+{
+    background: rgb(34,96,195);
+    background: linear-gradient(300deg, rgba(34,96,195,1) 8%, rgba(233,59,59,1) 82%, rgba(253,187,45,1) 100%);
+}

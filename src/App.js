@@ -1,7 +1,4 @@
-import { useState } from "react";
 import "./App.scss";
-import AddNotesBtn from "./components/note/AddNotesBtn";
-import NotesInput from "./components/note/NotesInput";
 import NotesRender from "./components/note/NotesRender";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LogIn from "./components/auth/LogIn";

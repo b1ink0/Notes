@@ -39,7 +39,7 @@ export default function NoteInputFontSizeSelect() {
         <div
           className="fontSizeCon"
           style={{
-            height: `${fSOpen ? "200px" : ""}`,
+            height: `${fSOpen ? "210px" : ""}`,
             opacity: `${fSOpen ? "1" : ""}`,
             pointerEvents: `${fSOpen ? "all" : ""}`,
           }}

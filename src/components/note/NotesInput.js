@@ -21,7 +21,6 @@ export default function NotesInput() {
     title,
     setTitle,
   } = useStateContext();
-  console.log(fontSize)
 
   const [close, setClose] = useState(false);
   const handleSubmit = (e) => {
@@ -43,10 +42,10 @@ export default function NotesInput() {
   };
   const handleClose = () => {
     setClose(true);
-    setTimeout(() => {
+    // setTimeout(() => {
       setAddNote(false);
       setClose(false);
-    }, 500);
+    // }, 500);
   };
   return (
     <div className="formContainer">
@@ -58,6 +57,12 @@ export default function NotesInput() {
           onChange={(e) => setTitle(e.target.value)}
           required
           placeholder="Title..."
+          style={{
+            background: `${noteBackgroundColor}`,
+            color: `${textColor}`,
+            transition: "all 0.35s",
+            fontFamily: `${font}`,   
+          }}
         />
         <textarea
           type="text"
@@ -78,15 +83,19 @@ export default function NotesInput() {
             title="Background"
             paddingT="0px"
             paddingB="0px"
+            align_1='0'
             color={noteBackgroundColor}
             setColor={setNoteBackgroundColor}
+            colors={["#ffffff",'#f2cdaf','#f9e2cf', "#fcd9dd", "#b6dee7"]}
           />
           <NotesInputSelect
             title="Text Color"
             paddingT="10px"
             paddingB="0px"
+            align_2='0'
             color={textColor}
             setColor={setTextColor}
+            colors={["#000000",'#ffffff','#ff0000', "#9500ff", "#ff00ff"]}
           />
           <NoteInputFontSelect/>
           <NoteInputFontSizeSelect/>
