@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import 'firebase/firestore'
 
 const app = firebase.initializeApp({
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -14,6 +15,12 @@ export const auth = app.auth()
 const googleProvider = new firebase.auth.GoogleAuthProvider()
 export const signInWithGoogle = () => {
     auth.signInWithPopup(googleProvider)
-        .then((res)=> console.log(res.user))
+        .then()
         .catch((error)=> console.log(error))
+}
+export const firestore = app.firestore()
+export const database = {
+    users: firestore.collection('users'),
+    notesM: firestore.collection('notes'),
+    getCurrentTimeStamp : firebase.firestore.FieldValue.serverTimestamp
 }

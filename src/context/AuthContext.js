@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { auth, signInWithGoogle } from '../firebase';
+import { auth, database, signInWithGoogle } from '../firebase';
 
 const AuthContext = React.createContext()
 

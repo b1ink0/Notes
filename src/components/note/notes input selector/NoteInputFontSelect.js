@@ -3,7 +3,6 @@ import { useStateContext } from "../../../context/StateContext";
 import "../note-sass/NotesInputFontSelect.scss";
 
 export default function NoteInputFontSelect() {
-
   const node = useRef()
   const [fOpen, setFOpen] = useState(false);
   const { font, setFont } = useStateContext();

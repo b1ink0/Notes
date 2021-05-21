@@ -38,9 +38,10 @@ export default function NotesInputSelect({
     }else{
       setTimeout(()=>{
         setZi(1)
-      }, 500)
+      }, 300)
     }
   },[bgOpen])
+
   return (
     <div
       ref={node}

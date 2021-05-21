@@ -21,10 +21,8 @@ export default function LogIn() {
       setLoading(true)
       await logIn()
 
-      console.log('signed in')
       auth.onAuthStateChanged((user)=> {
         if (user) {
-          console.log('push')
           history.push('/Notes')
         }
         return
