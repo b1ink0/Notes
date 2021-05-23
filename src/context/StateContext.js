@@ -15,6 +15,7 @@ export const StateProvider = ( { children } ) => {
     const [font, setFont] = useState('Sans-serif')
     const [fontSize, setFontSize] = useState('25')
     const [title, setTitle] = useState('')
+    const [sort, setSort] = useState('title')
 
     const value = {
         addNote,
@@ -33,6 +34,8 @@ export const StateProvider = ( { children } ) => {
         setFontSize,
         title,
         setTitle,
+        sort,
+        setSort
     }
     return (
         <StateContext.Provider value={value}>

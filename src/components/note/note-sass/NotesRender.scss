@@ -6,7 +6,72 @@
 .notesContainer
 {
     @include flex;
+    flex-direction: column;
     width: 100%;
     min-height: 100vh;
     position: relative;
+    background-color: #ececec;
+    .logo
+    {
+        @include flex();
+        background-color: white;
+        width: 95vw;
+        height: 50px;
+        text-align: center;
+        border-radius: 25px;
+        margin-top: 15px;
+        box-shadow: 6px 6px 5px #bbb, 
+        0 10px 5px rgba(0,0,0,0);
+    }
+    .noteCon
+    {
+        @include flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        width: 100%;
+        min-height: 100vh;
+        margin: 10px;
+        .notes
+        {
+            width: 95vw;
+            margin: 10px;
+            border-radius: 25px;
+            box-shadow: 6px 6px 5px #bbb, 
+                        0 10px 5px rgba(0,0,0,0);
+            transition: all 0.3s;
+            h1
+            {
+                // border-bottom: 2px solid rgb(197, 197, 197);
+                font-size: 45px;
+                width: 100%;
+                height: 65px;
+                padding: 10px;
+                text-align: center;
+                font-weight: bold;
+                word-wrap: normal;
+                overflow: hidden;
+            }
+            div
+            {
+                width: 100%;
+                padding: 10px;
+                text-align: center;
+                word-wrap: break-word;
+                a
+                {
+                    color: rgb(0, 98, 255);
+                    user-select: none;
+                    z-index: 10;
+                }
+            }
+            .date
+            {
+                font-size: 15px;
+                width: 100%;
+                padding: 10px;
+                text-align: end;
+                color: #aaaaaa;
+            }
+        }
+    }
 }

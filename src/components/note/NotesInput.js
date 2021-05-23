@@ -6,7 +6,7 @@ import "./note-sass/NotesInput.scss";
 import NoteInputFontSelect from "./notes input selector/NoteInputFontSelect";
 import NoteInputFontSizeSelect from "./notes input selector/NoteInputFontSizeSelect";
 import NotesInputSelect from "./notes input selector/NotesInputColorSelect";
-import { firestore } from '../../firebase'
+import { Offline, Online } from "react-detect-offline"
 
 export default function NotesInput() {
   const {
@@ -30,6 +30,7 @@ export default function NotesInput() {
   const [close, setClose] = useState(false);
   const [noteHelp, setNoteHelp] = useState(false)
   const [saving, setSaving] = useState(false)
+  const [onlineStatus, setOnlineStatus] = useState(true)
   const { currentUser } = useAuth()
   const handleRipples = (e) => {
     setNoteHelp(!noteHelp)
@@ -46,6 +47,9 @@ export default function NotesInput() {
   }
 
   const handleUpdate = () => {
+    let months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    let date = new Date()
+    let fullDate = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
     database.users
       .doc(currentUser.uid)
       .get()
@@ -63,7 +67,8 @@ export default function NotesInput() {
               textColor: textColor,
               font: font,
               fontSize: fontSize,
-              noteId: Math.random() * 1000
+              noteId: Math.random() * 1000,
+              date: fullDate
             }
           ]
           console.log('updated data')
@@ -84,10 +89,17 @@ export default function NotesInput() {
         }
       })
   }
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setSaving(true)
-    await handleUpdate()  
+    if (navigator.onLine){
+      console.log('online')
+      setSaving(true)
+      handleUpdate()  
+    }
+    if (navigator.onLine == false){
+      setOnlineStatus(false)
+      console.log('offline')
+    }
   };
   const handleClose = () => {
     setClose(true);
@@ -100,7 +112,25 @@ export default function NotesInput() {
   return (
     <div className="formContainer">
       {
-        saving && <div className='saving'>Saving...</div>
+        saving && 
+          <div className='saving'>
+            <div>
+              <p>
+                saving...
+              </p>
+            </div>
+          </div>
+      }
+      {
+        !onlineStatus && 
+        (
+          <div className='offline'>
+            <div>
+              <p>Check your internet connection and try again.</p>
+              <button onClick={()=> setOnlineStatus(true)}>Close</button>
+            </div>
+          </div>
+        )
       }
       <form onSubmit={handleSubmit}>
         <input
@@ -110,6 +140,7 @@ export default function NotesInput() {
           onChange={(e) => setTitle(e.target.value)}
           required
           placeholder="Title..."
+          maxLength = "15"
           style={{
             background: `${noteBackgroundColor}`,
             color: `${textColor}`,
@@ -123,6 +154,7 @@ export default function NotesInput() {
           onChange={(e) => setText(e.target.value)}
           required
           placeholder="Note..."
+          maxLength = "1000"
           style={{
             background: `${noteBackgroundColor}`,
             color: `${textColor}`,

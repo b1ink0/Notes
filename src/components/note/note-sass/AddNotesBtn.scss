@@ -3,6 +3,47 @@
     justify-content: center;
     align-items: center;
 }
+.offline
+    {
+        @include flex;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 20;
+        font-size: 40px;
+        font-weight: 700;
+        font-family: monospace;
+        background-color: rgba(0, 0, 0, 0.342);
+        div 
+        {
+            @include flex;
+            justify-content: space-evenly;
+            flex-direction: column;
+            border-radius: 25px;
+            width: 80vw;
+            height: 150px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 5px 6px rgb(143, 143, 143), 
+            0 10px 5px rgba(0,0,0,0);
+            p {
+                font-size: 20px;
+                text-align: center;
+            }
+            button
+            {
+                background-color: red;
+                border-radius: 25px;
+                border: none;
+                width: 80%;
+                height: 30px;
+                color: white;
+                font-size: 20px;
+                cursor: pointer;
+                margin-top: 15px;
+            }
+        }
+    }
 .addNotesBtn
 {
     @include flex;
