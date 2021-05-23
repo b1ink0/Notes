@@ -6,6 +6,8 @@ import { auth, database } from "../../firebase";
 import AddNotesBtn from "./AddNotesBtn";
 import NotesInput from "./NotesInput";
 import "./note-sass/NotesRender.scss";
+import titleSvg from './img/title.svg'
+import gridSvg from './img/grid.svg'
 
 export default function NotesRender() {
   const [error, setError] = useState("");
@@ -98,7 +100,9 @@ export default function NotesRender() {
         <div className="notesContainer">
           <h1 className="logo">
             Notes
-            <button onClick={handleSort}>sort</button>
+            <button onClick={handleSort}>
+              <img src={sort === 'title' ? titleSvg : gridSvg}/>
+            </button>
           </h1>
           <div className="noteCon">
             {noteData &&
@@ -114,7 +118,7 @@ export default function NotesRender() {
                   key={note.noteId}
                 >
                   <h1>{note.title}</h1>
-                  <div>
+                  <div style={{padding: `${sort === 'title' ? `0px` : `10px`}`}}>
                     {
                       sort === 'grid' && (
                     note.note.length > 460 && note.fontSize === "15" ? (
