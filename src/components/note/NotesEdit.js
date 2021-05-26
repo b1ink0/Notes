@@ -8,7 +8,7 @@ import NoteInputFontSizeSelect from "./notes input selector/NoteInputFontSizeSel
 import NotesInputSelect from "./notes input selector/NotesInputColorSelect";
 import { v4 as uuidV4 } from "uuid";
 
-export default function NotesInput() {
+export default function NotesEdit() {
   const {
     setAddNote,
     notes,
@@ -25,6 +25,8 @@ export default function NotesInput() {
     setFontSize,
     title,
     setTitle,
+    setCurrentNote,
+    currentNote
   } = useStateContext();
   
   const [close, setClose] = useState(false);
@@ -33,6 +35,27 @@ export default function NotesInput() {
   const [onlineStatus, setOnlineStatus] = useState(true)
   const { currentUser } = useAuth()
   const id = uuidV4()
+
+  useEffect(()=>{
+      console.log(currentNote)
+      setTitle(currentNote.title)
+      setText(currentNote.note)
+      setTextColor(currentNote.textColor)
+      setNoteBackgroundColor(currentNote.backgroundColor)
+      setFont(currentNote.font)
+      setFontSize(currentNote.fontSize)
+    // if (currentUser){
+    //     database.users
+    //       .doc(currentUser.uid)
+    //       .get()
+    //       .then( doc => {
+    //           if ( doc.exists ){
+
+    //           }
+    //       })
+    // }
+  },[])
+
   const handleRipples = (e) => {
     setNoteHelp(!noteHelp)
     let ripplesClassName = e.target.className
@@ -46,7 +69,6 @@ export default function NotesInput() {
         ripples.remove()
     },500)
   }
-
   const handleUpdate = () => {
     let months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
     let date = new Date()
@@ -58,6 +80,17 @@ export default function NotesInput() {
         if (doc.exists){
           console.log('geting data')
           let tempNote = doc.data().note
+          let b = -1
+          tempNote.map( tNote => {
+              b = b + 1
+              console.log(b)
+              if (tNote.noteId === currentNote.noteId){
+                  console.log('found it')
+                  tempNote.splice(b,1)
+                  return
+              }
+              console.log(tempNote)
+          })
           console.log('setData')
           tempNote = [
             ...tempNote,

@@ -8,12 +8,10 @@ export default function AddNotesBtn() {
 
     const handleClick = () => {
         if (navigator.onLine){
-            console.log('online')
             setAddNote(true)
         }
         if (navigator.onLine === false){
             setOnlineStatus(false)
-            console.log('offline')
         }
     }
     return (

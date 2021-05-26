@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useStateContext } from "../../../context/StateContext";
 import "../note-sass/NotesInputFontSelect.scss";
 
-export default function NoteInputFontSelect() {
+export default function NoteInputFontSelect({Font}) {
   const node = useRef()
   const [fOpen, setFOpen] = useState(false);
   const { font, setFont } = useStateContext();

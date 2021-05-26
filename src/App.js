@@ -7,7 +7,6 @@ import PrivateRoute from "./components/auth/PrivateRoute";
 import { StateProvider } from "./context/StateContext";
 
 function App() {
-
   return (
     <AuthProvider>
       <StateProvider>

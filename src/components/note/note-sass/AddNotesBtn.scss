@@ -50,18 +50,20 @@
     position: fixed;
     width: 70px;
     height: 70px;
-    background: cyan;
+    background: rgb(255, 255, 255);
     border-radius: 50%;
     cursor: pointer;
     bottom: 20px;
     right: 20px;
+    box-shadow: 6px 6px 5px #bbb, 
+    0 10px 5px rgba(0,0,0,0);
     div:nth-child(1), div:nth-child(2)
     {
         position: absolute;
         height: 7px;
         width: 50px;
-        background: white;
-        border-radius: 1rem;
+        background: #0083ff;
+        border-radius: 3px;
     }
     div:nth-child(2)
     {

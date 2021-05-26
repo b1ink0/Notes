@@ -41,8 +41,6 @@
             height: 150px;
             padding: 20px;
             background-color: white;
-            box-shadow: 0px 0px 5px 6px rgb(143, 143, 143), 
-            0 10px 5px rgba(0,0,0,0);
         }
     }
     .offline
@@ -100,10 +98,10 @@
             background: none;
             // border: 2px solid gray;
             border: none;
-            border-radius: 15px;
+            border-radius: 10px;
             background: white;
             font-size: 25px;
-            margin-top: 60px;
+            margin-top: 50px;
             outline: none;
             padding: 10px;
             box-shadow: 6px 6px 5px #bbb, 
@@ -118,7 +116,7 @@
             // border: 2px solid gray;
             border: none;
             border-radius: 15px;
-            font-size: 25px;
+            font-size: 10px;
             outline: none;
             resize: none;
             padding: 10px;
@@ -158,12 +156,13 @@
         button
         {
             background: rgb(201, 144, 255);
+            margin-top: 5px;
             border: none;
             width: 95%;
             height: 40px;
             font-size: 25px;
             color: white;
-            border-radius: 15px;
+            border-radius: 10px;
             position: relative;
             overflow: hidden;
             box-shadow: 6px 6px 5px #bbb, 
@@ -221,19 +220,11 @@
         }    
     }
 }
-.close-1
+.close
 {
-    animation: close-1 0.5s forwards;
+    animation: close 0.3s forwards;
 }
-.close-2
-{
-    animation: close-2 0.5s forwards;
-}
-@keyframes close-1 {
-    0%{transform: rotate(90deg) translateY(0px); width: 30px; opacity: 1;}
-    100%{transform: rotate(0deg) translateY(0px); width:30px; opacity: 0;}
-}
-@keyframes close-2 {
-    0%{transform: rotate(45deg) translateY(0px); width: 30px; opacity: 1;}
-    100%{transform: rotate(0deg) translateY(0px); width:30px; opacity: 0;}
+@keyframes close {
+    0%{top: 0;}
+    100%{top: 100%;}
 }
