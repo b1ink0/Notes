@@ -7,6 +7,7 @@
 {
     @include flex;
     align-items: flex-start;
+    position: relative;
     width: 100%;
     min-height: 88vh;
     .preview
@@ -18,7 +19,7 @@
         margin-top: 20px;
         margin-bottom: 20px;
         width: 95vw;
-        min-height: 88vh;
+        // min-height: 88vh;
         border-radius: 10px;
         background-color: white;
         box-shadow: 6px 6px 5px #bbb, 

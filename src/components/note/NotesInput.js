@@ -7,6 +7,7 @@ import NoteInputFontSelect from "./notes input selector/NoteInputFontSelect";
 import NoteInputFontSizeSelect from "./notes input selector/NoteInputFontSizeSelect";
 import NotesInputSelect from "./notes input selector/NotesInputColorSelect";
 import { v4 as uuidV4 } from "uuid";
+import backSvg from "./img/back.svg";
 
 export default function NotesInput() {
   const {
@@ -134,6 +135,14 @@ export default function NotesInput() {
           </div>
         )
       }
+      <div className="navInput">
+        <button className="backInput" onClick={handleClose}>
+          <img src={backSvg} />
+        </button>
+        <h1>
+          Add Note
+        </h1>
+      </div>
       <form onSubmit={handleSubmit}>
         <input
           className="titleInput"
@@ -191,10 +200,6 @@ export default function NotesInput() {
           Save
         </button>
       </form>
-      <button className="inputCloseBtn" onClick={handleClose}>
-        <div></div>
-        <div></div>
-      </button>
     </div>
   );
 }

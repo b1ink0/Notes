@@ -7,6 +7,7 @@ import NoteInputFontSelect from "./notes input selector/NoteInputFontSelect";
 import NoteInputFontSizeSelect from "./notes input selector/NoteInputFontSizeSelect";
 import NotesInputSelect from "./notes input selector/NotesInputColorSelect";
 import { v4 as uuidV4 } from "uuid";
+import backSvg from "./img/back.svg";
 
 export default function NotesEdit() {
   const {
@@ -26,7 +27,9 @@ export default function NotesEdit() {
     title,
     setTitle,
     setCurrentNote,
-    currentNote
+    currentNote,
+    setPreview,
+    setEdit
   } = useStateContext();
   
   const [close, setClose] = useState(false);
@@ -83,13 +86,10 @@ export default function NotesEdit() {
           let b = -1
           tempNote.map( tNote => {
               b = b + 1
-              console.log(b)
               if (tNote.noteId === currentNote.noteId){
-                  console.log('found it')
                   tempNote.splice(b,1)
                   return
               }
-              console.log(tempNote)
           })
           console.log('setData')
           tempNote = [
@@ -118,6 +118,8 @@ export default function NotesEdit() {
             setNoteBackgroundColor("#ffffff");
             setSaving(false)
             setAddNote(false);
+            setPreview(false)
+            setEdit(false)
           })
           console.log('updated server data')
         }
@@ -141,6 +143,8 @@ export default function NotesEdit() {
     setTimeout(() => {
       setAddNote(false);
       setClose(false);
+      setEdit(false)
+      setPreview(false)
     }, 300);
   };
 
@@ -167,6 +171,14 @@ export default function NotesEdit() {
           </div>
         )
       }
+      <div className="navInput">
+        <button className="backInput" onClick={handleClose}>
+          <img src={backSvg} />
+        </button>
+        <h1>
+          Edit Note
+        </h1>
+      </div>
       <form onSubmit={handleSubmit}>
         <input
           className="titleInput"

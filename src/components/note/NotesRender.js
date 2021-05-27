@@ -15,9 +15,8 @@ import NotesEdit from "./NotesEdit";
 export default function NotesRender() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [firstLoad, setFirstLoad] = useState(true)
   const [noteData, setNoteData] = useState();
-  const [preview, setPreview] = useState(false);
-  const [edit, setEdit] = useState(false);
   const [preNote, setPreNote] = useState({});
   const history = useHistory();
   const { logOut, currentUser } = useAuth();
@@ -39,7 +38,19 @@ export default function NotesRender() {
     setLoading(false);
   };
 
-  const { notes, addNote, setAddNote, setNotes, sort, setSort, setCurrentNote } = useStateContext();
+  const { 
+    notes,
+    addNote,
+    setAddNote, 
+    setNotes, 
+    sort, 
+    setSort, 
+    setCurrentNote,
+    preview,
+    setPreview,
+    edit,
+    setEdit 
+  } = useStateContext();
 
   function reverseArr(input) {
     let ret = [];
@@ -72,19 +83,10 @@ export default function NotesRender() {
         tempData = reverseArr(tempData)
         setNoteData(tempData);
         setNotes(tempData);
+        setFirstLoad(false)
       });
-  }, [addNote]);
-  const handleReadMore = (e) => {
-    let aClass = e.target.className;
-    let spanNote = document.getElementById(`${aClass}`);
-    if (e.target.innerText === "...read more") {
-      spanNote.style.display = "inline";
-      e.target.innerText = " read less";
-    } else if (e.target.innerText === " read less") {
-      spanNote.style.display = "none";
-      e.target.innerText = "...read more";
-    }
-  };
+  }, [addNote, edit]);
+
   const handleSort = () => {
     if (sort === "title") {
       setSort("grid");
@@ -93,6 +95,7 @@ export default function NotesRender() {
     } else {
     }
   };
+
   const handleSee = (e) => {
     let show = e.target.id;
     setPreNote({
@@ -119,14 +122,23 @@ export default function NotesRender() {
     })
     setPreview(true);
   };
+  const handleBack = () => {
+    document.querySelector('.preCon').classList.add('back1')
+    setTimeout(()=> {
+      setPreview(false)
+    },400)
+  }
   return (
     <>
       {preview && !edit && (
         <div className="preCon">
           <div className="navPreview">
-            <button className="back" onClick={() => setPreview(false)}>
+            <button className="back" onClick={() => handleBack()}>
               <img src={backSvg} />
             </button>
+            <h1>
+              Note
+            </h1>
             <button className="edit" onClick={() => setEdit(true)}>
               Edit
             </button>
@@ -153,6 +165,10 @@ export default function NotesRender() {
               <img src={sort === "title" ? titleSvg : gridSvg} />
             </button>
           </h1>
+          {
+            firstLoad && 
+            <div className='loading'>Loading...</div>
+          }
           <div className="noteCon">
             {noteData &&
               noteData.map((note) => (
@@ -184,57 +200,37 @@ export default function NotesRender() {
                       (note.note.length > 460 && note.fontSize === "15" ? (
                         <p>
                           {note.note.slice(0, 461)}
-                          <span id={note.noteId} style={{ display: "none" }}>
-                            {note.note.slice(461)}
-                          </span>
                           <a
-                            onClick={handleReadMore}
                             style={{ fontSize: `${note.fontSize}px` }}
-                            className={note.noteId}
                           >
-                            ...read more
+                            ...
                           </a>
                         </p>
                       ) : note.note.length > 250 && note.fontSize === "25" ? (
                         <p>
                           {note.note.slice(0, 240)}
-                          <span id={note.noteId} style={{ display: "none" }}>
-                            {note.note.slice(240)}
-                          </span>
                           <a
-                            onClick={handleReadMore}
                             style={{ fontSize: `${note.fontSize}px` }}
-                            className={note.noteId}
                           >
-                            ...read more
+                            ...
                           </a>
                         </p>
                       ) : note.note.length > 115 && note.fontSize === "35" ? (
                         <p>
                           {note.note.slice(0, 120)}
-                          <span id={note.noteId} style={{ display: "none" }}>
-                            {note.note.slice(120)}
-                          </span>
                           <a
-                            onClick={handleReadMore}
                             style={{ fontSize: `${note.fontSize}px` }}
-                            className={note.noteId}
                           >
-                            ...read more
+                            ...
                           </a>
                         </p>
                       ) : note.note.length > 44 && note.fontSize === "45" ? (
                         <p>
                           {note.note.slice(0, 45)}
-                          <span id={note.noteId} style={{ display: "none" }}>
-                            {note.note.slice(45)}
-                          </span>
                           <a
-                            onClick={handleReadMore}
                             style={{ fontSize: `${note.fontSize}px` }}
-                            className={note.noteId}
                           >
-                            ...read more
+                            ...
                           </a>
                         </p>
                       ) : (
@@ -251,7 +247,6 @@ export default function NotesRender() {
           </button>
         </div>
       )}
-      {/* <PrivateRoute path={preId} note={preNote} component={PreviewNote} /> */}
     </>
   );
 }

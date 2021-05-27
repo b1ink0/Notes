@@ -17,6 +17,8 @@ export const StateProvider = ( { children } ) => {
     const [title, setTitle] = useState('')
     const [sort, setSort] = useState('title')
     const [currentNote, setCurrentNote] = useState({})
+    const [preview, setPreview] = useState(false);
+    const [edit, setEdit] = useState(false);
 
     const value = {
         addNote,
@@ -38,7 +40,11 @@ export const StateProvider = ( { children } ) => {
         sort,
         setSort,
         currentNote,
-        setCurrentNote
+        setCurrentNote,
+        preview,
+        setPreview,
+        edit,
+        setEdit
     }
     return (
         <StateContext.Provider value={value}>
