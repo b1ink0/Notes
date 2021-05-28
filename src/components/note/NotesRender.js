@@ -18,6 +18,8 @@ export default function NotesRender() {
   const [firstLoad, setFirstLoad] = useState(true)
   const [noteData, setNoteData] = useState();
   const [preNote, setPreNote] = useState({});
+  const [deleting, setDeleting] = useState(false)
+  const [del, setDel] = useState(false)
   const history = useHistory();
   const { logOut, currentUser } = useAuth();
 
@@ -85,7 +87,20 @@ export default function NotesRender() {
         setNotes(tempData);
         setFirstLoad(false)
       });
-  }, [addNote, edit]);
+  }, [addNote, edit, deleting]);
+
+  const handleRipples = (e) => {
+    let ripplesClassName = e.target.className
+    let x = e.clientX - e.target.offsetLeft;
+    let y = e.clientY - e.target.offsetTop;
+    let ripples = document.createElement('span');
+    ripples.style.left = x + 'px';
+    ripples.style.top = y + 'px'
+    document.querySelector(`.${ripplesClassName}`).appendChild(ripples)
+    setTimeout(()=>{
+        ripples.remove()
+    },500)
+  }
 
   const handleSort = () => {
     if (sort === "title") {
@@ -128,6 +143,53 @@ export default function NotesRender() {
       setPreview(false)
     },400)
   }
+  const handleDelete = (e) => {
+    handleRipples(e)
+    document.querySelector('.delCon').classList.remove('openAnime')
+    document.querySelector('.delCon').classList.add('cancelAnime')
+    setTimeout(()=>{
+      setDel(false)
+    },300)
+    setDeleting(true)
+    let delId = e.target.id
+    console.log(e.target.id)
+    database.users
+    .doc(currentUser.uid)
+    .get()
+    .then( doc => {
+      if (doc.exists){
+        console.log('geting data')
+        let tempNote = doc.data().note
+        let b = -1
+        tempNote.map( tNote => {
+            b = b + 1
+            if (tNote.noteId === delId){
+                tempNote.splice(b,1)
+                return
+            }
+          }
+        )
+        database.users.doc(currentUser.uid).update({
+          note:tempNote
+        })
+        console.log('deleted')
+        setDeleting(false)
+        setPreview(false)
+      }
+      }
+    )
+  }
+  const handleOpen = async () => {
+    await setDel(true)
+    document.querySelector('.delCon').classList.add('openAnime')
+  }
+  const handleCancel = async() => {
+    await document.querySelector('.delCon').classList.remove('openAnime')
+    document.querySelector('.delCon').classList.add('cancelAnime')
+    setTimeout(()=>{
+      setDel(false)
+    },300)
+  }
   return (
     <>
       {preview && !edit && (
@@ -142,7 +204,30 @@ export default function NotesRender() {
             <button className="edit" onClick={() => setEdit(true)}>
               Edit
             </button>
+            <button className='delete' onClick={handleOpen}>
+              Del
+            </button>
           </div>
+          {
+            del && 
+              <div className='delCon'>
+                <div className='del'>
+                  <h1>Are you sure to delete?</h1>
+                  <div>
+                    <button className='cancelDel' onClick={handleCancel}>Cancel</button>
+                    <button className='deleteDel' id={`${preNote.noteId}`} onClick={handleDelete}>Delete</button>
+                  </div>
+                </div>
+              </div>
+          }
+          {
+            deleting && 
+              <div className='deleting'>
+                <div>
+                  <h1>Deleting...</h1>
+                </div>
+              </div>
+          }
           <PreviewNote note={preNote} />
         </div>
       )}

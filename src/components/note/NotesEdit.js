@@ -40,23 +40,12 @@ export default function NotesEdit() {
   const id = uuidV4()
 
   useEffect(()=>{
-      console.log(currentNote)
       setTitle(currentNote.title)
       setText(currentNote.note)
       setTextColor(currentNote.textColor)
       setNoteBackgroundColor(currentNote.backgroundColor)
       setFont(currentNote.font)
       setFontSize(currentNote.fontSize)
-    // if (currentUser){
-    //     database.users
-    //       .doc(currentUser.uid)
-    //       .get()
-    //       .then( doc => {
-    //           if ( doc.exists ){
-
-    //           }
-    //       })
-    // }
   },[])
 
   const handleRipples = (e) => {
@@ -137,14 +126,14 @@ export default function NotesEdit() {
       console.log('offline')
     }
   };
-  const handleClose = () => {
-    setClose(true);
-    document.querySelector('.formContainer').classList.add('close')
+  const handleClose = async() => {
+    await document.querySelector('.formContainer').classList.add('close')
     setTimeout(() => {
+      setPreview(false)
+      setClose(true);
       setAddNote(false);
       setClose(false);
       setEdit(false)
-      setPreview(false)
     }, 300);
   };
 
@@ -236,10 +225,6 @@ export default function NotesEdit() {
           Save
         </button>
       </form>
-      <button className="inputCloseBtn" onClick={handleClose}>
-        <div></div>
-        <div></div>
-      </button>
     </div>
   );
 }

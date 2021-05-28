@@ -15,6 +15,11 @@ body
     @include flex;
     width: 100%;
     min-height: 100vh;
+    background-color: #ececec;
+    button
+    {
+        outline: none;
+    }
 }
 #root
 {
