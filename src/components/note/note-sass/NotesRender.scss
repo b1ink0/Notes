@@ -186,6 +186,7 @@
         button
         {
             @include flex;
+            flex-direction: column;
             position: absolute;
             right: 0;
             height: 100%;
@@ -195,10 +196,29 @@
             border: none;
             font-size: 20px;
             cursor: pointer;
-            img
+            .burger
             {
-                width: 24px;
-                height: 24px;
+                @include flex();
+                flex-direction: column;
+                position: relative;
+                height: 100%;
+                width: 50px; 
+                div
+                {
+                    width: 35px;
+                    height: 6px;
+                    border-radius: 25px;
+                    background: white;
+                    position: absolute;
+                }
+                div:nth-child(1)
+                {
+                    transform: translateY(-12px);
+                }
+                div:nth-child(3)
+                {
+                    transform: translateY(12px);
+                }
             }
         }
     }
@@ -293,4 +313,88 @@
 @keyframes fadeIn {
     0%{opacity: 0;}
     100%{opacity: 1;}
+}
+.openBurger1
+{
+    animation: oBur1 0.5s forwards;
+}
+.openBurger2
+{
+    animation: oBur2 0.5s forwards;
+}
+.openBurger3
+{
+    animation: oBur3 0.5s forwards;
+}
+.closeBurger1
+{
+    animation: cBur1 0.5s backwards;
+}
+.closeBurger2
+{
+    animation: cBur2 0.5s backwards;
+}
+.closeBurger3
+{
+    animation: cBur3 0.5s backwards;
+}
+@keyframes oBur1 {
+    0%
+    {
+        transform: translateY(12px) rotate(0deg);
+    }
+    100%
+    {
+        transform: translateY(0) rotate(45deg);
+    }
+}
+@keyframes oBur3 {
+    0%
+    {
+        transform: translateY(-12px) rotate(0deg);
+    }
+    100%
+    {
+        transform: translateY(0) rotate(-45deg);
+    }
+}
+@keyframes oBur2 {
+    0%
+    {
+        opacity: 1;
+    }
+    100%
+    {
+        opacity: 0;
+    }
+}
+@keyframes cBur1 {
+    0%
+    {
+        transform: translateY(0) rotate(45deg);
+    }
+    100%
+    {
+        transform: translateY(12px) rotate(0deg);
+    }
+}
+@keyframes cBur3 {
+    0%
+    {
+        transform: translateY(0) rotate(-45deg);
+    }
+    100%
+    {
+        transform: translateY(-12px) rotate(0deg);
+    }
+}
+@keyframes cBur2 {
+    0%
+    {
+        opacity: 0;
+    }
+    100%
+    {
+        opacity: 1;
+    }
 }
