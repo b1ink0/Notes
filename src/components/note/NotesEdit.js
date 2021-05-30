@@ -7,13 +7,10 @@ import NoteInputFontSelect from "./notes input selector/NoteInputFontSelect";
 import NoteInputFontSizeSelect from "./notes input selector/NoteInputFontSizeSelect";
 import NotesInputSelect from "./notes input selector/NotesInputColorSelect";
 import { v4 as uuidV4 } from "uuid";
-import backSvg from "./img/back.svg";
 
 export default function NotesEdit() {
   const {
     setAddNote,
-    notes,
-    setNotes,
     text,
     setText,
     noteBackgroundColor,
@@ -26,7 +23,6 @@ export default function NotesEdit() {
     setFontSize,
     title,
     setTitle,
-    setCurrentNote,
     currentNote,
     setPreview,
     setEdit,
@@ -139,7 +135,7 @@ export default function NotesEdit() {
       setSaving(true);
       handleUpdate();
     }
-    if (navigator.onLine == false) {
+    if (navigator.onLine === false) {
       setOnlineStatus(false);
       console.log("offline");
     }
@@ -164,10 +160,28 @@ export default function NotesEdit() {
   return (
     <div className="formContainer">
       {saving && (
-        <div className="saving">
-          <div>
-            <p>saving...</p>
-          </div>
+        <div className="loading">
+          <svg className="svgLoad2" height="100" width="100">
+            <circle
+              cx="50"
+              cy="50"
+              r="40"
+              strokeLinecap="round"
+              strokeWidth="10"
+              fill="none"
+            />
+          </svg>
+          <svg className="svgLoad1" height="100" width="100">
+            <circle
+              cx="50"
+              cy="50"
+              r="40"
+              stroke="#fff"
+              strokeLinecap="round"
+              strokeWidth="10"
+              fill="none"
+            />
+          </svg>
         </div>
       )}
       {!onlineStatus && (
@@ -217,36 +231,42 @@ export default function NotesEdit() {
         <h1>Edit Note</h1>
       </div>
       <form onSubmit={handleSubmit}>
-        <input
-          className="titleInput"
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-          placeholder="Title..."
-          maxLength="15"
-          style={{
-            background: `${noteBackgroundColor}`,
-            color: `${textColor}`,
-            transition: "all 0.35s",
-            fontFamily: `${font}`,
-          }}
-        />
-        <textarea
-          type="text"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          required
-          placeholder="Note..."
-          maxLength="1000"
-          style={{
-            background: `${noteBackgroundColor}`,
-            color: `${textColor}`,
-            transition: "all 0.35s",
-            fontFamily: `${font}`,
-            fontSize: `${fontSize}px`,
-          }}
-        />
+        <div className="inputCon">
+          <input
+            className="titleInput"
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+            placeholder="Title..."
+            maxLength="15"
+            style={{
+              background: `${noteBackgroundColor}`,
+              color: `${textColor}`,
+              transition: "all 0.35s",
+              fontFamily: `${font}`,
+            }}
+          />
+          <div className="chaLimit">{title.length}/15</div>
+        </div>
+        <div className="textareaCon">
+          <textarea
+            type="text"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            required
+            placeholder="Note..."
+            maxLength="1000"
+            style={{
+              background: `${noteBackgroundColor}`,
+              color: `${textColor}`,
+              transition: "all 0.35s",
+              fontFamily: `${font}`,
+              fontSize: `${fontSize}px`,
+            }}
+          />
+          <div className="chaLimit">{text.length}/1000</div>
+        </div>
         <div className="selectContainer">
           <NotesInputSelect
             title="Background"

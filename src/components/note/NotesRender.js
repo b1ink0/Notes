@@ -1,52 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
 import { useAuth } from "../../context/AuthContext";
 import { useStateContext } from "../../context/StateContext";
-import { auth, database } from "../../firebase";
+import { database } from "../../firebase";
 import AddNotesBtn from "./AddNotesBtn";
 import NotesInput from "./NotesInput";
 import "./note-sass/NotesRender.scss";
-import titleSvg from "./img/title.svg";
-import gridSvg from "./img/grid.svg";
 import PreviewNote from "./PreviewNote";
-import backSvg from "./img/back.svg";
 import NotesEdit from "./NotesEdit";
-import Title from "./img/Title";
 import Delete from "./img/Delete";
 import Edit from "./img/Edit";
+import SideNav from "./SideNav";
 
 export default function NotesRender() {
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
   const [firstLoad, setFirstLoad] = useState(true);
   const [noteData, setNoteData] = useState();
   const [preNote, setPreNote] = useState({});
   const [deleting, setDeleting] = useState(false);
   const [del, setDel] = useState(false);
-  const history = useHistory();
-  const { logOut, currentUser } = useAuth();
-
-  const handleLogOut = async () => {
-    try {
-      setError("");
-      setLoading(true);
-      await logOut();
-      auth.onAuthStateChanged((user) => {
-        if (!user) {
-          history.push("/Notes/login");
-        }
-        return;
-      });
-    } catch {
-      setError("Failed to logOUt");
-    }
-    setLoading(false);
-  };
-
+  const { currentUser } = useAuth();
   const {
-    notes,
     addNote,
-    setAddNote,
     setNotes,
     sort,
     setSort,
@@ -55,6 +28,8 @@ export default function NotesRender() {
     setPreview,
     edit,
     setEdit,
+    sideNavbar,
+    setSideNavbar,
   } = useStateContext();
 
   function reverseArr(input) {
@@ -91,7 +66,7 @@ export default function NotesRender() {
         setFirstLoad(false);
       });
   }, [addNote, edit, deleting]);
- 
+
   const handleRipples = (e) => {
     let ripplesClassName = e.target.className;
     let x = e.clientX - e.target.offsetLeft;
@@ -116,7 +91,7 @@ export default function NotesRender() {
 
   const handleSee = (e) => {
     let show = e.target.id;
-    const hShow = document.getElementById(`${show}`).dataset
+    const hShow = document.getElementById(`${show}`).dataset;
     setPreNote({
       note: hShow.note,
       title: hShow.title,
@@ -190,37 +165,41 @@ export default function NotesRender() {
       setDel(false);
     }, 300);
   };
-  let burger = false
-  const handleBurger = async() => {
-    burger = !burger
-    handleBurgerSub()
-  }
+  let burger = false;
+  const handleBurger = async () => {
+    burger = !burger;
+    setSideNavbar(!sideNavbar);
+  };
+  useEffect(() => {
+    handleBurgerSub();
+  }, [sideNavbar]);
   const handleBurgerSub = () => {
-    const el = document.querySelector('.burger').children
-    if (burger){
-      el.item(0).classList.remove('closeBurger1')
-      el.item(1).classList.remove('closeBurger2')
-      el.item(2).classList.remove('closeBurger3')
+    const el = document.querySelector(".burger").children;
+    if (sideNavbar) {
+      el.item(0).classList.remove("closeBurger1");
+      el.item(1).classList.remove("closeBurger2");
+      el.item(2).classList.remove("closeBurger3");
       void el.item(0).offsetWidth;
       void el.item(1).offsetWidth;
       void el.item(2).offsetWidth;
-      el.item(0).classList.add('openBurger1')
-      el.item(1).classList.add('openBurger2')
-      el.item(2).classList.add('openBurger3')
-    } else if (!burger){
-      el.item(0).classList.remove('openBurger1')
-      el.item(1).classList.remove('openBurger2')
-      el.item(2).classList.remove('openBurger3')
+      el.item(0).classList.add("openBurger1");
+      el.item(1).classList.add("openBurger2");
+      el.item(2).classList.add("openBurger3");
+    } else if (!sideNavbar) {
+      el.item(0).classList.remove("openBurger1");
+      el.item(1).classList.remove("openBurger2");
+      el.item(2).classList.remove("openBurger3");
       void el.item(0).offsetWidth;
       void el.item(1).offsetWidth;
       void el.item(2).offsetWidth;
-      el.item(0).classList.add('closeBurger1')
-      el.item(1).classList.add('closeBurger2')
-      el.item(2).classList.add('closeBurger3')
+      el.item(0).classList.add("closeBurger1");
+      el.item(1).classList.add("closeBurger2");
+      el.item(2).classList.add("closeBurger3");
     }
-  }
+  };
   return (
     <>
+      {sideNavbar && <SideNav />}
       {preview && !edit && (
         <div className="preCon">
           <div className="navPreview">
@@ -239,20 +218,32 @@ export default function NotesRender() {
                   overflow: "visible",
                 }}
               >
-              	<g id="Layer_2" data-name="Layer 2">
+                <g id="Layer_2" data-name="Layer 2">
                   <g id="Layer_1-2" data-name="Layer 1">
-                    <line className="cls-1" x1="10" y1="109.57" x2="109.57" y2="10"/>
-                    <line className="cls-1" x1="10" y1="109.57" x2="109.57" y2="209.15"/>
+                    <line
+                      className="cls-1"
+                      x1="10"
+                      y1="109.57"
+                      x2="109.57"
+                      y2="10"
+                    />
+                    <line
+                      className="cls-1"
+                      x1="10"
+                      y1="109.57"
+                      x2="109.57"
+                      y2="209.15"
+                    />
                   </g>
                 </g>
               </svg>
             </button>
             <h1>Note</h1>
             <button className="edit" onClick={() => setEdit(true)}>
-              <Edit/>
+              <Edit />
             </button>
             <button className="delete" onClick={handleOpen}>
-              <Delete/>
+              <Delete />
             </button>
           </div>
           {del && (
@@ -275,10 +266,28 @@ export default function NotesRender() {
             </div>
           )}
           {deleting && (
-            <div className="deleting">
-              <div>
-                <h1>Deleting...</h1>
-              </div>
+            <div className="loading">
+              <svg className="svgLoad2" height="100" width="100">
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="40"
+                  strokeLinecap="round"
+                  strokeWidth="10"
+                  fill="none"
+                />
+              </svg>
+              <svg className="svgLoad1" height="100" width="100">
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="40"
+                  stroke="#fff"
+                  strokeLinecap="round"
+                  strokeWidth="10"
+                  fill="none"
+                />
+              </svg>
             </div>
           )}
           <PreviewNote note={preNote} />
@@ -294,18 +303,39 @@ export default function NotesRender() {
         <div className="notesContainer">
           <h1 className="logo">
             Notes
-            {/* <button onClick={handleSort}>
-              {sort === "title" ? <Title/> : gridSvg} 
-            </button> */}
             <button onClick={handleBurger}>
-              <div className='burger'>
+              <div className="burger">
                 <div></div>
                 <div></div>
                 <div></div>
               </div>
             </button>
           </h1>
-          {firstLoad && <div className="loading">Loading...</div>}
+          {firstLoad && (
+            <div className="loading">
+              <svg className="svgLoad2" height="100" width="100">
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="40"
+                  strokeLinecap="round"
+                  strokeWidth="10"
+                  fill="none"
+                />
+              </svg>
+              <svg className="svgLoad1" height="100" width="100">
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="40"
+                  stroke="#fff"
+                  strokeLinecap="round"
+                  strokeWidth="10"
+                  fill="none"
+                />
+              </svg>
+            </div>
+          )}
           <div className="noteCon">
             {noteData &&
               noteData.map((note) => (
@@ -363,9 +393,6 @@ export default function NotesRender() {
               ))}
           </div>
           <AddNotesBtn />
-          <button disabled={loading} onClick={handleLogOut}>
-            log out
-          </button>
         </div>
       )}
     </>

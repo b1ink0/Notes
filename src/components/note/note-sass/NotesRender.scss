@@ -21,6 +21,37 @@
             left: 0%;
         }
     }
+    .loading
+    {
+        @include flex;
+        color: gray;
+        width: 100%;
+        height: 100%;
+        font-size: 35px;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.342);
+        z-index: 10;
+        .svgLoad1
+        {
+            stroke-dasharray: 250;
+            stroke-dashoffset: 250;
+            animation: load 3s ease infinite;
+            position: absolute;
+        }
+        .svgLoad2
+        {
+            position: absolute;
+            circle
+            {
+                stroke: #dddddd;
+            }
+        }
+        @keyframes load {
+            0%{stroke-dashoffset: 250; transform: rotate(0deg);}
+            50%{stroke-dashoffset: 0; transform: rotate(180deg)}
+            100%{stroke-dashoffset: -250; transform: rotate(0deg)}
+        }
+    }
     .navPreview
     {
         @include flex;
@@ -127,32 +158,6 @@
         }
     }
 }
-.deleting
-{
-    @include flex();
-        position: absolute;
-        width: 100%;
-        height: 100vh;
-        z-index: 10;
-        background-color: rgba(0, 0, 0, 0.342);
-    div
-    {
-        @include flex();
-        flex-direction: column;
-        width: 70vw;
-        height: 150px;
-        width: 80vw;
-        height: 150px;
-        padding: 20px;
-        border-radius: 10px;
-        background: white;
-        padding: 10px;
-        h1
-        {
-            
-        }
-    }
-}
 .notesContainer
 {
     @include flex;
@@ -203,6 +208,7 @@
                 position: relative;
                 height: 100%;
                 width: 50px; 
+                z-index: 11;
                 div
                 {
                     width: 35px;
@@ -229,6 +235,27 @@
         width: 100%;
         height: 90vh;
         font-size: 35px;
+        position: relative;
+        .svgLoad1
+        {
+            stroke-dasharray: 250;
+            stroke-dashoffset: 250;
+            animation: load 3s ease infinite;
+            position: absolute;
+        }
+        .svgLoad2
+        {
+            position: absolute;
+            circle
+            {
+                stroke: #dddddd;
+            }
+        }
+        @keyframes load {
+            0%{stroke-dashoffset: 250; transform: rotate(0deg);}
+            50%{stroke-dashoffset: 0; transform: rotate(180deg)}
+            100%{stroke-dashoffset: -250; transform: rotate(0deg)}
+        }
     }
     .noteCon
     {

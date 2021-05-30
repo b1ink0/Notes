@@ -1,0 +1,101 @@
+@mixin  flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sideNav
+{
+    @include flex();
+    border: #bebebe 0.5px solid;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100%;
+    background-color: #ececec;
+    position: absolute;
+    z-index: 10;
+    animation: navbar 0.4s ease forwards;
+    @keyframes navbar {
+        0%{
+            right: 100%;
+        }
+        100%{
+            right: 0%;
+        }
+    }
+    .optionCon
+    {
+        @include flex();
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 100%;
+        min-height: 100%;
+        margin-top: 40px;
+        div
+        {
+            @include flex;
+            width: 95vw;
+            border-radius: 9px;
+            height: 50px;
+            background: rgb(255, 255, 255);
+            margin-top: 25px;
+            font-size: 25px;
+            text-align: center;
+            box-shadow: 6px 6px 5px #bbb, 
+            0 10px 5px rgba(0,0,0,0);
+            cursor: pointer;
+        }
+    }
+    button
+    {
+        @include flex;
+        flex-direction: column;
+        position: absolute;
+        right: 10px;
+        top:10px;
+        height: 50px;
+        width: 50px;
+        margin-right: 0px;
+        background-color: #ececec;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        .burger
+        {
+            @include flex();
+            flex-direction: column;
+            position: relative;
+            height: 100%;
+            width: 50px; 
+            z-index: 11;
+            div
+            {
+                width: 35px;
+                height: 6px;
+                border-radius: 25px;
+                background: rgb(175, 175, 175);
+                position: absolute;
+            }
+            div:nth-child(1)
+            {
+                transform: translateY(-12px);
+            }
+            div:nth-child(3)
+            {
+                transform: translateY(12px);
+            }
+        }
+    }
+}
+.navBarOut
+{
+    animation: navbarout 0.4s ease forwards;
+    @keyframes navbarout {
+        0%{
+            right: 0%;
+        }
+        100%{
+            right: 100%;
+        }
+    }
+}
