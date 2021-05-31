@@ -1,21 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { auth } from "../../firebase";
 import { useAuth } from "../../context/AuthContext";
-import { useStateContext } from '../../context/StateContext'
-import './note-sass/SideNav.scss'
+import { useStateContext } from "../../context/StateContext";
+import "./note-sass/SideNav.scss";
 
 export default function SideNav() {
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
-    const history = useHistory();
-    const { logOut } = useAuth();
-    const { sideNavbar, setSideNavbar } = useStateContext()
-    const handleLogOut = async () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [out, setOut] = useState(false);
+  const history = useHistory();
+  const { logOut } = useAuth();
+  const { sideNavbar, setSideNavbar } = useStateContext();
+  const handleLogOut = async () => {
+    document.querySelector(".delCon").classList.remove("openAnime");
+    document.querySelector(".delCon").classList.add("cancelAnime");
+    setTimeout(() => {
+      setOut(false);
       try {
         setError("");
         setLoading(true);
-        await logOut();
+        logOut();
         auth.onAuthStateChanged((user) => {
           if (!user) {
             history.push("/Notes/login");
@@ -25,29 +30,61 @@ export default function SideNav() {
       } catch {
         setError("Failed to logOUt");
       }
-      setLoading(false);
-    };  
-    const handleClose = () => {
-      document.querySelector('.sideNav').classList.add('navBarOut')
-      setTimeout(()=>{
-        setSideNavbar(false)
-      },400)
-    }
-    return (
-        <div className='sideNav'>
-            <button onClick={handleClose}>
-              <div className='burger'>
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-            </button>
-            <div className='optionCon'>
-              <div className='themes'>Themes</div>
-              <div className='about'>About</div>
-              <div className='contact'>Contact</div>
-              <div className='logOut' onClick={handleLogOut}>Log Out</div>
+      setLoading(false)  
+    }, 300);
+  };
+  const handleClose = () => {
+    document.querySelector(".sideNav").classList.add("navBarOut");
+    setTimeout(() => {
+      setSideNavbar(false);
+    }, 400);
+  };
+  const handleOpen = async () => {
+    await setOut(true);
+    document.querySelector(".delCon").classList.add("openAnime");
+  };
+  const handleCancel = async () => {
+    await document.querySelector(".delCon").classList.remove("openAnime");
+    document.querySelector(".delCon").classList.add("cancelAnime");
+    setTimeout(() => {
+      setOut(false);
+    }, 300);
+  };
+  return (
+    <div className="sideNav">
+      {out && (
+        <div className="delCon">
+          <div className="del">
+            <h1>Are you sure ?</h1>
+            <div>
+              <button className="cancelDel" onClick={handleCancel}>
+                Cancel
+              </button>
+              <button
+                className="deleteDel"
+                onClick={handleLogOut}
+              >
+                Log Out
+              </button>
             </div>
+          </div>
         </div>
-    )
+      )}
+      <button className="navClose" onClick={handleClose}>
+        <div className="burger">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </button>
+      <div className="optionCon">
+        <div className="themes">Themes</div>
+        <div className="about">About</div>
+        <div className="contact">Contact</div>
+        <button disabled={loading} className="logOut" onClick={handleOpen}>
+          Log Out
+        </button>
+      </div>
+    </div>
+  );
 }

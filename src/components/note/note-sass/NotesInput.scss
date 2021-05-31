@@ -37,10 +37,12 @@
             stroke-dashoffset: 250;
             animation: load 3s ease infinite;
             position: absolute;
+            top: 40vh;
         }
         .svgLoad2
         {
             position: absolute;
+            top: 40vh;
             circle
             {
                 stroke: #dddddd;
