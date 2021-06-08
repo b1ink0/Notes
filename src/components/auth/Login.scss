@@ -1,0 +1,91 @@
+@mixin  flex 
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loginCon
+{
+    @include flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width:100%;
+    background-color: #ececec;
+    position: relative;
+    overflow: hidden;
+    .bgImg
+    {
+        width: 350%;
+        height: 350%;
+        position: absolute;
+        z-index: 0;
+        filter: invert(0.9)
+    }
+    .navPreview
+    {
+        @include flex;
+        width: 95vw;
+        height: 50px;
+        margin-top: 15px;
+        background-color: white;
+        position: absolute;
+        border-radius: 10px;
+        top: 0;
+        box-shadow: 6px 6px 5px #bbb, 
+        0 10px 5px rgba(0,0,0,0);
+        overflow: hidden;
+        z-index: 1;
+        h1
+        {
+            margin: 0;
+        }
+    }
+    div
+    {
+        @include flex;
+        flex-direction: column;
+        width:95VW;
+        height:250px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 6px 6px 5px #bbb, 
+        0 10px 5px rgba(0,0,0,0);
+        z-index: 1;
+        h1
+        {
+            font-size: 30px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        p
+        {
+            border-top: 1px rgb(134, 134, 134) solid;
+            width:250px;
+        }
+        button
+        {
+            @include flex;
+            outline: none;
+            border: none;
+            border-radius: 25px;
+            background: #1e92fd;
+            color:white;
+            width: 250px;
+            height: 45px;
+            font-size: 18px;
+            transition: all 0.3s;
+            margin-top: 20px;
+            cursor: pointer;
+            img
+            {
+                width: 40px;
+                height: 40px;
+                margin-right: 10px;
+            }
+        }
+        button:hover
+        {
+            background: #0084ff;
+        }
+    }
+}
