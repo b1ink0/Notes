@@ -39,12 +39,12 @@ export default function LogIn() {
   
   return (
       <div className='loginCon'>
-        <img className='bgImg' src={bg}></img>
+        <div className='bgImg'></div>
         <div className="navPreview">
-          <h1>Notes Log In</h1>
+          <h1>Notes</h1>
         </div>
         <div>
-          <h1>Sign Up / Log In</h1>
+          <h1>Log In</h1>
           <p/>
           <button disabled={loading} onClick={handleLogIn}><img src={gIcon}></img>Continue with Google</button>
         </div>

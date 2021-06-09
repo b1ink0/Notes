@@ -15,11 +15,19 @@
     overflow: hidden;
     .bgImg
     {
-        width: 350%;
-        height: 350%;
+        width: 200%;
+        height: 200%;
         position: absolute;
         z-index: 0;
-        filter: invert(0.9)
+        filter: opacity(0.1);
+        background-image: url('./img/bg.svg');
+    }
+    @media only screen and (max-width: 600px) {
+        .bgImg
+        {
+        width: 450%;
+        height: 450%;
+        }
     }
     .navPreview
     {

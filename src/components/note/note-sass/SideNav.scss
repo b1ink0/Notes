@@ -98,6 +98,11 @@
             box-shadow: 6px 6px 5px #bbb, 
             0 10px 5px rgba(0,0,0,0);
             cursor: pointer;
+            transition: all 0.2s;
+        }
+        div:hover,button:hover
+        {
+            background: rgb(230, 230, 230);
         }
     }
     .navClose
