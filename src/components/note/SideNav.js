@@ -11,7 +11,7 @@ export default function SideNav() {
   const [out, setOut] = useState(false);
   const history = useHistory();
   const { logOut } = useAuth();
-  const { sideNavbar, setSideNavbar } = useStateContext();
+  const { sideNavbar, setSideNavbar, setThemes } = useStateContext();
   const handleLogOut = async () => {
     document.querySelector(".delCon").classList.remove("openAnime");
     document.querySelector(".delCon").classList.add("cancelAnime");
@@ -30,7 +30,7 @@ export default function SideNav() {
       } catch {
         setError("Failed to logOUt");
       }
-      setLoading(false)  
+      setLoading(false);
     }, 300);
   };
   const handleClose = () => {
@@ -60,10 +60,7 @@ export default function SideNav() {
               <button className="cancelDel" onClick={handleCancel}>
                 Cancel
               </button>
-              <button
-                className="deleteDel"
-                onClick={handleLogOut}
-              >
+              <button className="deleteDel" onClick={handleLogOut}>
                 Log Out
               </button>
             </div>
@@ -78,9 +75,9 @@ export default function SideNav() {
         </div>
       </button>
       <div className="optionCon">
-        <div className="themes">Themes</div>
-        <div className="about">About</div>
-        <div className="contact">Contact</div>
+        <button className="themes" onClick={()=>setThemes(true)}>Themes</button>
+        <button className="about">About</button>
+        <button className="contact">Contact</button>
         <button disabled={loading} className="logOut" onClick={handleOpen}>
           Log Out
         </button>

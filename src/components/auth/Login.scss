@@ -32,9 +32,9 @@
     .navPreview
     {
         @include flex;
-        width: 95vw;
+        width: 96.5vw;
         height: 50px;
-        margin-top: 15px;
+        margin-top: 5px;
         background-color: white;
         position: absolute;
         border-radius: 10px;
@@ -52,7 +52,7 @@
     {
         @include flex;
         flex-direction: column;
-        width:95VW;
+        width: 96.5vw;
         height:250px;
         background: white;
         border-radius: 15px;

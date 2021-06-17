@@ -11,7 +11,7 @@ export default function NoteInputFontSelect({Font}) {
     "Cursive",
     "Fantasy",
     "Pattaya",
-    "Dancing Script",
+    "Monospace",
   ];
   
   const handleClickOutside = e => {

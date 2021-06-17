@@ -10,6 +10,9 @@ import NotesEdit from "./NotesEdit";
 import Delete from "./img/Delete";
 import Edit from "./img/Edit";
 import SideNav from "./SideNav";
+import BackSvg from './img/BackSvg'
+import LoadingSvg from "./img/LoadingSvg";
+import Themes from "../nav/Themes";
 
 export default function NotesRender() {
   const [firstLoad, setFirstLoad] = useState(true);
@@ -30,6 +33,8 @@ export default function NotesRender() {
     setEdit,
     sideNavbar,
     setSideNavbar,
+    themes,
+    setThemes
   } = useStateContext();
 
   function reverseArr(input) {
@@ -200,43 +205,12 @@ export default function NotesRender() {
   return (
     <>
       {sideNavbar && <SideNav />}
+      {themes && <Themes/>}
       {preview && !edit && (
         <div className="preCon">
           <div className="navPreview">
             <button className="back" onClick={() => handleBack()}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 119.57 219.15"
-                style={{
-                  fill: "none",
-                  stroke: "#fff",
-                  strokeLinecap: "round",
-                  strokeMiterlimit: "10",
-                  strokeWidth: "23px",
-                  width: "37px",
-                  height: "37px",
-                  overflow: "visible",
-                }}
-              >
-                <g id="Layer_2" data-name="Layer 2">
-                  <g id="Layer_1-2" data-name="Layer 1">
-                    <line
-                      className="cls-1"
-                      x1="10"
-                      y1="109.57"
-                      x2="109.57"
-                      y2="10"
-                    />
-                    <line
-                      className="cls-1"
-                      x1="10"
-                      y1="109.57"
-                      x2="109.57"
-                      y2="209.15"
-                    />
-                  </g>
-                </g>
-              </svg>
+              <BackSvg/>
             </button>
             <h1>Note</h1>
             <button className="edit" onClick={() => setEdit(true)}>
@@ -267,27 +241,7 @@ export default function NotesRender() {
           )}
           {deleting && (
             <div className="loading">
-              <svg className="svgLoad2" height="100" width="100">
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="40"
-                  strokeLinecap="round"
-                  strokeWidth="10"
-                  fill="none"
-                />
-              </svg>
-              <svg className="svgLoad1" height="100" width="100">
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="40"
-                  stroke="#fff"
-                  strokeLinecap="round"
-                  strokeWidth="10"
-                  fill="none"
-                />
-              </svg>
+              <LoadingSvg/>
             </div>
           )}
           <PreviewNote note={preNote} />
@@ -313,27 +267,7 @@ export default function NotesRender() {
           </h1>
           {firstLoad && (
             <div className="loading">
-              <svg className="svgLoad2" height="100" width="100">
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="40"
-                  strokeLinecap="round"
-                  strokeWidth="10"
-                  fill="none"
-                />
-              </svg>
-              <svg className="svgLoad1" height="100" width="100">
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="40"
-                  stroke="#fff"
-                  strokeLinecap="round"
-                  strokeWidth="10"
-                  fill="none"
-                />
-              </svg>
+              <LoadingSvg/>
             </div>
           )}
           <div className="noteCon">

@@ -20,6 +20,8 @@ export const StateProvider = ( { children } ) => {
     const [preview, setPreview] = useState(false);
     const [edit, setEdit] = useState(false);
     const [sideNavbar, setSideNavbar] = useState(false)
+    const [themes, setThemes] = useState(false)
+
 
     const value = {
         addNote,
@@ -47,7 +49,9 @@ export const StateProvider = ( { children } ) => {
         edit,
         setEdit,
         sideNavbar,
-        setSideNavbar
+        setSideNavbar,
+        themes,
+        setThemes
     }
     return (
         <StateContext.Provider value={value}>

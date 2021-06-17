@@ -7,6 +7,8 @@ import NoteInputFontSelect from "./notes input selector/NoteInputFontSelect";
 import NoteInputFontSizeSelect from "./notes input selector/NoteInputFontSizeSelect";
 import NotesInputSelect from "./notes input selector/NotesInputColorSelect";
 import { v4 as uuidV4 } from "uuid";
+import LoadingSvg from "./img/LoadingSvg";
+import BackSvg from "./img/BackSvg";
 
 export default function NotesEdit() {
   const {
@@ -161,27 +163,7 @@ export default function NotesEdit() {
     <div className="formContainer">
       {saving && (
         <div className="loading">
-          <svg className="svgLoad2" height="100" width="100">
-            <circle
-              cx="50"
-              cy="50"
-              r="40"
-              strokeLinecap="round"
-              strokeWidth="10"
-              fill="none"
-            />
-          </svg>
-          <svg className="svgLoad1" height="100" width="100">
-            <circle
-              cx="50"
-              cy="50"
-              r="40"
-              stroke="#fff"
-              strokeLinecap="round"
-              strokeWidth="10"
-              fill="none"
-            />
-          </svg>
+          <LoadingSvg/>
         </div>
       )}
       {!onlineStatus && (
@@ -194,39 +176,7 @@ export default function NotesEdit() {
       )}
       <div className="navInput">
         <button className="backInput" onClick={handleClose}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 119.57 219.15"
-            style={{
-              fill: "none",
-              stroke: "#fff",
-              strokeLinecap: "round",
-              strokeMiterlimit: "10",
-              strokeWidth: "23px",
-              width: "37px",
-              height: "37px",
-              overflow: "visible",
-            }}
-          >
-            <g id="Layer_2" data-name="Layer 2">
-              <g id="Layer_1-2" data-name="Layer 1">
-                <line
-                  className="cls-1"
-                  x1="10"
-                  y1="109.57"
-                  x2="109.57"
-                  y2="10"
-                />
-                <line
-                  className="cls-1"
-                  x1="10"
-                  y1="109.57"
-                  x2="109.57"
-                  y2="209.15"
-                />
-              </g>
-            </g>
-          </svg>
+          <BackSvg/>
         </button>
         <h1>Edit Note</h1>
       </div>
