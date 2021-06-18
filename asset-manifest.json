@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/Notes/static/css/main.6c0b70bd.chunk.css",
-    "main.js": "/Notes/static/js/main.a4ab0a0e.chunk.js",
-    "main.js.map": "/Notes/static/js/main.a4ab0a0e.chunk.js.map",
+    "main.css": "/Notes/static/css/main.3db963c3.chunk.css",
+    "main.js": "/Notes/static/js/main.dda0c805.chunk.js",
+    "main.js.map": "/Notes/static/js/main.dda0c805.chunk.js.map",
     "runtime-main.js": "/Notes/static/js/runtime-main.badecaba.js",
     "runtime-main.js.map": "/Notes/static/js/runtime-main.badecaba.js.map",
     "static/js/2.1a3ed6eb.chunk.js": "/Notes/static/js/2.1a3ed6eb.chunk.js",
     "static/js/2.1a3ed6eb.chunk.js.map": "/Notes/static/js/2.1a3ed6eb.chunk.js.map",
     "index.html": "/Notes/index.html",
-    "static/css/main.6c0b70bd.chunk.css.map": "/Notes/static/css/main.6c0b70bd.chunk.css.map",
+    "static/css/main.3db963c3.chunk.css.map": "/Notes/static/css/main.3db963c3.chunk.css.map",
     "static/js/2.1a3ed6eb.chunk.js.LICENSE.txt": "/Notes/static/js/2.1a3ed6eb.chunk.js.LICENSE.txt",
     "static/media/Login.scss": "/Notes/static/media/bg.b9946741.svg",
     "static/media/gIcon.f1089448.svg": "/Notes/static/media/gIcon.f1089448.svg"
@@ -16,7 +16,7 @@
   "entrypoints": [
     "static/js/runtime-main.badecaba.js",
     "static/js/2.1a3ed6eb.chunk.js",
-    "static/css/main.6c0b70bd.chunk.css",
-    "static/js/main.a4ab0a0e.chunk.js"
+    "static/css/main.3db963c3.chunk.css",
+    "static/js/main.dda0c805.chunk.js"
   ]
 }
