@@ -2,19 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { useStateContext } from "../../../context/StateContext";
 import "../note-sass/NotesInputFontSelect.scss";
 
-export default function NoteInputFontSelect({Font}) {
-  const node = useRef()
+export default function NoteInputFontSelect({ Font }) {
+  const node = useRef();
   const [fOpen, setFOpen] = useState(false);
-  const { font, setFont } = useStateContext();
-  const fonts = [
-    "Sans-serif",
-    "Cursive",
-    "Fantasy",
-    "Pattaya",
-    "Monospace",
-  ];
-  
-  const handleClickOutside = e => {
+  const { font, setFont, defaultTheme } = useStateContext();
+  const fonts = ["Sans-serif", "Cursive", "Fantasy", "Pattaya", "Monospace"];
+
+  const handleClickOutside = (e) => {
     if (node.current.contains(e.target)) {
       return;
     }
@@ -33,7 +27,17 @@ export default function NoteInputFontSelect({Font}) {
   }, [fOpen]);
 
   return (
-    <div style={{zIndex: `${fOpen ? '4' : ''}`}} ref={node} className="fontSelect" onClick={() => setFOpen(!fOpen)}>
+    <div
+      style={{ zIndex: `${fOpen ? "4" : ""}` }}
+      ref={node}
+      className="fontSelect"
+      style={{
+        background: defaultTheme[1],
+        color: defaultTheme[2],
+        boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
+      }}
+      onClick={() => setFOpen(!fOpen)}
+    >
       <div className="title">Font</div>
       <div
         className="selectDefault"
@@ -49,6 +53,7 @@ export default function NoteInputFontSelect({Font}) {
           height: `${fOpen ? "250px" : ""}`,
           opacity: `${fOpen ? "1" : ""}`,
           pointerEvents: `${fOpen ? "all" : ""}`,
+          background:defaultTheme[1]
         }}
       >
         {fonts.map((font) => (

@@ -28,6 +28,8 @@ export default function NotesEdit() {
     currentNote,
     setPreview,
     setEdit,
+    themes,
+    defaultTheme,
   } = useStateContext();
 
   const [close, setClose] = useState(false);
@@ -117,10 +119,10 @@ export default function NotesEdit() {
               console.log("updated note at server");
               setText("");
               setTitle("");
-              setTextColor("#000000");
               setFont("Sans-serif");
               setFontSize("25");
-              setNoteBackgroundColor("#ffffff");
+              setNoteBackgroundColor(defaultTheme[1]);
+              setTextColor(defaultTheme[2]);
               setSaving(false);
               setAddNote(false);
               setPreview(false);
@@ -147,10 +149,10 @@ export default function NotesEdit() {
     setTimeout(() => {
       setText("");
       setTitle("");
-      setTextColor("#000000");
       setFont("Sans-serif");
       setFontSize("25");
-      setNoteBackgroundColor("#ffffff");
+      setNoteBackgroundColor(defaultTheme[1]);
+      setTextColor(defaultTheme[2]);
       setPreview(false);
       setClose(true);
       setAddNote(false);
@@ -158,12 +160,14 @@ export default function NotesEdit() {
       setEdit(false);
     }, 300);
   };
-
+  useEffect(()=>{
+    document.querySelector('body').style.background = defaultTheme[0];
+  },[themes])
   return (
-    <div className="formContainer">
+    <div className="formContainer" style={{ background: defaultTheme[0] }}>
       {saving && (
         <div className="loading">
-          <LoadingSvg/>
+          <LoadingSvg />
         </div>
       )}
       {!onlineStatus && (
@@ -174,9 +178,20 @@ export default function NotesEdit() {
           </div>
         </div>
       )}
-      <div className="navInput">
-        <button className="backInput" onClick={handleClose}>
-          <BackSvg/>
+      <div
+        className="navInput"
+        style={{
+          background: defaultTheme[1],
+          color: defaultTheme[2],
+          boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
+        }}
+      >
+        <button
+          className="backInput"
+          style={{ background: defaultTheme[3] }}
+          onClick={handleClose}
+        >
+          <BackSvg />
         </button>
         <h1>Edit Note</h1>
       </div>
@@ -195,6 +210,7 @@ export default function NotesEdit() {
               color: `${textColor}`,
               transition: "all 0.35s",
               fontFamily: `${font}`,
+              boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
             }}
           />
           <div className="chaLimit">{title.length}/15</div>
@@ -213,6 +229,7 @@ export default function NotesEdit() {
               transition: "all 0.35s",
               fontFamily: `${font}`,
               fontSize: `${fontSize}px`,
+              boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
             }}
           />
           <div className="chaLimit">{text.length}/1000</div>
@@ -239,7 +256,15 @@ export default function NotesEdit() {
           <NoteInputFontSelect />
           <NoteInputFontSizeSelect />
         </div>
-        <button type="submit" className="save" onClick={handleRipples}>
+        <button
+          type="submit"
+          className="save"
+          style={{
+            background: defaultTheme[5],
+            boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
+          }}
+          onClick={handleRipples}
+        >
           Save
         </button>
       </form>

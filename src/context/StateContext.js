@@ -21,7 +21,7 @@ export const StateProvider = ( { children } ) => {
     const [edit, setEdit] = useState(false);
     const [sideNavbar, setSideNavbar] = useState(false)
     const [themes, setThemes] = useState(false)
-
+    const [defaultTheme, setDefaultTheme] = useState(['#ececec','#fff','#000','#dfdfdf','#bbb'])
 
     const value = {
         addNote,
@@ -51,7 +51,9 @@ export const StateProvider = ( { children } ) => {
         sideNavbar,
         setSideNavbar,
         themes,
-        setThemes
+        setThemes,
+        defaultTheme,
+        setDefaultTheme
     }
     return (
         <StateContext.Provider value={value}>

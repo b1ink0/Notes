@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useStateContext } from "../../../context/StateContext";
 import "../note-sass/NotesInputColorSelect.scss";
 
 export default function NotesInputSelect({
@@ -14,6 +15,7 @@ export default function NotesInputSelect({
   const node = useRef();
   const [bgOpen, setBgOpen] = useState(false);
   const [zi, setZi] = useState(3)
+  const { defaultTheme } = useStateContext()
   const handleClickOutside = (e) => {
     if (node.current.contains(e.target)) {
       return;
@@ -60,6 +62,9 @@ export default function NotesInputSelect({
           width: `${bgOpen ? "95vw" : ""}`,
           height: `${bgOpen ? "80px" : ""}`,
           borderRadius: `${bgOpen ? "15px" : ""}`,
+          boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
+          background:defaultTheme[1],
+          color:defaultTheme[2]
         }}
         onClick={() => {
           setBgOpen(!bgOpen);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useStateContext } from "../../context/StateContext";
 import { database } from "../../firebase";
@@ -7,6 +7,8 @@ import NoteInputFontSelect from "./notes input selector/NoteInputFontSelect";
 import NoteInputFontSizeSelect from "./notes input selector/NoteInputFontSizeSelect";
 import NotesInputSelect from "./notes input selector/NotesInputColorSelect";
 import { v4 as uuidV4 } from "uuid";
+import LoadingSvg from "./img/LoadingSvg";
+import BackSvg from "./img/BackSvg";
 
 export default function NotesInput() {
   const {
@@ -23,6 +25,7 @@ export default function NotesInput() {
     setFontSize,
     title,
     setTitle,
+    defaultTheme,
   } = useStateContext();
 
   const [close, setClose] = useState(false);
@@ -95,10 +98,10 @@ export default function NotesInput() {
               console.log("updated note at server");
               setText("");
               setTitle("");
-              setTextColor("#000000");
               setFont("Sans-serif");
               setFontSize("25");
-              setNoteBackgroundColor("#ffffff");
+              setNoteBackgroundColor(defaultTheme[1]);
+              setTextColor(defaultTheme[2]);
               setSaving(false);
               setAddNote(false);
             });
@@ -128,30 +131,10 @@ export default function NotesInput() {
   };
 
   return (
-    <div className="formContainer">
+    <div className="formContainer" style={{ background: defaultTheme[0] }}>
       {saving && (
         <div className="loading">
-          <svg className="svgLoad2" height="100" width="100">
-            <circle
-              cx="50"
-              cy="50"
-              r="40"
-              strokeLinecap="round"
-              strokeWidth="10"
-              fill="none"
-            />
-          </svg>
-          <svg className="svgLoad1" height="100" width="100">
-            <circle
-              cx="50"
-              cy="50"
-              r="40"
-              stroke="#fff"
-              strokeLinecap="round"
-              strokeWidth="10"
-              fill="none"
-            />
-          </svg>
+          <LoadingSvg />
         </div>
       )}
       {!onlineStatus && (
@@ -162,43 +145,22 @@ export default function NotesInput() {
           </div>
         </div>
       )}
-      <div className="navInput">
-        <button className="backInput" onClick={handleClose}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 119.57 219.15"
-            style={{
-              fill: "none",
-              stroke: "#fff",
-              strokeLinecap: "round",
-              strokeMiterlimit: "10",
-              strokeWidth: "23px",
-              width: "37px",
-              height: "37px",
-              overflow: "visible",
-            }}
-          >
-            <g id="Layer_2" data-name="Layer 2">
-              <g id="Layer_1-2" data-name="Layer 1">
-                <line
-                  className="cls-1"
-                  x1="10"
-                  y1="109.57"
-                  x2="109.57"
-                  y2="10"
-                />
-                <line
-                  className="cls-1"
-                  x1="10"
-                  y1="109.57"
-                  x2="109.57"
-                  y2="209.15"
-                />
-              </g>
-            </g>
-          </svg>
+      <div
+        className="navInput"
+        style={{
+          background: defaultTheme[1],
+          color: defaultTheme[2],
+          boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
+        }}
+      >
+        <button
+          className="backInput"
+          onClick={handleClose}
+          style={{ background: defaultTheme[3] }}
+        >
+          <BackSvg />
         </button>
-        <h1>Add Note</h1>
+        <h1 style={{ color: defaultTheme[2] }}>Add Note</h1>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="inputCon">
@@ -211,10 +173,12 @@ export default function NotesInput() {
             placeholder="Title..."
             maxLength="15"
             style={{
+              background: defaultTheme[1],
               background: `${noteBackgroundColor}`,
               color: `${textColor}`,
               transition: "all 0.35s",
               fontFamily: `${font}`,
+              boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
             }}
           />
           <div className="chaLimit">{title.length}/15</div>
@@ -228,11 +192,13 @@ export default function NotesInput() {
             placeholder="Note..."
             maxLength="1000"
             style={{
+              background: defaultTheme[1],
               background: `${noteBackgroundColor}`,
               color: `${textColor}`,
               transition: "all 0.35s",
               fontFamily: `${font}`,
               fontSize: `${fontSize}px`,
+              boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
             }}
           />
           <div className="chaLimit">{text.length}/1000</div>
@@ -259,7 +225,15 @@ export default function NotesInput() {
           <NoteInputFontSelect />
           <NoteInputFontSizeSelect />
         </div>
-        <button type="submit" className="save" onClick={handleRipples}>
+        <button
+          type="submit"
+          className="save"
+          style={{
+            background: defaultTheme[5],
+            boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
+          }}
+          onClick={handleRipples}
+        >
           Save
         </button>
       </form>

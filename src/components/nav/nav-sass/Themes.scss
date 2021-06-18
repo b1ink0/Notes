@@ -14,6 +14,15 @@
     background-color:#ececec;
     position: absolute;
     z-index: 11;
+    animation: theme 0.4s ease forwards;
+    @keyframes theme {
+        0%{
+            left: 100%;
+        }
+        100%{
+            left: 0%;
+        }
+    }
     .navInput
     {
         @include flex;
@@ -81,6 +90,18 @@
             {
                 height: 115px;
             }
+        }
+    }
+}
+.themeClose
+{
+    animation: themeC 0.4s ease forwards;
+    @keyframes themeC {
+        0%{
+            left: 0%;
+        }
+        100%{
+            left: 100%;
         }
     }
 }

@@ -2,9 +2,11 @@ import React, { useEffect } from 'react'
 import './note-sass/PreviewNote.scss'
 import { database } from "../../firebase";
 import { useAuth } from "../../context/AuthContext";
+import { useStateContext } from '../../context/StateContext';
 
 export default function PreviewNote( { note } ) {
     const { currentUser } = useAuth()
+    const { defaultTheme } = useStateContext()
     useEffect(()=>{
         if(currentUser){
             database.users.doc(currentUser.uid)
@@ -16,7 +18,8 @@ export default function PreviewNote( { note } ) {
             style={{
                 background:`${note.backgroundColor}`,
                 color:`${note.textColor}`,
-                fontFamily:`${note.font}`
+                fontFamily:`${note.font}`,
+                boxShadow: `6px 6px 5px ${defaultTheme[4]}`
             }}>
                 <h1>
                     {note.title}

@@ -11,7 +11,8 @@ export default function SideNav() {
   const [out, setOut] = useState(false);
   const history = useHistory();
   const { logOut } = useAuth();
-  const { sideNavbar, setSideNavbar, setThemes } = useStateContext();
+  const { sideNavbar, setSideNavbar, setThemes, defaultTheme } =
+    useStateContext();
   const handleLogOut = async () => {
     document.querySelector(".delCon").classList.remove("openAnime");
     document.querySelector(".delCon").classList.add("cancelAnime");
@@ -51,13 +52,20 @@ export default function SideNav() {
     }, 300);
   };
   return (
-    <div className="sideNav">
+    <div className="sideNav" style={{ background: defaultTheme[0] }}>
       {out && (
         <div className="delCon">
-          <div className="del">
+          <div
+            className="del"
+            style={{ background: defaultTheme[1], color: defaultTheme[2] }}
+          >
             <h1>Are you sure ?</h1>
             <div>
-              <button className="cancelDel" onClick={handleCancel}>
+              <button
+                className="cancelDel"
+                style={{ background: defaultTheme[6] }}
+                onClick={handleCancel}
+              >
                 Cancel
               </button>
               <button className="deleteDel" onClick={handleLogOut}>
@@ -67,18 +75,59 @@ export default function SideNav() {
           </div>
         </div>
       )}
-      <button className="navClose" onClick={handleClose}>
+      <button
+        className="navClose"
+        onClick={handleClose}
+        style={{ background: defaultTheme[0] }}
+      >
         <div className="burger">
-          <div></div>
-          <div></div>
-          <div></div>
+          <div style={{ background: defaultTheme[4] }}></div>
+          <div style={{ background: defaultTheme[4] }}></div>
+          <div style={{ background: defaultTheme[4] }}></div>
         </div>
       </button>
       <div className="optionCon">
-        <button className="themes" onClick={()=>setThemes(true)}>Themes</button>
-        <button className="about">About</button>
-        <button className="contact">Contact</button>
-        <button disabled={loading} className="logOut" onClick={handleOpen}>
+        <button
+          className="themes"
+          style={{
+            background: defaultTheme[1],
+            color: defaultTheme[2],
+            boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
+          }}
+          onClick={() => setThemes(true)}
+        >
+          Themes
+        </button>
+        <button
+          className="about"
+          style={{
+            background: defaultTheme[1],
+            color: defaultTheme[2],
+            boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
+          }}
+        >
+          About
+        </button>
+        <button
+          className="contact"
+          style={{
+            background: defaultTheme[1],
+            color: defaultTheme[2],
+            boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
+          }}
+        >
+          Contact
+        </button>
+        <button
+          disabled={loading}
+          className="logOut"
+          style={{
+            background: defaultTheme[1],
+            color: defaultTheme[2],
+            boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
+          }}
+          onClick={handleOpen}
+        >
           Log Out
         </button>
       </div>

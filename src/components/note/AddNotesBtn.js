@@ -3,9 +3,9 @@ import { useStateContext } from '../../context/StateContext'
 import './note-sass/AddNotesBtn.scss'
 
 export default function AddNotesBtn() {
-    const { setAddNote } = useStateContext()
+    const { setAddNote, defaultTheme } = useStateContext()
     const [onlineStatus, setOnlineStatus] = useState(true)
-
+   
     const handleClick = () => {
         if (navigator.onLine){
             setAddNote(true)
@@ -27,9 +27,9 @@ export default function AddNotesBtn() {
           </div>
         )
         }
-        <span className='addNotesBtn' onClick={handleClick}>
-            <div></div>
-            <div></div>
+        <span className='addNotesBtn' onClick={handleClick} style={{background:defaultTheme[1],boxShadow: `6px 6px 5px ${defaultTheme[4]}`}}>
+            <div style={{background:defaultTheme[2]}}></div>
+            <div style={{background:defaultTheme[2]}}></div>
         </span>
         </>
     )

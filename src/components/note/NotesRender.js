@@ -10,7 +10,7 @@ import NotesEdit from "./NotesEdit";
 import Delete from "./img/Delete";
 import Edit from "./img/Edit";
 import SideNav from "./SideNav";
-import BackSvg from './img/BackSvg'
+import BackSvg from "./img/BackSvg";
 import LoadingSvg from "./img/LoadingSvg";
 import Themes from "../nav/Themes";
 
@@ -24,6 +24,8 @@ export default function NotesRender() {
   const {
     addNote,
     setNotes,
+    setNoteBackgroundColor,
+    setTextColor,
     sort,
     setSort,
     setCurrentNote,
@@ -34,9 +36,14 @@ export default function NotesRender() {
     sideNavbar,
     setSideNavbar,
     themes,
-    setThemes
+    setThemes,
+    defaultTheme,
+    setDefaultTheme
   } = useStateContext();
-
+  useEffect(() => {
+    setNoteBackgroundColor(defaultTheme[1]);
+    setTextColor(defaultTheme[2]);
+  }, []);
   function reverseArr(input) {
     let ret = [];
     for (let i = input.length - 1; i >= 0; i--) {
@@ -55,6 +62,7 @@ export default function NotesRender() {
           database.users.doc(currentUser.uid).set({
             note: [],
             uid: currentUser.uid,
+            theme: ['#ececec','#fff','#000','#dfdfdf','#bbb','#c990ff','#00b300']
           });
         }
       });
@@ -64,6 +72,13 @@ export default function NotesRender() {
       .doc(currentUser.uid)
       .get()
       .then((doc) => {
+        if (doc.data().theme){
+          setDefaultTheme(doc.data().theme)
+          console.log('yes')
+        }else{
+          console.log('no')
+        }
+        console.log(doc.data().theme)
         let tempData = doc.data().note;
         tempData = reverseArr(tempData);
         setNoteData(tempData);
@@ -202,30 +217,60 @@ export default function NotesRender() {
       el.item(2).classList.add("closeBurger3");
     }
   };
+  useEffect(() => {
+    document.querySelector("body").style.background = defaultTheme[0];
+  }, [themes]);
+
   return (
     <>
       {sideNavbar && <SideNav />}
-      {themes && <Themes/>}
+      {themes && <Themes />}
       {preview && !edit && (
-        <div className="preCon">
-          <div className="navPreview">
-            <button className="back" onClick={() => handleBack()}>
-              <BackSvg/>
+        <div className="preCon" style={{ background: defaultTheme[0] }}>
+          <div
+            className="navPreview"
+            style={{
+              background: defaultTheme[1],
+              boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
+              color:defaultTheme[2]
+            }}
+          >
+            <button
+              className="back"
+              style={{ background: defaultTheme[3] }}
+              onClick={() => handleBack()}
+            >
+              <BackSvg />
             </button>
             <h1>Note</h1>
-            <button className="edit" onClick={() => setEdit(true)}>
+            <button
+              className="edit"
+              style={{ background: defaultTheme[3] }}
+              onClick={() => setEdit(true)}
+            >
               <Edit />
             </button>
-            <button className="delete" onClick={handleOpen}>
+            <button
+              className="delete"
+              style={{ background: defaultTheme[3] }}
+              onClick={handleOpen}
+            >
               <Delete />
             </button>
           </div>
           {del && (
             <div className="delCon">
-              <div className="del">
+              <div
+                className="del"
+                style={{ background: defaultTheme[1], color: defaultTheme[2] }}
+              >
                 <h1>Are you sure to delete?</h1>
                 <div>
-                  <button className="cancelDel" onClick={handleCancel}>
+                  <button
+                    className="cancelDel"
+                    onClick={handleCancel}
+                    style={{ background: defaultTheme[6] }}
+                  >
                     Cancel
                   </button>
                   <button
@@ -241,7 +286,7 @@ export default function NotesRender() {
           )}
           {deleting && (
             <div className="loading">
-              <LoadingSvg/>
+              <LoadingSvg />
             </div>
           )}
           <PreviewNote note={preNote} />
@@ -254,11 +299,20 @@ export default function NotesRender() {
       )}
       {addNote && !preview && <NotesInput />}
       {!addNote && !preview && (
-        <div className="notesContainer">
-          <h1 className="logo">
+        <div
+          className="notesContainer"
+          style={{ background: defaultTheme[0], color: defaultTheme[2] }}
+        >
+          <h1
+            className="logo"
+            style={{
+              background: defaultTheme[1],
+              boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
+            }}
+          >
             Notes
             <button onClick={handleBurger}>
-              <div className="burger">
+              <div className="burger" style={{ background: defaultTheme[3] }}>
                 <div></div>
                 <div></div>
                 <div></div>
@@ -267,7 +321,7 @@ export default function NotesRender() {
           </h1>
           {firstLoad && (
             <div className="loading">
-              <LoadingSvg/>
+              <LoadingSvg />
             </div>
           )}
           <div className="noteCon">
@@ -280,6 +334,7 @@ export default function NotesRender() {
                     color: `${note.textColor}`,
                     fontFamily: `${note.font}`,
                     fontSize: `${note.fontSize}px`,
+                    boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
                   }}
                   key={note.noteId}
                   onClick={handleSee}
