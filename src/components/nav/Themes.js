@@ -18,12 +18,12 @@ export default function Themes() {
         <h1>Themes</h1>
       </div>
       <div className="theme">
-        <Theme theme='Notes' backgroundColor='#ececec' background='white' color='blace' boxShadow='#bbb'/>
+        <Theme theme='Notes' on='true' backgroundColor='#ececec' background='white' color='blace' boxShadow='#bbb'/>
         <Theme theme='Notes' backgroundColor='#000' background='#232323' color='white' boxShadow='rgba(0,0,0,0)'/>
-        <Theme theme='Notes' backgroundColor='#44318d' background='#6a50d0' color='white' boxShadow='rgba(0,0,0,0)'/>
+        <Theme theme='Notes' backgroundColor='#9400d3' background='#b826f7' color='white' boxShadow='rgba(0,0,0,0)'/>
         <Theme theme='Notes' backgroundColor='#3aafa9' background='#47d4cd' color='white' boxShadow='rgba(0,0,0,0)'/>
         <Theme theme='Notes' backgroundColor='#d83f87' background='#ef5aa0' color='white' boxShadow='rgba(0,0,0,0)'/>
-        {/* <Theme theme='Notes' backgroundColor='linear-gradient(to right, #20002c, #cbb4d4)' background='#9e74af' color='white' boxShadow='rgba(0,0,0,0)'/> */}
+        <Theme theme='Notes' backgroundColor='orange' background='#ffc252' color='white' boxShadow='rgba(0,0,0,0)'/>
       </div>
     </div>
   );

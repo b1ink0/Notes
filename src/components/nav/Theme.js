@@ -7,6 +7,7 @@ export default function Theme({
   background,
   color,
   boxShadow,
+  on
 }) {
   return (
     <div
@@ -27,7 +28,18 @@ export default function Theme({
           boxShadow: `6px 6px 5px ${boxShadow},0 10px 5px rgba(0,0,0,0)`,
         }}
         className="theme1"
-      ></div>
+      >
+        Note...
+      </div>
+      {
+        on &&
+      <div className='theme2'>
+        <div className='theme21'>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      }
     </div>
   );
 }
