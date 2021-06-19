@@ -26,6 +26,7 @@
         font-size: 20px;
         box-shadow: 3px 3px 5px #bbb, 
         0 10px 5px rgba(0,0,0,0);
+        pointer-events: none;
     }
     .theme1
     {
@@ -44,6 +45,16 @@
         position: absolute;
         border-radius: 10px;
         border: 3px rgb(22, 131, 255) solid;
+        pointer-events: none;
+        animation: fade 0.6s ease forwards;
+        @keyframes fade {
+            0%{
+                opacity: 0;
+            }
+            100%{
+                opacity: 1;
+            }
+        }
         .theme21
         {
             @include flex();
@@ -52,6 +63,7 @@
             border-radius: 50%;
             background-color: rgba(255, 255, 255, 0);
             position: relative;
+            pointer-events: none;
             div
             {
                 width: 60px;
@@ -59,6 +71,7 @@
                 background-color: rgb(22, 131, 255);
                 position: absolute;
                 transform: rotate(-135deg);
+                pointer-events: none;
             }
             div:nth-child(1)
             {

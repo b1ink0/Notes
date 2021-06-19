@@ -36,14 +36,15 @@ export default function NotesRender() {
     sideNavbar,
     setSideNavbar,
     themes,
-    setThemes,
     defaultTheme,
-    setDefaultTheme
+    setDefaultTheme,
+    update
   } = useStateContext();
+
   useEffect(() => {
-    setNoteBackgroundColor(defaultTheme[1]);
-    setTextColor(defaultTheme[2]);
+    document.querySelector("body").style.background = defaultTheme[0];
   }, []);
+
   function reverseArr(input) {
     let ret = [];
     for (let i = input.length - 1; i >= 0; i--) {
@@ -62,7 +63,7 @@ export default function NotesRender() {
           database.users.doc(currentUser.uid).set({
             note: [],
             uid: currentUser.uid,
-            theme: ['#ececec','#fff','#000','#dfdfdf','#bbb','#c990ff','#00b300']
+            theme: ['#ececec','#fff','#000','#dfdfdf','#bbb','#c990ff','#00b300','1']
           });
         }
       });
@@ -85,7 +86,7 @@ export default function NotesRender() {
         setNotes(tempData);
         setFirstLoad(false);
       });
-  }, [addNote, edit, deleting]);
+  }, [addNote, edit, deleting,update]);
 
   const handleRipples = (e) => {
     let ripplesClassName = e.target.className;
@@ -269,7 +270,7 @@ export default function NotesRender() {
                   <button
                     className="cancelDel"
                     onClick={handleCancel}
-                    style={{ background: defaultTheme[6] }}
+                    style={{ background: defaultTheme[3] }}
                   >
                     Cancel
                   </button>

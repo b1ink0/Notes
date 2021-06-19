@@ -21,7 +21,9 @@ export const StateProvider = ( { children } ) => {
     const [edit, setEdit] = useState(false);
     const [sideNavbar, setSideNavbar] = useState(false)
     const [themes, setThemes] = useState(false)
-    const [defaultTheme, setDefaultTheme] = useState(['#ececec','#fff','#000','#dfdfdf','#bbb'])
+    const [update, setUpdate] = useState(false)
+    const [savingTheme, setSavingTheme] = useState(false)
+    const [defaultTheme, setDefaultTheme] = useState(['#ececec','#fff','#000','#dfdfdf','#bbb','#c990ff','#00b300','1'])
 
     const value = {
         addNote,
@@ -53,7 +55,11 @@ export const StateProvider = ( { children } ) => {
         themes,
         setThemes,
         defaultTheme,
-        setDefaultTheme
+        setDefaultTheme,
+        update,
+        setUpdate,
+        savingTheme,
+        setSavingTheme
     }
     return (
         <StateContext.Provider value={value}>

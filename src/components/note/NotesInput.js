@@ -27,13 +27,20 @@ export default function NotesInput() {
     setTitle,
     defaultTheme,
   } = useStateContext();
-
+ 
   const [close, setClose] = useState(false);
   const [noteHelp, setNoteHelp] = useState(false);
   const [saving, setSaving] = useState(false);
   const [onlineStatus, setOnlineStatus] = useState(true);
   const { currentUser } = useAuth();
   const id = uuidV4();
+  useEffect(() => {
+    document.querySelector("body").style.background = defaultTheme[0];
+  }, []);
+  useEffect(()=>{
+    setNoteBackgroundColor(defaultTheme[1])
+    setTextColor(defaultTheme[2])
+  },[])
   const handleRipples = (e) => {
     setNoteHelp(!noteHelp);
     let ripplesClassName = e.target.className;

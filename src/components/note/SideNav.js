@@ -63,7 +63,7 @@ export default function SideNav() {
             <div>
               <button
                 className="cancelDel"
-                style={{ background: defaultTheme[6] }}
+                style={{ background: defaultTheme[3] }}
                 onClick={handleCancel}
               >
                 Cancel
@@ -81,9 +81,9 @@ export default function SideNav() {
         style={{ background: defaultTheme[0] }}
       >
         <div className="burger">
-          <div style={{ background: defaultTheme[4] }}></div>
-          <div style={{ background: defaultTheme[4] }}></div>
-          <div style={{ background: defaultTheme[4] }}></div>
+          <div style={{ background: defaultTheme[8] }}></div>
+          <div style={{ background: defaultTheme[8] }}></div>
+          <div style={{ background: defaultTheme[8] }}></div>
         </div>
       </button>
       <div className="optionCon">

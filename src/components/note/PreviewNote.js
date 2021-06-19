@@ -7,6 +7,9 @@ import { useStateContext } from '../../context/StateContext';
 export default function PreviewNote( { note } ) {
     const { currentUser } = useAuth()
     const { defaultTheme } = useStateContext()
+    useEffect(() => {
+        document.querySelector("body").style.background = defaultTheme[0];
+      }, []);
     useEffect(()=>{
         if(currentUser){
             database.users.doc(currentUser.uid)
