@@ -274,10 +274,10 @@
             box-shadow: 6px 6px 5px #bbb, 
                         0 10px 5px rgba(0,0,0,0);
             transition: all 0.3s;
-            animation: fadeIN 0.5s forwards;
+            animation: fadeIN 0.7s forwards;
             @keyframes fadeIN {
-                0%{opacity: 0; height: 0;}
-                100%{opacity: 1; height: 90px;}
+                0%{opacity: 0;}
+                100%{opacity: 1;}
             }
             h1
             {

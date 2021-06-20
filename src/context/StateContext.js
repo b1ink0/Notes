@@ -21,9 +21,12 @@ export const StateProvider = ( { children } ) => {
     const [edit, setEdit] = useState(false);
     const [sideNavbar, setSideNavbar] = useState(false)
     const [themes, setThemes] = useState(false)
+    const [about, setAbout] = useState(false)
+    const [profileEdit, setProfileEdit] = useState(false)
     const [update, setUpdate] = useState(false)
     const [savingTheme, setSavingTheme] = useState(false)
-    const [defaultTheme, setDefaultTheme] = useState(['#ececec','#fff','#000','#dfdfdf','#bbb','#c990ff','#00b300','1'])
+    const [userName, setUserName] = useState('User-420')
+    const [defaultTheme, setDefaultTheme] = useState(['#ececec','#ffffff','#000000','#dfdfdf','#bbbbbb','#c990ff','#00b300','1','#bbbbbb',''])
 
     const value = {
         addNote,
@@ -59,7 +62,13 @@ export const StateProvider = ( { children } ) => {
         update,
         setUpdate,
         savingTheme,
-        setSavingTheme
+        setSavingTheme,
+        about,
+        setAbout,
+        profileEdit,
+        setProfileEdit,
+        userName,
+        setUserName
     }
     return (
         <StateContext.Provider value={value}>

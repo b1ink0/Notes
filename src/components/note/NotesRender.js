@@ -13,6 +13,7 @@ import SideNav from "./SideNav";
 import BackSvg from "./img/BackSvg";
 import LoadingSvg from "./img/LoadingSvg";
 import Themes from "../nav/Themes";
+import About from "../nav/About";
 
 export default function NotesRender() {
   const [firstLoad, setFirstLoad] = useState(true);
@@ -38,7 +39,9 @@ export default function NotesRender() {
     themes,
     defaultTheme,
     setDefaultTheme,
-    update
+    update,
+    about,
+    setUserName
   } = useStateContext();
 
   useEffect(() => {
@@ -63,7 +66,8 @@ export default function NotesRender() {
           database.users.doc(currentUser.uid).set({
             note: [],
             uid: currentUser.uid,
-            theme: ['#ececec','#fff','#000','#dfdfdf','#bbb','#c990ff','#00b300','1']
+            theme: ['#ececec','#ffffff','#000000','#dfdfdf','#bbbbbb','#c990ff','#00b300','1','#bbbbbb',''],
+            name: `User-${Math.floor(Math.random()*1000)}`
           });
         }
       });
@@ -75,11 +79,10 @@ export default function NotesRender() {
       .then((doc) => {
         if (doc.data().theme){
           setDefaultTheme(doc.data().theme)
-          console.log('yes')
-        }else{
-          console.log('no')
         }
-        console.log(doc.data().theme)
+        if (doc.data().name){
+          setUserName(doc.data().name)
+        }
         let tempData = doc.data().note;
         tempData = reverseArr(tempData);
         setNoteData(tempData);
@@ -99,15 +102,6 @@ export default function NotesRender() {
     setTimeout(() => {
       ripples.remove();
     }, 500);
-  };
-
-  const handleSort = () => {
-    if (sort === "title") {
-      setSort("grid");
-    } else if (sort === "grid") {
-      setSort("title");
-    } else {
-    }
   };
 
   const handleSee = (e) => {
@@ -226,6 +220,7 @@ export default function NotesRender() {
     <>
       {sideNavbar && <SideNav />}
       {themes && <Themes />}
+      {about && <About/>}
       {preview && !edit && (
         <div className="preCon" style={{ background: defaultTheme[0] }}>
           <div

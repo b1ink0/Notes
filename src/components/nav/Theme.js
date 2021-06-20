@@ -23,26 +23,21 @@ export default function Theme({
     let a = ''
     while( something.length > i ){
       if(something[i] === ','){
-        console.log(',,,,')
         arr.push(a)
-        console.log(a)
         a = ''
       } else {
         a = a + something[i]
       }
       i++;
     }
-    console.log(arr)
   
     if (currentUser) {
       database.users
       .doc(currentUser.uid)
       .get()
       .then((doc) => {
-        database.users.doc(currentUser.uid).set({
-          note: doc.data().note,
-          uid: doc.data().uid,
-          theme: arr
+        database.users.doc(currentUser.uid).update({
+          theme: arr,
         });
         setUpdate(!update)
         setSavingTheme(false)

@@ -14,7 +14,6 @@ export default function Themes() {
       setThemes(false);
     }, 400);
   };
-  console.log(defaultTheme[7] === "1" ? "true" : "false");
   return (
     <div
       className={`themesCon ${themeClose && "themeClose"}`}
