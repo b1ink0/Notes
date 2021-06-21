@@ -9,6 +9,7 @@ import NotesInputSelect from "./notes input selector/NotesInputColorSelect";
 import { v4 as uuidV4 } from "uuid";
 import LoadingSvg from "./img/LoadingSvg";
 import BackSvg from "./img/BackSvg";
+import CryptoJS from 'crypto-js'
 
 export default function NotesEdit() {
   const {
@@ -108,19 +109,21 @@ export default function NotesEdit() {
       .get()
       .then((doc) => {
         if (doc.exists) {
-          console.log("geting data");
           let tempNote = doc.data().note;
+          let decryptedNote = ''
+          if (tempNote !== ''){
+            decryptedNote = JSON.parse(CryptoJS.AES.decrypt(tempNote, doc.data().password).toString(CryptoJS.enc.Utf8))
+          }
           let b = -1;
-          tempNote.map((tNote) => {
+          decryptedNote.map((tNote) => {
             b = b + 1;
             if (tNote.noteId === currentNote.noteId) {
-              tempNote.splice(b, 1);
+              decryptedNote.splice(b, 1);
               return;
             }
           });
-          console.log("setData");
           tempNote = [
-            ...tempNote,
+            ...decryptedNote,
             {
               title: title,
               note: text,
@@ -132,14 +135,13 @@ export default function NotesEdit() {
               date: fullDate,
             },
           ];
-          console.log("updated data");
+          let tempNoteEncrypted = CryptoJS.AES.encrypt(JSON.stringify(tempNote), doc.data().password).toString();
           database.users
             .doc(currentUser.uid)
             .update({
-              note: tempNote,
+              note: tempNoteEncrypted,
             })
             .then((e) => {
-              console.log("updated note at server");
               setText("");
               setTitle("");
               setFont("Sans-serif");
@@ -151,14 +153,12 @@ export default function NotesEdit() {
               setPreview(false);
               setEdit(false);
             });
-          console.log("updated server data");
         }
       });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (navigator.onLine) {
-      console.log("online");
       setSaving(true);
       handleUpdate();
     }

@@ -14,6 +14,8 @@ import BackSvg from "./img/BackSvg";
 import LoadingSvg from "./img/LoadingSvg";
 import Themes from "../nav/Themes";
 import About from "../nav/About";
+import CryptoJS from 'crypto-js'
+import CreateProfile from "./CreateProfile";
 
 export default function NotesRender() {
   const [firstLoad, setFirstLoad] = useState(true);
@@ -21,6 +23,7 @@ export default function NotesRender() {
   const [preNote, setPreNote] = useState({});
   const [deleting, setDeleting] = useState(false);
   const [del, setDel] = useState(false);
+  // const [decryptedNote, setDecryptedNote] = useState('')
   const { currentUser } = useAuth();
   const {
     addNote,
@@ -41,10 +44,18 @@ export default function NotesRender() {
     setDefaultTheme,
     update,
     about,
-    setUserName
+    setUserName,
+    profileExist,
+    setProfileExist
   } = useStateContext();
 
   useEffect(() => {
+    // console.log(defaultTheme)
+    // let ciphertext = CryptoJS.AES.encrypt(JSON.stringify(defaultTheme), 'a').toString();
+    // console.log(ciphertext)
+    // var bytes = CryptoJS.AES.decrypt(ciphertext, 'a');
+    // var decryptedData = JSON.parse(CryptoJS.AES.decrypt(ciphertext, 'a').toString(CryptoJS.enc.Utf8));
+    // console.log(decryptedData)
     document.querySelector("body").style.background = defaultTheme[0];
   }, []);
 
@@ -61,12 +72,20 @@ export default function NotesRender() {
       .get()
       .then((doc) => {
         if (doc.exists) {
+          if (doc.data()){
+            if (doc.data().password){
+              return
+            }else {
+              setProfileExist(true)
+            }
+          }
           return;
         } else {
+          setProfileExist(true)
           database.users.doc(currentUser.uid).set({
-            note: [],
+            note: '',
             uid: currentUser.uid,
-            theme: ['#ececec','#ffffff','#000000','#dfdfdf','#bbbbbb','#c990ff','#00b300','1','#bbbbbb',''],
+            theme: ["#ececec","#ffffff","#000000","#dfdfdf","#bbbbbb","#c990ff","#00b300","1","#bbbbbb",""],
             name: `User-${Math.floor(Math.random()*1000)}`
           });
         }
@@ -77,17 +96,24 @@ export default function NotesRender() {
       .doc(currentUser.uid)
       .get()
       .then((doc) => {
-        if (doc.data().theme){
-          setDefaultTheme(doc.data().theme)
+        if (doc.data()){
+          if (doc.data().theme){
+            setDefaultTheme(doc.data().theme)
+          }
+          if (doc.data().name){
+            setUserName(doc.data().name)
+          }
+          let tempData = doc.data().note;
+          if (tempData !== ''){
+            let decryptedNote = JSON.parse(CryptoJS.AES.decrypt(tempData, doc.data().password).toString(CryptoJS.enc.Utf8))
+            tempData = reverseArr(decryptedNote);
+            setNoteData(tempData);
+            setNotes(tempData);
+            setFirstLoad(false);
+          } else {
+              setFirstLoad(false);
+          }
         }
-        if (doc.data().name){
-          setUserName(doc.data().name)
-        }
-        let tempData = doc.data().note;
-        tempData = reverseArr(tempData);
-        setNoteData(tempData);
-        setNotes(tempData);
-        setFirstLoad(false);
       });
   }, [addNote, edit, deleting,update]);
 
@@ -221,6 +247,7 @@ export default function NotesRender() {
       {sideNavbar && <SideNav />}
       {themes && <Themes />}
       {about && <About/>}
+      {profileExist && <CreateProfile/>}
       {preview && !edit && (
         <div className="preCon" style={{ background: defaultTheme[0] }}>
           <div

@@ -55,7 +55,7 @@ export default function Themes() {
           background="white"
           color="blace"
           boxShadow="#bbb"
-          theme={['#ececec','#ffffff','#000000','#dfdfdf','#bbbbbb','#c990ff','#00b300','1','#bbbbbb','']}
+          theme={'["#ececec","#ffffff","#000000","#dfdfdf","#bbbbbb","#c990ff","#00b300","1","#bbbbbb"]'}
         />
         <Theme
           id="theme_2"
@@ -64,7 +64,7 @@ export default function Themes() {
           background="#232323"
           color="white"
           boxShadow="rgba(0,0,0,0)"
-          theme={['#000000','#353535','#ffffff','#585858','#3c3c3c00','#353535','#00b300','2','#585858','']}
+          theme={'["#000000","#353535","#ffffff","#585858","#3c3c3c00","#353535","#00b300","2","#585858"]'}
         />
         <Theme
           id="theme_3"
@@ -73,7 +73,7 @@ export default function Themes() {
           background="#b826f7"
           color="white"
           boxShadow="rgba(0,0,0,0)"
-          theme={['#9400d3','#b826f7','#ffffff','#cb52ff','#3c3c3c00','#b826f7','#00b300','3','#cb52ff','']}
+          theme={'["#9400d3","#b826f7","#ffffff","#cb52ff","#3c3c3c00","#b826f7","#00b300","3","#cb52ff"]'}
         />
         <Theme
           theme="Notes"
@@ -83,7 +83,7 @@ export default function Themes() {
           background="#47d4cd"
           color="white"
           boxShadow="rgba(0,0,0,0)"
-          theme={['#3aafa9','#47d4cd','#ffffff','#52ece5','#3c3c3c00','#52ece5','#00b300','4','#52ece5','']}
+          theme={'["#3aafa9","#47d4cd","#ffffff","#52ece5","#3c3c3c00","#52ece5","#00b300","4","#52ece5"]'}
         />
         <Theme
           theme="Notes"
@@ -93,7 +93,7 @@ export default function Themes() {
           background="#ef5aa0"
           color="white"
           boxShadow="rgba(0,0,0,0)"
-          theme={['#d83f87','#ef5aa0','#ffffff','#ff76b6','#3c3c3c00','#ff76b6','#00b300','5','#ff76b6','']}
+          theme={'["#d83f87","#ef5aa0","#ffffff","#ff76b6","#3c3c3c00","#ff76b6","#00b300","5","#ff76b6"]'}
         />
         <Theme
           theme="Notes"
@@ -103,7 +103,7 @@ export default function Themes() {
           background="#ffc252"
           color="white"
           boxShadow="rgba(0,0,0,0)"
-          theme={['#ffa500','#ffc252','#ffffff','#ffd280','#3c3c3c00','#ffd280','#00b300','6','#ffd280','']}
+          theme={'["#ffa500","#ffc252","#ffffff","#ffd280","#3c3c3c00","#ffd280","#00b300","6","#ffd280"]'}
         />
       </div>
     </div>

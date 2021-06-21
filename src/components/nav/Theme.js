@@ -17,33 +17,19 @@ export default function Theme({
 
   const handleTheme = (e) => {
     setSavingTheme(true)
-    let something = e.target.id
-    let i = 0
-    let arr = []
-    let a = ''
-    while( something.length > i ){
-      if(something[i] === ','){
-        arr.push(a)
-        a = ''
-      } else {
-        a = a + something[i]
-      }
-      i++;
-    }
-  
+    let something = JSON.parse(e.target.id)
     if (currentUser) {
       database.users
       .doc(currentUser.uid)
       .get()
       .then((doc) => {
         database.users.doc(currentUser.uid).update({
-          theme: arr,
+          theme: something,
         });
         setUpdate(!update)
         setSavingTheme(false)
       })
     }
-    // setDefaultTheme(arr)
   }
   return (
     <div

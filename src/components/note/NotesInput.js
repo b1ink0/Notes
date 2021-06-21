@@ -9,6 +9,7 @@ import NotesInputSelect from "./notes input selector/NotesInputColorSelect";
 import { v4 as uuidV4 } from "uuid";
 import LoadingSvg from "./img/LoadingSvg";
 import BackSvg from "./img/BackSvg";
+import CryptoJS from 'crypto-js'
 
 export default function NotesInput() {
   const {
@@ -38,8 +39,8 @@ export default function NotesInput() {
     document.querySelector("body").style.background = defaultTheme[0];
   }, []);
   useEffect(()=>{
-    setNoteBackgroundColor(defaultTheme[1])
-    setTextColor(defaultTheme[2])
+      setNoteBackgroundColor(defaultTheme[1])
+      setTextColor(defaultTheme[2])
   },[])
   const handleRipples = (e) => {
     setNoteHelp(!noteHelp);
@@ -79,11 +80,13 @@ export default function NotesInput() {
       .get()
       .then((doc) => {
         if (doc.exists) {
-          console.log("geting data");
           let tempNote = doc.data().note;
-          console.log("setData");
+          let decryptedNote = ''
+          if (tempNote !== ''){
+            decryptedNote = JSON.parse(CryptoJS.AES.decrypt(tempNote, doc.data().password).toString(CryptoJS.enc.Utf8))
+          }
           tempNote = [
-            ...tempNote,
+            ...decryptedNote,
             {
               title: title,
               note: text,
@@ -95,14 +98,13 @@ export default function NotesInput() {
               date: fullDate,
             },
           ];
-          console.log("updated data");
+          let tempNoteEncrypted = CryptoJS.AES.encrypt(JSON.stringify(tempNote), doc.data().password).toString();
           database.users
             .doc(currentUser.uid)
             .update({
-              note: tempNote,
+              note: tempNoteEncrypted,
             })
             .then((e) => {
-              console.log("updated note at server");
               setText("");
               setTitle("");
               setFont("Sans-serif");
@@ -112,14 +114,12 @@ export default function NotesInput() {
               setSaving(false);
               setAddNote(false);
             });
-          console.log("updated server data");
         }
       });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (navigator.onLine) {
-      console.log("online");
       setSaving(true);
       handleUpdate();
     }

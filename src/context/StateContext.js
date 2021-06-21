@@ -26,7 +26,8 @@ export const StateProvider = ( { children } ) => {
     const [update, setUpdate] = useState(false)
     const [savingTheme, setSavingTheme] = useState(false)
     const [userName, setUserName] = useState('User-420')
-    const [defaultTheme, setDefaultTheme] = useState(['#ececec','#ffffff','#000000','#dfdfdf','#bbbbbb','#c990ff','#00b300','1','#bbbbbb',''])
+    const [profileExist, setProfileExist] = useState(false)
+    const [defaultTheme, setDefaultTheme] = useState(["#ececec","#ffffff","#000000","#dfdfdf","#bbbbbb","#c990ff","#00b300","1","#bbbbbb",""])
 
     const value = {
         addNote,
@@ -68,7 +69,9 @@ export const StateProvider = ( { children } ) => {
         profileEdit,
         setProfileEdit,
         userName,
-        setUserName
+        setUserName,
+        profileExist,
+        setProfileExist
     }
     return (
         <StateContext.Provider value={value}>

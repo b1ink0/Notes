@@ -1,19 +1,18 @@
-@mixin  flex 
-{
+@mixin  flex {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.profileEditCon
+.enterPassCon
 {
     @include flex();
-    position: absolute;
+    position: fixed;
+    background-color: #ececec;
+    z-index: 15;
     width: 100%;
-    min-height: 100%;
-    z-index: 10;
-    background-color: rgba(0, 0, 0, 0.342);
-    animation: fadeInProfileEdit 0.3s forwards;
-    @keyframes fadeInProfileEdit 
+    height: 100vh;
+    animation: fadeInProfileExist 0.3s forwards;
+    @keyframes fadeInProfileExist
     {
         0%{opacity: 0;}
         100%{opacity: 1;}
@@ -51,16 +50,18 @@
             100%{stroke-dashoffset: -250; transform: rotate(0deg)}
         }
     }
-    .profileEdit
+    form
     {
         @include flex();
         flex-direction: column;
         width: 80vw;
-        height: 250px;
+        height: 400px;
         padding: 20px;
         border-radius: 10px;
         background: white;
         padding: 10px;
+        box-shadow: 4px 4px 5px #bbb, 
+        0 10px 5px rgba(0,0,0,0);
         .profileImg{
             width: 100px;
             height: 100px;
@@ -88,57 +89,71 @@
         .inputCon
         {
             @include flex();
+            align-items: flex-start;
+            flex-direction: column;
             margin-top: 15px;
             position: relative;
-            width: 100%;
+            width: 90%;
+            label
+            {
+                font-size: 18px;
+                color: #3c4043;
+                font-weight: 400;
+                padding: 3px;
+                margin-top: 22px;
+            }
             input
             {
-                width: 90%;
+                width: 100%;
                 height: 25px;
                 border: none;
                 border-bottom: 2px #1e92fd solid;
                 outline: none;
                 padding: 3px;
                 font-size: 20px;
+                margin-top: 5px;
             }
             h1
             {
                 position: absolute;
                 font-size: 15px;
                 font-weight: 300;
-                right: 5%;
+                right: 0;
+                top: 37%;
                 color: #acacac;
             }
+            .showPass
+            {
+                position: absolute;
+                bottom: 2%;
+                right: 0;
+                font-size: 15px;
+                font-weight: 550;
+                color: #1e92fd;
+                border-radius: 50%;
+            }
         }
-        .buttonCon
+        button
         {
-            @include flex();
-            width: 100%;
-            height: 50px;
-            margin-top: 10px;
-            button
-            {
-                border-radius: 10px;
-                border: none;
-                width: 45%;
-                height: 30px;
-                color: white;
-                background: red;
-                font-size: 20px;
-                cursor: pointer;
-                margin: 10px;
-            }
-            button:nth-child(2)
-            {
-                background: rgb(32, 212, 47);
-            }
+            background: #c990ff;
+            margin-top: 25px;
+            border: none;
+            width: 95%;
+            height: 40px;
+            font-size: 25px;
+            color: white;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 4px 4px 5px #bbb, 
+                        0 10px 5px rgba(0,0,0,0);
         }
     }
 }
-.fadeOutProfileEdit
+.fadeOutProfileExist
 {
-    animation: fadeOutProfileEdit 0.3s forwards;
-    @keyframes fadeOutProfileEdit 
+    animation: fadeOutProfileExist 0.3s forwards;
+    @keyframes fadeOutProfileExist 
     {
         0%{opacity: 1;}
         100%{opacity: 0;}

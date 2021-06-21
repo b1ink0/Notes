@@ -233,9 +233,10 @@
         @include flex;
         color: gray;
         width: 100%;
-        height: 90vh;
+        height: 100%;
         font-size: 35px;
-        position: relative;
+        position: fixed;
+        top: 0;
         .svgLoad1
         {
             stroke-dasharray: 250;
