@@ -64,7 +64,7 @@ export default function Themes() {
           background="#232323"
           color="white"
           boxShadow="rgba(0,0,0,0)"
-          theme={'["#000000","#353535","#ffffff","#585858","#3c3c3c00","#353535","#00b300","2","#585858"]'}
+          theme={'["#000000","#353535","#ffffff","#585858","#3c3c3c00","#585858","#00b300","2","#585858"]'}
         />
         <Theme
           id="theme_3"
@@ -73,7 +73,7 @@ export default function Themes() {
           background="#b826f7"
           color="white"
           boxShadow="rgba(0,0,0,0)"
-          theme={'["#9400d3","#b826f7","#ffffff","#cb52ff","#3c3c3c00","#b826f7","#00b300","3","#cb52ff"]'}
+          theme={'["#9400d3","#b826f7","#ffffff","#cb52ff","#3c3c3c00","#cb52ff","#00b300","3","#cb52ff"]'}
         />
         <Theme
           theme="Notes"

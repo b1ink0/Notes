@@ -5,9 +5,11 @@ import { useStateContext } from "../../context/StateContext";
 import { database } from "../../firebase";
 import { useAuth } from "../../context/AuthContext";
 import LoadingSvg from "./img/LoadingSvg";
+import ProfileImg from "../nav/ProfileImg";
+import DefaultProfileImg from "../nav/DefaultProfileImg";
 
 export default function CreateProfile() {
-  const { userName, setUserName, setProfileExist } = useStateContext()
+  const { userName, setUserName, setProfileExist, profileChoose, setProfileChoose, defaultTheme, defaultProfileImg } = useStateContext()
   const { currentUser } = useAuth()
   const [show, setShow] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -24,6 +26,7 @@ export default function CreateProfile() {
           .update({
             name: userName,
             password: tempPass,
+            profileImg: defaultProfileImg
           }).then(()=>{
             setLoading(false)
             setSaved(true)
@@ -37,14 +40,15 @@ export default function CreateProfile() {
   return (
     <div className={`enterPassCon ${saved && 'fadeOutProfileExist'}`}>
       {loading && <div className='loading'><LoadingSvg/></div>}
+      {profileChoose && <ProfileImg/>}
       <form className="passForm" onSubmit={handleSubmit}>
         <div className="profileImg">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M 12 4 C 9.789063 4 8 5.789063 8 8 C 8 10.210938 9.789063 12 12 12 C 14.210938 12 16 10.210938 16 8 C 16 5.789063 14.210938 4 12 4 Z M 9.03125 13.40625 C 5.253906 14.550781 4 17.65625 4 17.65625 L 4 20 L 20 20 L 20 17.65625 C 20 17.65625 18.746094 14.550781 14.96875 13.40625 C 14.761719 14.863281 13.511719 16 12 16 C 10.488281 16 9.238281 14.863281 9.03125 13.40625 Z"></path>
-          </svg>
+          <DefaultProfileImg defaultImg={defaultProfileImg}/>
           <button
             type="button"
             className="profileImgEdit"
+            style={{ background: defaultTheme[5], color: defaultTheme[2] }}
+            onClick={()=> setProfileChoose(true)}
           >
             <Edit />
           </button>

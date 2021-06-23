@@ -27,6 +27,8 @@ export const StateProvider = ( { children } ) => {
     const [savingTheme, setSavingTheme] = useState(false)
     const [userName, setUserName] = useState('User-420')
     const [profileExist, setProfileExist] = useState(false)
+    const [profileChoose, setProfileChoose] = useState(false)
+    const [defaultProfileImg, setDefaultProfileImg] = useState(1)
     const [defaultTheme, setDefaultTheme] = useState(["#ececec","#ffffff","#000000","#dfdfdf","#bbbbbb","#c990ff","#00b300","1","#bbbbbb",""])
 
     const value = {
@@ -71,7 +73,11 @@ export const StateProvider = ( { children } ) => {
         userName,
         setUserName,
         profileExist,
-        setProfileExist
+        setProfileExist,
+        profileChoose,
+        setProfileChoose,
+        defaultProfileImg,
+        setDefaultProfileImg
     }
     return (
         <StateContext.Provider value={value}>

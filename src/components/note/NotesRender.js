@@ -46,16 +46,11 @@ export default function NotesRender() {
     about,
     setUserName,
     profileExist,
-    setProfileExist
+    setProfileExist,
+    setDefaultProfileImg
   } = useStateContext();
 
   useEffect(() => {
-    // console.log(defaultTheme)
-    // let ciphertext = CryptoJS.AES.encrypt(JSON.stringify(defaultTheme), 'a').toString();
-    // console.log(ciphertext)
-    // var bytes = CryptoJS.AES.decrypt(ciphertext, 'a');
-    // var decryptedData = JSON.parse(CryptoJS.AES.decrypt(ciphertext, 'a').toString(CryptoJS.enc.Utf8));
-    // console.log(decryptedData)
     document.querySelector("body").style.background = defaultTheme[0];
   }, []);
 
@@ -86,7 +81,8 @@ export default function NotesRender() {
             note: '',
             uid: currentUser.uid,
             theme: ["#ececec","#ffffff","#000000","#dfdfdf","#bbbbbb","#c990ff","#00b300","1","#bbbbbb",""],
-            name: `User-${Math.floor(Math.random()*1000)}`
+            name: `User-${Math.floor(Math.random()*1000)}`,
+            profileImg: 1
           });
         }
       });
@@ -113,8 +109,13 @@ export default function NotesRender() {
           } else {
               setFirstLoad(false);
           }
+          if (doc.data().profileImg){
+            setDefaultProfileImg(doc.data().profileImg)
+          }
+          setFirstLoad(false);
         }
       });
+      setFirstLoad(false);
   }, [addNote, edit, deleting,update]);
 
   const handleRipples = (e) => {
@@ -275,7 +276,7 @@ export default function NotesRender() {
             </button>
             <button
               className="delete"
-              style={{ background: defaultTheme[3] }}
+              // style={{ background: defaultTheme[6] }}
               onClick={handleOpen}
             >
               <Delete />
