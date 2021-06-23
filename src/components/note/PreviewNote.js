@@ -19,9 +19,9 @@ export default function PreviewNote( { note } ) {
         <div className='previewCon'>
             <div className='preview' 
             style={{
-                background:`${note.backgroundColor}`,
-                color:`${note.textColor}`,
-                fontFamily:`${note.font}`,
+                background: note.backgroundColor,
+                color: note.textColor,
+                fontFamily:note.font,
                 boxShadow: `6px 6px 5px ${defaultTheme[4]}`
             }}>
                 <h1>
@@ -30,7 +30,7 @@ export default function PreviewNote( { note } ) {
                 <div style={{fontSize:`${note.fontSize}px`}}>
                     {note.note}
                 </div>
-                <p>
+                <p style={{color:note.textColor}}>
                     {note.date}
                 </p>
             </div>

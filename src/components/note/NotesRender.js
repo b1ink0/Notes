@@ -376,32 +376,8 @@ export default function NotesRender() {
                   <div
                     style={{ padding: `${sort === "title" ? `0px` : `10px`}` }}
                   >
-                    {sort === "grid" &&
-                      (note.note.length > 460 && note.fontSize === "15" ? (
-                        <p>
-                          {note.note.slice(0, 461)}
-                          <a style={{ fontSize: `${note.fontSize}px` }}>...</a>
-                        </p>
-                      ) : note.note.length > 250 && note.fontSize === "25" ? (
-                        <p>
-                          {note.note.slice(0, 240)}
-                          <a style={{ fontSize: `${note.fontSize}px` }}>...</a>
-                        </p>
-                      ) : note.note.length > 115 && note.fontSize === "35" ? (
-                        <p>
-                          {note.note.slice(0, 120)}
-                          <a style={{ fontSize: `${note.fontSize}px` }}>...</a>
-                        </p>
-                      ) : note.note.length > 44 && note.fontSize === "45" ? (
-                        <p>
-                          {note.note.slice(0, 45)}
-                          <a style={{ fontSize: `${note.fontSize}px` }}>...</a>
-                        </p>
-                      ) : (
-                        note.note
-                      ))}
                   </div>
-                  <p className="date">{note.date}</p>
+                  <p style={{ color: `${note.textColor}`}} className="date">{note.date}</p>
                 </div>
               ))}
           </div>

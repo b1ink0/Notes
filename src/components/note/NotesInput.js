@@ -35,6 +35,7 @@ export default function NotesInput() {
   const [onlineStatus, setOnlineStatus] = useState(true);
   const { currentUser } = useAuth();
   const id = uuidV4();
+
   useEffect(() => {
     document.querySelector("body").style.background = defaultTheme[0];
   }, []);
@@ -188,7 +189,7 @@ export default function NotesInput() {
               boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
             }}
           />
-          <div className="chaLimit">{title.length}/15</div>
+          <div className="chaLimit" style={{color: `${textColor}`}}>{title.length}/15</div>
         </div>
         <div className="textareaCon">
           <textarea
@@ -208,7 +209,7 @@ export default function NotesInput() {
               boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
             }}
           />
-          <div className="chaLimit">{text.length}/1000</div>
+          <div className="chaLimit" style={{color: `${textColor}`}}>{text.length}/1000</div>
         </div>
         <div className="selectContainer">
           <NotesInputSelect

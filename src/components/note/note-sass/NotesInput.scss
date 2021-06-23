@@ -3,6 +3,9 @@
     justify-content: center;
     align-items: center;
 }
+::placeholder {
+    color: rgb(214, 214, 214);
+}
 .formContainer
 {
     @include flex;
@@ -157,8 +160,9 @@
                 position: absolute;
                 right: 6px;
                 bottom: 4px;
-                color: #acacac;
+                color: #000000;
                 font-size: 12px;
+                opacity: 0.5;
             }
         }
         .textareaCon
@@ -186,8 +190,9 @@
                 position: absolute;
                 right: 10px;
                 bottom: 6px;
-                color: #acacac;
+                color: #000000;
                 font-size: 12px;
+                opacity: 0.5;
             }
         }
         .selectContainer

@@ -91,7 +91,7 @@ export default function EditProfile() {
             style={{ background: defaultTheme[1], color: defaultTheme[2] }}
             onChange={(e) => setUserName(e.target.value)}
           />
-          <h1>{userName.length}/15</h1>
+          <h1 style={{color: defaultTheme[2] }}>{userName.length}/15</h1>
         </div>
         <div className="buttonCon">
           <button
