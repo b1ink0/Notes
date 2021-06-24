@@ -21,6 +21,7 @@ export default function SideNav() {
     defaultTheme,
     about,
     setAbout,
+    setContact,
     setProfileEdit,
     profileEdit,
     userName,
@@ -143,6 +144,7 @@ export default function SideNav() {
             color: defaultTheme[2],
             boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
           }}
+          onClick={()=>setContact(true)}
         >
           Contact
         </button>

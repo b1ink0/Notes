@@ -22,6 +22,7 @@ export const StateProvider = ( { children } ) => {
     const [sideNavbar, setSideNavbar] = useState(false)
     const [themes, setThemes] = useState(false)
     const [about, setAbout] = useState(false)
+    const [contact, setContact] = useState(false)
     const [profileEdit, setProfileEdit] = useState(false)
     const [update, setUpdate] = useState(false)
     const [savingTheme, setSavingTheme] = useState(false)
@@ -68,6 +69,8 @@ export const StateProvider = ( { children } ) => {
         setSavingTheme,
         about,
         setAbout,
+        contact,
+        setContact,
         profileEdit,
         setProfileEdit,
         userName,

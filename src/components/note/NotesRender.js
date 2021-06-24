@@ -14,6 +14,7 @@ import BackSvg from "./img/BackSvg";
 import LoadingSvg from "./img/LoadingSvg";
 import Themes from "../nav/Themes";
 import About from "../nav/About";
+import Contact from "../nav/Contact";
 import CryptoJS from 'crypto-js'
 import CreateProfile from "./CreateProfile";
 
@@ -44,6 +45,7 @@ export default function NotesRender() {
     setDefaultTheme,
     update,
     about,
+    contact,
     setUserName,
     profileExist,
     setProfileExist,
@@ -248,6 +250,7 @@ export default function NotesRender() {
       {sideNavbar && <SideNav />}
       {themes && <Themes />}
       {about && <About/>}
+      {contact && <Contact/>}
       {profileExist && <CreateProfile/>}
       {preview && !edit && (
         <div className="preCon" style={{ background: defaultTheme[0] }}>

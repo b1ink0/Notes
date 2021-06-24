@@ -108,9 +108,9 @@
     .delCon
     {
         @include flex();
-        position: absolute;
+        position: fixed;
         width: 100%;
-        height: 100vh;
+        min-height: 100%;
         z-index: 10;
         background-color: rgba(0, 0, 0, 0.342);
         .del

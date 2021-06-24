@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
 }
-.aboutCon
+.contactCon
 {
     @include flex();
     justify-content: flex-start;
@@ -14,8 +14,8 @@
     background-color: #ececec;
     position: absolute;
     z-index: 11;
-    animation: about 0.4s ease forwards;
-    @keyframes about {
+    animation: contact 0.4s ease forwards;
+    @keyframes contact {
         0%{
             left: 100%;
         }
@@ -52,7 +52,7 @@
             }
         }
     }
-    .about
+    .contact
     {
         @include flex;
         flex-direction: column;
@@ -65,7 +65,7 @@
         border-radius: 10px;
         box-shadow: 6px 6px 5px #bbb,0 10px 5px rgba(0,0,0,0);
         overflow: hidden;
-        .aboutLogo
+        .contactLogo
         {
             @include flex();
             flex-direction: column;
@@ -80,10 +80,11 @@
                 border-radius: 50%;
                 background-color: #ff6532;
                 box-shadow: 0px 0px 10px #bbb,0 10px 5px rgba(0,0,0,0);
-                svg
+                overflow: hidden;
+                img
                 {
-                    width: 70px;
-                    height: 70px;
+                    width: 90px;
+                    height: 90px;
                     fill: white;
                 }
             }
@@ -92,77 +93,52 @@
                 margin-top: 10px;
                 font-size: 25px;
                 font-weight: 550;
+                opacity: 0.5;
             }
         }
-        ul
-        {
-            height: 500px;
-            margin-top: 20px;
-            li
-            {
-                @include flex();
-                justify-content: flex-start;
-                position: relative;
-                padding-left: 10px;
-                list-style: none;
-                font-size: 22px;
-                font-weight: 400;
-                margin-top: 30px;
-                border-radius: 10px;
-                background-color:  #ffffff;
-                width: 90vw;
-                height: 55px;
-                box-shadow: 0px 0px 10px #bbb,0 10px 5px rgba(0,0,0,0);
-                a
-                {
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                }
-                .add
-                {
-                    @include flex();
-                    position: absolute;
-                    right: 20px;
-                    width: 40px;
-                    height: 40px;
-                    background: rgb(255, 255, 255);
-                    border-radius: 50%;
-                    box-shadow: 0px 0px 10px #bbb,0 10px 5px rgba(0,0,0,0);
-                    overflow: hidden;
-                    div
-                    {
-                        width: 25px;
-                        height: 3px;
-                        position: absolute;
-                        background: rgb(0, 0, 0);
-                        border-radius: 25px;
-                    }
-                    div:nth-child(2)
-                    {
-                        transform: rotate(90deg);
-                    }
-                    svg
-                    {
-                        width: 25px !important;
-                        height: 25px !important;
-                    }
-                }
-            }
-        }
-        h1
+        .intro
         {
             font-size: 20px;
-            opacity: 0.5;
-            font-weight: 400;
-            margin-bottom: 10px;
+        }
+        .socialMedia
+        {
+            @include flex();
+            flex-wrap: wrap;
+            width: 100%;
+            height: 400px;
+            div
+            {
+                @include flex();
+                width: 50px;
+                height: 50px;
+                margin: 15px;
+                border-radius: 50%;
+                position: relative;
+                box-shadow: 0px 0px 10px #bbb,0 10px 5px rgba(0,0,0,0);
+                overflow: hidden;
+                a
+                {
+                    @include flex();
+                    width: 50px;
+                    height: 50px;
+                    overflow: hidden;
+                    position: absolute;
+                }
+                svg
+                {
+                    position: absolute;
+                    width: 50px ;
+                    height: 50px ;
+                    pointer-events: none;
+                }
+            }
         }
     }
 }
-.aboutClose
+.contactClose
 {
-    animation: aboutC 0.4s ease forwards;
-    @keyframes aboutC {
+    animation: contactC 0.4s ease forwards;
+    @keyframes contactC {
         0%{
             left: 0%;
         }
