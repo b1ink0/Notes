@@ -27,7 +27,7 @@ export default function AddNotesBtn() {
           </div>
         )
         }
-        <span className='addNotesBtn' onClick={handleClick} style={{background:defaultTheme[1],boxShadow: `6px 6px 5px ${defaultTheme[4]}`}}>
+        <span className='addNotesBtn' onClick={handleClick} style={{background:defaultTheme[1],boxShadow: `0px 0px 10px ${defaultTheme[4]}`}}>
             <div style={{background:defaultTheme[2]}}></div>
             <div style={{background:defaultTheme[2]}}></div>
         </span>

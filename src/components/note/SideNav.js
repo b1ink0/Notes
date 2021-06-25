@@ -25,8 +25,13 @@ export default function SideNav() {
     setProfileEdit,
     profileEdit,
     userName,
-    defaultProfileImg
+    defaultProfileImg,
   } = useStateContext();
+  const defaultThemeStyle = {
+    background: defaultTheme[1],
+    color: defaultTheme[2],
+    boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
+  }
   const handleLogOut = async () => {
     document.querySelector(".delCon").classList.remove("openAnime");
     document.querySelector(".delCon").classList.add("cancelAnime");
@@ -36,6 +41,7 @@ export default function SideNav() {
         setError("");
         setLoading(true);
         logOut();
+        setSideNavbar(false);
         auth.onAuthStateChanged((user) => {
           if (!user) {
             history.push("/Notes/login");
@@ -101,7 +107,7 @@ export default function SideNav() {
         </div>
       </button>
       <div className="profile">
-        <div className="profileImgCon">
+        <div className="profileImgCon" style={{boxShadow: `0px 0px 10px ${defaultTheme[4]}`}}>
           <DefaultProfileImg defaultImg={defaultProfileImg}/>
         </div>
         <div className="profileNameCon">
@@ -117,33 +123,21 @@ export default function SideNav() {
       <div className="optionCon">
         <button
           className="themes"
-          style={{
-            background: defaultTheme[1],
-            color: defaultTheme[2],
-            boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
-          }}
+          style={defaultThemeStyle}
           onClick={() => setThemes(true)}
         >
           Themes
         </button>
         <button
           className="about"
-          style={{
-            background: defaultTheme[1],
-            color: defaultTheme[2],
-            boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
-          }}
+          style={defaultThemeStyle}
           onClick={() => setAbout(true)}
         >
           About
         </button>
         <button
           className="contact"
-          style={{
-            background: defaultTheme[1],
-            color: defaultTheme[2],
-            boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
-          }}
+          style={defaultThemeStyle}
           onClick={()=>setContact(true)}
         >
           Contact
@@ -151,11 +145,7 @@ export default function SideNav() {
         <button
           disabled={loading}
           className="logOut"
-          style={{
-            background: defaultTheme[1],
-            color: defaultTheme[2],
-            boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
-          }}
+          style={defaultThemeStyle}
           onClick={handleOpen}
         >
           Log Out

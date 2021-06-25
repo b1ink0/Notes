@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "./nav-sass/About.scss";
 import { useStateContext } from "../../context/StateContext";
 import BackSvg from "../note/img/BackSvg";
-import CustomizeImg from "./img/CustomizeImg";
-import ThemeChange from "./img/ThemeChange";
-import EncryptedImg from "./img/EncryptedImg";
-import SourceCodeIcon from "./img/SourceCodeIcon";
+import CustomizeImg from "./img/CustomizeImg.svg";
+import ThemeChange from "./img/ThemeChange.svg";
+import EncryptedImg from "./img/EncryptedImg.svg";
+import SourceCodeIcon from "./img/SourceCodeIcon.svg";
 import Logo from "./img/Logo";
 
 export default function About() {
@@ -14,7 +14,7 @@ export default function About() {
   const defaultThemeStyle = {
     background: defaultTheme[1],
     color: defaultTheme[2],
-    boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
+    boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
   };
   const defaultThemeStyleSub = {
     background: defaultTheme[3],
@@ -78,7 +78,7 @@ export default function About() {
                 })
               }
             >
-              <CustomizeImg />
+              <img src={CustomizeImg} />
             </div>
           </li>
           <li style={defaultThemeStyleSub}>
@@ -93,7 +93,7 @@ export default function About() {
                 })
               }
             >
-              <ThemeChange />
+              <img src={ThemeChange} />
             </div>
           </li>
           <li style={defaultThemeStyleSub}>
@@ -108,7 +108,7 @@ export default function About() {
                 })
               }
             >
-              <EncryptedImg />
+              <img src={EncryptedImg} />
             </div>
           </li>
           <li style={defaultThemeStyleSub}>
@@ -124,7 +124,7 @@ export default function About() {
                 })
               }
             >
-              <SourceCodeIcon />
+              <img src={SourceCodeIcon} />
             </div>
           </li>
         </ul>

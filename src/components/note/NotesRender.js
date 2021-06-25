@@ -181,17 +181,22 @@ export default function NotesRender() {
         if (doc.exists) {
           console.log("geting data");
           let tempNote = doc.data().note;
-          let b = -1;
-          tempNote.map((tNote) => {
-            b = b + 1;
-            if (tNote.noteId === delId) {
-              tempNote.splice(b, 1);
-              return;
-            }
-          });
-          database.users.doc(currentUser.uid).update({
-            note: tempNote,
-          });
+          let decryptedNote = ''
+          if (tempNote !== ''){
+            decryptedNote = JSON.parse(CryptoJS.AES.decrypt(tempNote, doc.data().password).toString(CryptoJS.enc.Utf8))
+            let b = -1;
+            decryptedNote.map((tNote) => {
+              b = b + 1;
+              if (tNote.noteId === delId) {
+                decryptedNote.splice(b, 1);
+                return;
+              }
+            });
+            let tempNoteEncrypted = CryptoJS.AES.encrypt(JSON.stringify(decryptedNote), doc.data().password).toString();
+            database.users.doc(currentUser.uid).update({
+              note: tempNoteEncrypted,
+            });
+          }
           console.log("deleted");
           setDeleting(false);
           setPreview(false);
@@ -258,7 +263,7 @@ export default function NotesRender() {
             className="navPreview"
             style={{
               background: defaultTheme[1],
-              boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
+              boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
               color:defaultTheme[2]
             }}
           >
@@ -334,7 +339,7 @@ export default function NotesRender() {
             className="logo"
             style={{
               background: defaultTheme[1],
-              boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
+              boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
             }}
           >
             Notes
@@ -361,7 +366,7 @@ export default function NotesRender() {
                     color: `${note.textColor}`,
                     fontFamily: `${note.font}`,
                     fontSize: `${note.fontSize}px`,
-                    boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
+                    boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
                   }}
                   key={note.noteId}
                   onClick={handleSee}

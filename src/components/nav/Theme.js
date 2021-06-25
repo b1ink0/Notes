@@ -42,7 +42,7 @@ export default function Theme({
       <h1
         style={{
           background: background,
-          boxShadow: `6px 6px 5px ${boxShadow},0 10px 5px rgba(0,0,0,0)`,
+          boxShadow: `0px 0px 10px ${boxShadow},0 10px 5px rgba(0,0,0,0)`,
         }}
       >
         Notes
@@ -50,7 +50,7 @@ export default function Theme({
       <div
         style={{
           background: background,
-          boxShadow: `6px 6px 5px ${boxShadow},0 10px 5px rgba(0,0,0,0)`,
+          boxShadow: `0px 0px 10px ${boxShadow},0 10px 5px rgba(0,0,0,0)`,
         }}
         className="theme1"
       >

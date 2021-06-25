@@ -22,7 +22,7 @@ export default function PreviewNote( { note } ) {
                 background: note.backgroundColor,
                 color: note.textColor,
                 fontFamily:note.font,
-                boxShadow: `6px 6px 5px ${defaultTheme[4]}`
+                boxShadow: `0px 0px 10px ${defaultTheme[4]}`
             }}>
                 <h1>
                     {note.title}

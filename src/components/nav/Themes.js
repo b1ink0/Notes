@@ -29,7 +29,7 @@ export default function Themes() {
         style={{
           background: defaultTheme[1],
           color: defaultTheme[2],
-          boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
+          boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
         }}
       >
         <button
@@ -45,7 +45,7 @@ export default function Themes() {
         className="theme"
         style={{
           background: defaultTheme[1],
-          boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
+          boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
         }}
       >
         <Theme
@@ -55,7 +55,7 @@ export default function Themes() {
           background="white"
           color="blace"
           boxShadow="#bbb"
-          theme={'["#ececec","#ffffff","#000000","#dfdfdf","#bbbbbb","#c990ff","#00b300","1","#bbbbbb"]'}
+          theme={'["#ececec","#ffffff","#000000","#bfbfbf","#bbbbbb","#c990ff","#00b300","1","#bbbbbb"]'}
         />
         <Theme
           id="theme_2"

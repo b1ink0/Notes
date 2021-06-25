@@ -34,7 +34,7 @@ export default function NoteInputFontSelect({ Font }) {
       style={{
         background: defaultTheme[1],
         color: defaultTheme[2],
-        boxShadow: `6px 6px 5px ${defaultTheme[4]}`,
+        boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
       }}
       onClick={() => setFOpen(!fOpen)}
     >

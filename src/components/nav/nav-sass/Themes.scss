@@ -59,11 +59,11 @@
         @include flex;
         width: 96.5vw;
         height: 50px;
-        margin-top:5px;
+        margin-top:8px;
         background-color: white;
         position: sticky;
         border-radius: 10px;
-        box-shadow: 6px 6px 5px #bbb,0 10px 5px rgba(0,0,0,0);
+        box-shadow: rgb(187, 187, 187) 0px 0px 10px;
         overflow: hidden;
         .backInput
         {
@@ -93,8 +93,7 @@
         margin-top:10px;
         border-radius: 10px;
         background-color: white;
-        box-shadow: 6px 6px 5px #bbb, 
-        0 10px 5px rgba(0,0,0,0);
+        box-shadow: rgb(187, 187, 187) 0px 0px 10px;
         overflow: hidden;
         .themeCon
         {
@@ -114,8 +113,7 @@
                 margin-top: 10px;
                 background-color: white;
                 font-size: 20px;
-                box-shadow: 3px 3px 5px #bbb, 
-                0 10px 5px rgba(0,0,0,0);
+                box-shadow: rgb(187, 187, 187) 0px 0px 10px;
             }
             .theme1
             {

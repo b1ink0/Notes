@@ -272,8 +272,7 @@
             width: 96.5vw;
             margin: 5px;
             border-radius: 10px;
-            box-shadow: 6px 6px 5px #bbb, 
-                        0 10px 5px rgba(0,0,0,0);
+            box-shadow: rgb(187, 187, 187) 0px 0px 10px;
             transition: all 0.3s;
             animation: fadeIN 0.7s forwards;
             @keyframes fadeIN {

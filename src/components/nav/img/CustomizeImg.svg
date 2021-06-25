@@ -1,8 +1,4 @@
-import React from "react";
-
-export default function CustomizeImg() {
-  return (
-    <svg
+<svg
       xmlns="http://www.w3.org/2000/svg"
       width="512"
       height="512"
@@ -107,5 +103,4 @@ export default function CustomizeImg() {
         transform="rotate(45.001 208.308 258.625)"
       ></path>
     </svg>
-  );
-}
+
