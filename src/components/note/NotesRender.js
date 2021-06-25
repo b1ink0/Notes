@@ -160,6 +160,7 @@ export default function NotesRender() {
   };
   const handleBack = () => {
     document.querySelector(".preCon").classList.add("back1");
+    document.title = `Notes`
     setTimeout(() => {
       setPreview(false);
     }, 400);
@@ -178,6 +179,7 @@ export default function NotesRender() {
       .doc(currentUser.uid)
       .get()
       .then((doc) => {
+        document.title = 'Notes'
         if (doc.exists) {
           console.log("geting data");
           let tempNote = doc.data().note;
@@ -204,10 +206,12 @@ export default function NotesRender() {
       });
   };
   const handleOpen = async () => {
+    document.title = 'Note Delete ⚠'
     await setDel(true);
     document.querySelector(".delCon").classList.add("openAnime");
   };
   const handleCancel = async () => {
+    document.title = `Notes Title - ${preNote.title}`
     await document.querySelector(".delCon").classList.remove("openAnime");
     document.querySelector(".delCon").classList.add("cancelAnime");
     setTimeout(() => {
@@ -216,6 +220,11 @@ export default function NotesRender() {
   };
   let burger = false;
   const handleBurger = async () => {
+    if (document.title === 'Notes'){
+      document.title = 'Notes Navbar '
+    }else if (document.title === 'Notes Navbar'){
+      document.title = 'Notes'
+    }
     burger = !burger;
     setSideNavbar(!sideNavbar);
   };
@@ -284,7 +293,6 @@ export default function NotesRender() {
             </button>
             <button
               className="delete"
-              // style={{ background: defaultTheme[6] }}
               onClick={handleOpen}
             >
               <Delete />

@@ -40,30 +40,6 @@ export default function NotesEdit() {
   const { currentUser } = useAuth();
   const id = uuidV4();
   useEffect(() => {
-    document.querySelector("body").style.background = defaultTheme[0];
-  }, []);
-  useEffect(() => {
-    // if (currentUser){
-    //   database.users
-    //   .doc(currentUser.uid)
-    //   .get()
-    //   .then((doc) => {
-    //     if (doc.exists) {
-    //       let tempNote = doc.data().note;
-    //       tempNote.map((tNote) => {
-    //         if (tNote.noteId === currentNote.noteId) {
-    //           console.log(tNote.backgroundColor)
-    //           setNoteBackgroundColor(tNote.backgroundColor)
-    //           setTextColor(tNote.textColor)
-    //           console.log('note')
-    //           return;
-    //         }
-    //        }
-    //       );
-    //     }
-    //    }
-    //   )
-    // }
     setTitle(currentNote.title);
     setText(currentNote.note);
     setTextColor(currentNote.textColor);
@@ -71,6 +47,10 @@ export default function NotesEdit() {
     setFont(currentNote.font);
     setFontSize(currentNote.fontSize);
   },[]);
+  useEffect(() => {
+    document.querySelector("body").style.background = defaultTheme[0];
+    document.title = `Note Edit 🎨`
+  }, []);
 
   const handleRipples = (e) => {
     setNoteHelp(!noteHelp);
@@ -142,6 +122,7 @@ export default function NotesEdit() {
               note: tempNoteEncrypted,
             })
             .then((e) => {
+              document.title = `Notes`
               setText("");
               setTitle("");
               setFont("Sans-serif");
@@ -169,6 +150,7 @@ export default function NotesEdit() {
   };
   const handleClose = async () => {
     await document.querySelector(".formContainer").classList.add("close");
+    document.title = `Notes`
     setTimeout(() => {
       setText("");
       setTitle("");

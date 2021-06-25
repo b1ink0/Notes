@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useStateContext } from "../../context/StateContext";
 import { database } from "../../firebase";
@@ -22,7 +22,11 @@ export default function EditProfile() {
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState(false);
   const [saved, setSaved] = useState(false);
+  useEffect(()=>{
+    document.title = 'Notes Profile Edit 🎨'
+  },[])
   const handleClose = () => {
+    document.title = 'Notes Navbar'
     database.users
     .doc(currentUser.uid)
     .get()
@@ -50,6 +54,7 @@ export default function EditProfile() {
           profileImg: defaultProfileImg
         })
         .then(() => {
+          document.title = 'Notes Navbar'
           setLoading(false);
           setSaved(true);
           setTimeout(() => {

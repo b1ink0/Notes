@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useStateContext } from "../../context/StateContext";
 import "./nav-sass/Contact.scss";
 import BackSvg from "../note/img/BackSvg";
@@ -16,7 +16,11 @@ export default function Contact() {
     color: defaultTheme[2],
     boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
   };
+  useEffect(() => {
+    document.title = 'Notes Contact 🙃'
+  }, [])
   const handleClose = () => {
+    document.title = 'Notes Navbar'
     setContactClose(true);
     setTimeout(() => {
       setContact(false);

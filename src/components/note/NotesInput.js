@@ -38,6 +38,7 @@ export default function NotesInput() {
 
   useEffect(() => {
     document.querySelector("body").style.background = defaultTheme[0];
+    document.title = `Add Note ➕`
   }, []);
   useEffect(()=>{
       setNoteBackgroundColor(defaultTheme[1])
@@ -106,6 +107,7 @@ export default function NotesInput() {
               note: tempNoteEncrypted,
             })
             .then((e) => {
+              document.title = `Notes`
               setText("");
               setTitle("");
               setFont("Sans-serif");
@@ -130,6 +132,7 @@ export default function NotesInput() {
     }
   };
   const handleClose = () => {
+    document.title = `Notes`
     setClose(true);
     document.querySelector(".formContainer").classList.add("close");
     setTimeout(() => {

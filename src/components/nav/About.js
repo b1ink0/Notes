@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./nav-sass/About.scss";
 import { useStateContext } from "../../context/StateContext";
 import BackSvg from "../note/img/BackSvg";
@@ -21,7 +21,11 @@ export default function About() {
     color: defaultTheme[2],
     boxShadow: `0px 0px 0px ${defaultTheme[4]}`,
   };
+  useEffect(() => {
+    document.title = 'Notes About 😎'
+  }, [])
   const handleClose = () => {
+    document.title = 'Notes Navbar'
     setAboutClose(true);
     setTimeout(() => {
       setAbout(false);

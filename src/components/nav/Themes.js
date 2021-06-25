@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./nav-sass/Themes.scss";
 import BackSvg from "../note/img/BackSvg";
 import { useStateContext } from "../../context/StateContext";
@@ -8,7 +8,11 @@ import LoadingSvg from "../note/img/LoadingSvg";
 export default function Themes() {
   const [themeClose, setThemeClose] = useState(false);
   const { setThemes, defaultTheme, savingTheme } = useStateContext();
+  useEffect(() => {
+    document.title = 'Notes Themes 🎨'
+  }, [])
   const handleClose = () => {
+    document.title = 'Notes Navbar'
     setThemeClose(true);
     setTimeout(() => {
       setThemes(false);

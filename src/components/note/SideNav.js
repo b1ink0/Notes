@@ -33,6 +33,7 @@ export default function SideNav() {
     boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
   }
   const handleLogOut = async () => {
+    document.title = 'Notes'
     document.querySelector(".delCon").classList.remove("openAnime");
     document.querySelector(".delCon").classList.add("cancelAnime");
     setTimeout(() => {
@@ -55,6 +56,7 @@ export default function SideNav() {
     }, 300);
   };
   const handleClose = () => {
+    document.title = 'Notes'
     document.querySelector(".sideNav").classList.add("navBarOut");
     setTimeout(() => {
       setSideNavbar(false);
@@ -62,9 +64,11 @@ export default function SideNav() {
   };
   const handleOpen = async () => {
     await setOut(true);
+    document.title = 'Notes LogOut ⚠'
     document.querySelector(".delCon").classList.add("openAnime");
   };
   const handleCancel = async () => {
+    document.title = 'Notes Navbar'
     await document.querySelector(".delCon").classList.remove("openAnime");
     document.querySelector(".delCon").classList.add("cancelAnime");
     setTimeout(() => {
