@@ -9,7 +9,7 @@ import NotesInputSelect from "./notes input selector/NotesInputColorSelect";
 import { v4 as uuidV4 } from "uuid";
 import LoadingSvg from "./img/LoadingSvg";
 import BackSvg from "./img/BackSvg";
-import CryptoJS from 'crypto-js'
+import CryptoJS from "crypto-js";
 
 export default function NotesInput() {
   const {
@@ -28,22 +28,25 @@ export default function NotesInput() {
     setTitle,
     defaultTheme,
   } = useStateContext();
- 
-  const [close, setClose] = useState(false);
+
   const [noteHelp, setNoteHelp] = useState(false);
   const [saving, setSaving] = useState(false);
   const [onlineStatus, setOnlineStatus] = useState(true);
   const { currentUser } = useAuth();
   const id = uuidV4();
 
+  // First Load
   useEffect(() => {
     document.querySelector("body").style.background = defaultTheme[0];
-  }, []);
-  
-  useEffect(()=>{
-      setNoteBackgroundColor(defaultTheme[1])
-      setTextColor(defaultTheme[2])
-  },[])
+  }, [defaultTheme]);
+
+  // First Load
+  useEffect(() => {
+    setNoteBackgroundColor(defaultTheme[1]);
+    setTextColor(defaultTheme[2]);
+  }, [defaultTheme, setNoteBackgroundColor, setTextColor]);
+
+  // Ripples
   const handleRipples = (e) => {
     setNoteHelp(!noteHelp);
     let ripplesClassName = e.target.className;
@@ -58,6 +61,7 @@ export default function NotesInput() {
     }, 500);
   };
 
+  // Document Update
   const handleUpdate = () => {
     let months = [
       "Jan",
@@ -83,9 +87,13 @@ export default function NotesInput() {
       .then((doc) => {
         if (doc.exists) {
           let tempNote = doc.data().note;
-          let decryptedNote = ''
-          if (tempNote !== ''){
-            decryptedNote = JSON.parse(CryptoJS.AES.decrypt(tempNote, doc.data().password).toString(CryptoJS.enc.Utf8))
+          let decryptedNote = "";
+          if (tempNote !== "") {
+            decryptedNote = JSON.parse(
+              CryptoJS.AES.decrypt(tempNote, doc.data().password).toString(
+                CryptoJS.enc.Utf8
+              )
+            );
           }
           tempNote = [
             ...decryptedNote,
@@ -100,7 +108,10 @@ export default function NotesInput() {
               date: fullDate,
             },
           ];
-          let tempNoteEncrypted = CryptoJS.AES.encrypt(JSON.stringify(tempNote), doc.data().password).toString();
+          let tempNoteEncrypted = CryptoJS.AES.encrypt(
+            JSON.stringify(tempNote),
+            doc.data().password
+          ).toString();
           database.users
             .doc(currentUser.uid)
             .update({
@@ -119,6 +130,8 @@ export default function NotesInput() {
         }
       });
   };
+
+  // Note Submit
   const handleSubmit = (e) => {
     e.preventDefault();
     if (navigator.onLine) {
@@ -130,12 +143,12 @@ export default function NotesInput() {
       console.log("offline");
     }
   };
+
+  // Close Add Note
   const handleClose = () => {
-    setClose(true);
     document.querySelector(".formContainer").classList.add("close");
     setTimeout(() => {
       setAddNote(false);
-      setClose(false);
     }, 300);
   };
 
@@ -148,7 +161,13 @@ export default function NotesInput() {
       )}
       {!onlineStatus && (
         <div className="offline">
-          <div>
+          <div
+            style={{
+              background: defaultTheme[1],
+              color: defaultTheme[2],
+              boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
+            }}
+          >
             <p>Check your internet connection and try again.</p>
             <button onClick={() => setOnlineStatus(true)}>Close</button>
           </div>
@@ -182,7 +201,6 @@ export default function NotesInput() {
             placeholder="Title..."
             maxLength="15"
             style={{
-              background: defaultTheme[1],
               background: `${noteBackgroundColor}`,
               color: `${textColor}`,
               transition: "all 0.35s",
@@ -190,7 +208,9 @@ export default function NotesInput() {
               boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
             }}
           />
-          <div className="chaLimit" style={{color: `${textColor}`}}>{title.length}/15</div>
+          <div className="chaLimit" style={{ color: `${textColor}` }}>
+            {title.length}/15
+          </div>
         </div>
         <div className="textareaCon">
           <textarea
@@ -201,7 +221,6 @@ export default function NotesInput() {
             placeholder="Note..."
             maxLength="1000"
             style={{
-              background: defaultTheme[1],
               background: `${noteBackgroundColor}`,
               color: `${textColor}`,
               transition: "all 0.35s",
@@ -210,7 +229,9 @@ export default function NotesInput() {
               boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
             }}
           />
-          <div className="chaLimit" style={{color: `${textColor}`}}>{text.length}/1000</div>
+          <div className="chaLimit" style={{ color: `${textColor}` }}>
+            {text.length}/1000
+          </div>
         </div>
         <div className="selectContainer">
           <NotesInputSelect

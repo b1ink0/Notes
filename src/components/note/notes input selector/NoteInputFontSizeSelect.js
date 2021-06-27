@@ -8,14 +8,13 @@ export default function NoteInputFontSizeSelect() {
   const [fSOpen, setFSOpen] = useState(false);
   const fontSizes = [15, 25, 35, 45];
 
+  // Auto Close
   const handleClickOutside = (e) => {
     if (node.current.contains(e.target)) {
       return;
     }
     setFSOpen(false);
-    console.log(fSOpen)
   };
-
   useEffect(() => {
     if (fSOpen) {
       document.addEventListener("mousedown", handleClickOutside);

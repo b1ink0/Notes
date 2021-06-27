@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useStateContext } from "../../context/StateContext";
 import { database } from "../../firebase";
@@ -22,6 +22,8 @@ export default function EditProfile() {
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState(false);
   const [saved, setSaved] = useState(false);
+
+  // Edit Profile Close
   const handleClose = () => {
     database.users
     .doc(currentUser.uid)
@@ -38,11 +40,12 @@ export default function EditProfile() {
       setProfileEdit(false);
     }, 300);
   };
+
+  // Profile Update
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
     if (currentUser) {
-      console.log('hi')
       database.users
         .doc(currentUser.uid)
         .update({
@@ -58,6 +61,7 @@ export default function EditProfile() {
         });
     }
   };
+
   return (
     <div className={`profileEditCon ${saved && "fadeOutProfileEdit"}`}>
       {loading && (

@@ -15,11 +15,9 @@ export default function SideNav() {
   const history = useHistory();
   const { logOut } = useAuth();
   const {
-    sideNavbar,
     setSideNavbar,
     setThemes,
     defaultTheme,
-    about,
     setAbout,
     setContact,
     setProfileEdit,
@@ -30,11 +28,15 @@ export default function SideNav() {
     setDefaultProfileImg,
     setDefaultTheme
   } = useStateContext();
+
+  // Default Style 
   const defaultThemeStyle = {
     background: defaultTheme[1],
     color: defaultTheme[2],
     boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
   }
+
+  // Notes Log Out
   const handleLogOut = async () => {
     document.querySelector(".delCon").classList.remove("openAnime");
     document.querySelector(".delCon").classList.add("cancelAnime");
@@ -56,20 +58,27 @@ export default function SideNav() {
         });
       } catch {
         setError("Failed to logOUt");
+        console.log(error)
       }
       setLoading(false);
     }, 300);
   };
+
+  // Close Nav
   const handleClose = () => {
     document.querySelector(".sideNav").classList.add("navBarOut");
     setTimeout(() => {
       setSideNavbar(false);
     }, 400);
   };
+
+  // Open Log Out Menu
   const handleOpen = async () => {
     await setOut(true);
     document.querySelector(".delCon").classList.add("openAnime");
   };
+
+  // Close Log Out Menu
   const handleCancel = async () => {
     await document.querySelector(".delCon").classList.remove("openAnime");
     document.querySelector(".delCon").classList.add("cancelAnime");
@@ -77,6 +86,7 @@ export default function SideNav() {
       setOut(false);
     }, 300);
   };
+
   return (
     <div className="sideNav" style={{ background: defaultTheme[0] }}>
       {out && (

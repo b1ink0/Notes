@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./nav-sass/Themes.scss";
 import BackSvg from "../note/img/BackSvg";
 import { useStateContext } from "../../context/StateContext";
@@ -8,12 +8,15 @@ import LoadingSvg from "../note/img/LoadingSvg";
 export default function Themes() {
   const [themeClose, setThemeClose] = useState(false);
   const { setThemes, defaultTheme, savingTheme } = useStateContext();
+
+  // Themes Close
   const handleClose = () => {
     setThemeClose(true);
     setTimeout(() => {
       setThemes(false);
     }, 400);
   };
+
   return (
     <div
       className={`themesCon ${themeClose && "themeClose"}`}
@@ -76,7 +79,6 @@ export default function Themes() {
           theme={'["#9400d3","#b826f7","#ffffff","#cb52ff","#3c3c3c00","#cb52ff","#00b300","3","#cb52ff"]'}
         />
         <Theme
-          theme="Notes"
           id="theme_4"
           on={defaultTheme[7] === "4" ? "true" : "false"}
           backgroundColor="#3aafa9"
@@ -86,7 +88,6 @@ export default function Themes() {
           theme={'["#3aafa9","#47d4cd","#ffffff","#52ece5","#3c3c3c00","#52ece5","#00b300","4","#52ece5"]'}
         />
         <Theme
-          theme="Notes"
           id="theme_5"
           on={defaultTheme[7] === "5" ? "true" : "false"}
           backgroundColor="#d83f87"
@@ -96,7 +97,6 @@ export default function Themes() {
           theme={'["#d83f87","#ef5aa0","#ffffff","#ff76b6","#3c3c3c00","#ff76b6","#00b300","5","#ff76b6"]'}
         />
         <Theme
-          theme="Notes"
           id="theme_6"
           on={defaultTheme[7] === "6" ? "true" : "false"}
           backgroundColor="#ffa500"

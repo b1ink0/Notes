@@ -33,12 +33,18 @@ export default function NotesEdit() {
     defaultTheme,
   } = useStateContext();
 
-  const [close, setClose] = useState(false);
   const [noteHelp, setNoteHelp] = useState(false);
   const [saving, setSaving] = useState(false);
   const [onlineStatus, setOnlineStatus] = useState(true);
   const { currentUser } = useAuth();
   const id = uuidV4();
+
+  // First Load
+  useEffect(()=>{
+    document.querySelector('body').style.background = defaultTheme[0];
+  },[themes,defaultTheme])
+
+  // Set State
   useEffect(() => {
     setTitle(currentNote.title);
     setText(currentNote.note);
@@ -46,11 +52,9 @@ export default function NotesEdit() {
     setNoteBackgroundColor(currentNote.backgroundColor);
     setFont(currentNote.font);
     setFontSize(currentNote.fontSize);
-  },[]);
-  useEffect(() => {
-    document.querySelector("body").style.background = defaultTheme[0];
-  }, []);
+  },[currentNote.backgroundColor, currentNote.font, currentNote.fontSize, currentNote.note, currentNote.textColor, currentNote.title, setFont, setFontSize, setNoteBackgroundColor, setText,setTextColor,setTitle]);
 
+  // Ripples
   const handleRipples = (e) => {
     setNoteHelp(!noteHelp);
     let ripplesClassName = e.target.className;
@@ -64,6 +68,8 @@ export default function NotesEdit() {
       ripples.remove();
     }, 500);
   };
+
+  // Note Update
   const handleUpdate = () => {
     let months = [
       "Jan",
@@ -98,8 +104,9 @@ export default function NotesEdit() {
             b = b + 1;
             if (tNote.noteId === currentNote.noteId) {
               decryptedNote.splice(b, 1);
-              return;
+              return decryptedNote;
             }
+            return tNote;
           });
           tempNote = [
             ...decryptedNote,
@@ -135,6 +142,8 @@ export default function NotesEdit() {
         }
       });
   };
+
+  // Submit Updated Note
   const handleSubmit = (e) => {
     e.preventDefault();
     if (navigator.onLine) {
@@ -146,6 +155,8 @@ export default function NotesEdit() {
       console.log("offline");
     }
   };
+
+  // Close Edit Note
   const handleClose = async () => {
     await document.querySelector(".formContainer").classList.add("close");
     setTimeout(() => {
@@ -156,15 +167,11 @@ export default function NotesEdit() {
       setNoteBackgroundColor(defaultTheme[1]);
       setTextColor(defaultTheme[2]);
       setPreview(false);
-      setClose(true);
       setAddNote(false);
-      setClose(false);
       setEdit(false);
     }, 300);
   };
-  useEffect(()=>{
-    document.querySelector('body').style.background = defaultTheme[0];
-  },[themes])
+
   return (
     <div className="formContainer" style={{ background: defaultTheme[0] }}>
       {saving && (
@@ -174,7 +181,13 @@ export default function NotesEdit() {
       )}
       {!onlineStatus && (
         <div className="offline">
-          <div>
+          <div
+              style={{
+                background: defaultTheme[1],
+                color: defaultTheme[2],
+                boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
+              }}
+          >
             <p>Check your internet connection and try again.</p>
             <button onClick={() => setOnlineStatus(true)}>Close</button>
           </div>

@@ -16,6 +16,7 @@ export default function CreateProfile() {
   const [saved , setSaved] = useState(false)
   const [tempPass, setTempPass] = useState('')
 
+  // Profile Submit
   const handleSubmit = (e) => {
     e.preventDefault()
     setLoading(true)
@@ -37,6 +38,7 @@ export default function CreateProfile() {
       }
     }
   }
+  
   return (
     <div className={`enterPassCon ${saved && 'fadeOutProfileExist'}`}>
       {loading && <div className='loading'><LoadingSvg/></div>}

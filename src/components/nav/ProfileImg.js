@@ -7,16 +7,21 @@ export default function ProfileImg() {
   const { defaultTheme, setProfileChoose, defaultProfileImg, setDefaultProfileImg } = useStateContext();
   const imgs = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const [profileImgFadeOut, setProfileImgFadeOut] = useState(false)
+
+  // Profile Img Select Close
   const handleClose = () => {
     setProfileImgFadeOut(true)
     setTimeout(() => {
         setProfileChoose(false)
     }, 300);
   }
+
+  // Update Profile Img
   const handleProfileImg = (e) => {
     setDefaultProfileImg(parseInt(e.target.id))
     handleClose()
   }
+  
   return (
     <div className={`profileChooseCon ${profileImgFadeOut && `fadeOutProfileImg`}`}>
       <div className="profileChoose"   style={{ background: defaultTheme[0] }}>

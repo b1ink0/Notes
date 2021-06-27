@@ -15,7 +15,6 @@ export const StateProvider = ( { children } ) => {
     const [font, setFont] = useState('Sans-serif')
     const [fontSize, setFontSize] = useState('25')
     const [title, setTitle] = useState('')
-    const [sort, setSort] = useState('title')
     const [currentNote, setCurrentNote] = useState({})
     const [preview, setPreview] = useState(false);
     const [edit, setEdit] = useState(false);
@@ -49,8 +48,6 @@ export const StateProvider = ( { children } ) => {
         setFontSize,
         title,
         setTitle,
-        sort,
-        setSort,
         currentNote,
         setCurrentNote,
         preview,
@@ -82,6 +79,7 @@ export const StateProvider = ( { children } ) => {
         defaultProfileImg,
         setDefaultProfileImg
     }
+    
     return (
         <StateContext.Provider value={value}>
             {children}

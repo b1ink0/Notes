@@ -1,20 +1,16 @@
 import React, { useEffect } from 'react'
 import './note-sass/PreviewNote.scss'
-import { database } from "../../firebase";
-import { useAuth } from "../../context/AuthContext";
 import { useStateContext } from '../../context/StateContext';
 
 export default function PreviewNote( { note } ) {
-    const { currentUser } = useAuth()
+
     const { defaultTheme } = useStateContext()
+
+    // First Load
     useEffect(() => {
         document.querySelector("body").style.background = defaultTheme[0];
-      }, []);
-    useEffect(()=>{
-        if(currentUser){
-            database.users.doc(currentUser.uid)
-        }
-    },[])
+      }, [defaultTheme]);
+
     return (
         <div className='previewCon'>
             <div className='preview' 

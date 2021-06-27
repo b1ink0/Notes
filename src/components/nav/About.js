@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./nav-sass/About.scss";
 import { useStateContext } from "../../context/StateContext";
 import BackSvg from "../note/img/BackSvg";
@@ -11,22 +11,29 @@ import Logo from "./img/Logo";
 export default function About() {
   const { setAbout, defaultTheme } = useStateContext();
   const [aboutClose, setAboutClose] = useState(false);
+
+  // Default Style
   const defaultThemeStyle = {
     background: defaultTheme[1],
     color: defaultTheme[2],
     boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
   };
+
+  // Default Style
   const defaultThemeStyleSub = {
     background: defaultTheme[3],
     color: defaultTheme[2],
     boxShadow: `0px 0px 0px ${defaultTheme[4]}`,
   };
+
+  // About Close
   const handleClose = () => {
     setAboutClose(true);
     setTimeout(() => {
       setAbout(false);
     }, 400);
   };
+
   return (
     <div
       className={`aboutCon ${aboutClose && `aboutClose`}`}
@@ -78,7 +85,7 @@ export default function About() {
                 })
               }
             >
-              <img src={CustomizeImg} />
+              <img alt='' src={CustomizeImg} />
             </div>
           </li>
           <li style={defaultThemeStyleSub}>
@@ -93,7 +100,7 @@ export default function About() {
                 })
               }
             >
-              <img src={ThemeChange} />
+              <img alt='' src={ThemeChange} />
             </div>
           </li>
           <li style={defaultThemeStyleSub}>
@@ -108,11 +115,11 @@ export default function About() {
                 })
               }
             >
-              <img src={EncryptedImg} />
+              <img alt='' src={EncryptedImg} />
             </div>
           </li>
           <li style={defaultThemeStyleSub}>
-            <a href="https://github.com/stupidgaming/Notes" target="_blank"></a>
+            <a rel="noreferrer" href="https://github.com/stupidgaming/Notes" target="_blank"> </a>
             Source Code
             <div
               className="add"
@@ -124,7 +131,7 @@ export default function About() {
                 })
               }
             >
-              <img src={SourceCodeIcon} />
+              <img alt='' src={SourceCodeIcon} />
             </div>
           </li>
         </ul>

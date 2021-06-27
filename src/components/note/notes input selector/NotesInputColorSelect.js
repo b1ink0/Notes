@@ -16,6 +16,8 @@ export default function NotesInputSelect({
   const [bgOpen, setBgOpen] = useState(false);
   const [zi, setZi] = useState(3)
   const { defaultTheme } = useStateContext()
+
+  // Auto Close
   const handleClickOutside = (e) => {
     if (node.current.contains(e.target)) {
       return;
@@ -34,6 +36,8 @@ export default function NotesInputSelect({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [bgOpen]);
+
+  // Z Index
   useEffect(()=>{
     if(bgOpen){
       setZi(6)

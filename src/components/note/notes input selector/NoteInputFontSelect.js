@@ -8,13 +8,13 @@ export default function NoteInputFontSelect({ Font }) {
   const { font, setFont, defaultTheme } = useStateContext();
   const fonts = ["Sans-serif", "Cursive", "Fantasy", "Pattaya", "Monospace"];
 
+  // Auto Close
   const handleClickOutside = (e) => {
     if (node.current.contains(e.target)) {
       return;
     }
     setFOpen(false);
   };
-
   useEffect(() => {
     if (fOpen) {
       document.addEventListener("mousedown", handleClickOutside);
@@ -28,10 +28,10 @@ export default function NoteInputFontSelect({ Font }) {
 
   return (
     <div
-      style={{ zIndex: `${fOpen ? "4" : ""}` }}
       ref={node}
       className="fontSelect"
       style={{
+        zIndex: `${fOpen ? "4" : ""}`,
         background: defaultTheme[1],
         color: defaultTheme[2],
         boxShadow: `0px 0px 10px ${defaultTheme[4]}`,

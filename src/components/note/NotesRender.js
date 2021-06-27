@@ -24,15 +24,10 @@ export default function NotesRender() {
   const [preNote, setPreNote] = useState({});
   const [deleting, setDeleting] = useState(false);
   const [del, setDel] = useState(false);
-  // const [decryptedNote, setDecryptedNote] = useState('')
   const { currentUser } = useAuth();
   const {
     addNote,
     setNotes,
-    setNoteBackgroundColor,
-    setTextColor,
-    sort,
-    setSort,
     setCurrentNote,
     preview,
     setPreview,
@@ -52,10 +47,12 @@ export default function NotesRender() {
     setDefaultProfileImg
   } = useStateContext();
 
+  // Body Theme
   useEffect(() => {
     document.querySelector("body").style.background = defaultTheme[0];
-  }, []);
+  }, [defaultTheme]);
 
+  // ReverseArr
   function reverseArr(input) {
     let ret = [];
     for (let i = input.length - 1; i >= 0; i--) {
@@ -63,32 +60,40 @@ export default function NotesRender() {
     }
     return ret;
   }
-  if (currentUser) {
-    const com = database.users
-      .doc(currentUser.uid)
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-          if (doc.data()){
-            if (doc.data().password){
-              return
-            }else {
-              setProfileExist(true)
+
+  // First load
+  useEffect(()=>{
+    let com
+    if (currentUser) {
+      com = database.users
+        .doc(currentUser.uid)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            if (doc.data()){
+              if (doc.data().password){
+                return
+              }else {
+                setProfileExist(true)
+              }
             }
+            return;
+          } else {
+            setProfileExist(true)
+            database.users.doc(currentUser.uid).set({
+              note: '',
+              uid: currentUser.uid,
+              theme: ["#ececec","#ffffff","#000000","#c3c3c3","#bbbbbb","#c990ff","#00b300","1","#bbbbbb"],
+              name: `User-${Math.floor(Math.random()*1000)}`,
+              profileImg: 1
+            });
           }
-          return;
-        } else {
-          setProfileExist(true)
-          database.users.doc(currentUser.uid).set({
-            note: '',
-            uid: currentUser.uid,
-            theme: ["#ececec","#ffffff","#000000","#c3c3c3","#bbbbbb","#c990ff","#00b300","1","#bbbbbb"],
-            name: `User-${Math.floor(Math.random()*1000)}`,
-            profileImg: 1
-          });
-        }
-      });
-  }
+        });
+    }
+    return com;
+  },[currentUser , setProfileExist])
+
+  // Saving Data
   useEffect(() => {
     database.users
       .doc(currentUser.uid)
@@ -118,8 +123,9 @@ export default function NotesRender() {
         }
       });
       setFirstLoad(false);
-  }, [addNote, edit, deleting,update]);
+  }, [addNote, edit, deleting,update, currentUser.uid, setDefaultProfileImg, setDefaultTheme, setNotes, setUserName]);
 
+  // Ripples
   const handleRipples = (e) => {
     let ripplesClassName = e.target.className;
     let x = e.clientX - e.target.offsetLeft;
@@ -133,6 +139,7 @@ export default function NotesRender() {
     }, 500);
   };
 
+  // Preview
   const handleSee = (e) => {
     let show = e.target.id;
     const hShow = document.getElementById(`${show}`).dataset;
@@ -158,12 +165,16 @@ export default function NotesRender() {
     });
     setPreview(true);
   };
+
+  // Preview Close
   const handleBack = () => {
     document.querySelector(".preCon").classList.add("back1");
     setTimeout(() => {
       setPreview(false);
     }, 400);
   };
+
+  // Deleting Note
   const handleDelete = (e) => {
     handleRipples(e);
     document.querySelector(".delCon").classList.remove("openAnime");
@@ -173,13 +184,11 @@ export default function NotesRender() {
     }, 300);
     setDeleting(true);
     let delId = e.target.id;
-    console.log(e.target.id);
     database.users
       .doc(currentUser.uid)
       .get()
       .then((doc) => {
         if (doc.exists) {
-          console.log("geting data");
           let tempNote = doc.data().note;
           let decryptedNote = ''
           if (tempNote !== ''){
@@ -189,24 +198,28 @@ export default function NotesRender() {
               b = b + 1;
               if (tNote.noteId === delId) {
                 decryptedNote.splice(b, 1);
-                return;
+                return decryptedNote;
               }
+              return tNote;
             });
             let tempNoteEncrypted = CryptoJS.AES.encrypt(JSON.stringify(decryptedNote), doc.data().password).toString();
             database.users.doc(currentUser.uid).update({
               note: tempNoteEncrypted,
             });
           }
-          console.log("deleted");
           setDeleting(false);
           setPreview(false);
         }
       });
   };
+
+  // Open Delete Menu
   const handleOpen = async () => {
     await setDel(true);
     document.querySelector(".delCon").classList.add("openAnime");
   };
+
+  // Close Delete Menu
   const handleCancel = async () => {
     await document.querySelector(".delCon").classList.remove("openAnime");
     document.querySelector(".delCon").classList.add("cancelAnime");
@@ -214,43 +227,45 @@ export default function NotesRender() {
       setDel(false);
     }, 300);
   };
+
+  // Open Edit
+  const handleEdit = () => {
+    setEdit(true)
+  }
+
+  // Burger Animation
   let burger = false;
   const handleBurger = async () => {
     burger = !burger;
     setSideNavbar(!sideNavbar);
   };
   useEffect(() => {
+    const handleBurgerSub = () => {
+      const el = document.querySelector(".burger").children;
+      if (sideNavbar) {
+        el.item(0).classList.remove("closeBurger1");
+        el.item(1).classList.remove("closeBurger2");
+        el.item(2).classList.remove("closeBurger3");
+        void el.item(0).offsetWidth;
+        void el.item(1).offsetWidth;
+        void el.item(2).offsetWidth;
+        el.item(0).classList.add("openBurger1");
+        el.item(1).classList.add("openBurger2");
+        el.item(2).classList.add("openBurger3");
+      } else if (!sideNavbar) {
+        el.item(0).classList.remove("openBurger1");
+        el.item(1).classList.remove("openBurger2");
+        el.item(2).classList.remove("openBurger3");
+        void el.item(0).offsetWidth;
+        void el.item(1).offsetWidth;
+        void el.item(2).offsetWidth;
+        el.item(0).classList.add("closeBurger1");
+        el.item(1).classList.add("closeBurger2");
+        el.item(2).classList.add("closeBurger3");
+      }
+    };
     handleBurgerSub();
   }, [sideNavbar]);
-  const handleBurgerSub = () => {
-    const el = document.querySelector(".burger").children;
-    if (sideNavbar) {
-      el.item(0).classList.remove("closeBurger1");
-      el.item(1).classList.remove("closeBurger2");
-      el.item(2).classList.remove("closeBurger3");
-      void el.item(0).offsetWidth;
-      void el.item(1).offsetWidth;
-      void el.item(2).offsetWidth;
-      el.item(0).classList.add("openBurger1");
-      el.item(1).classList.add("openBurger2");
-      el.item(2).classList.add("openBurger3");
-    } else if (!sideNavbar) {
-      el.item(0).classList.remove("openBurger1");
-      el.item(1).classList.remove("openBurger2");
-      el.item(2).classList.remove("openBurger3");
-      void el.item(0).offsetWidth;
-      void el.item(1).offsetWidth;
-      void el.item(2).offsetWidth;
-      el.item(0).classList.add("closeBurger1");
-      el.item(1).classList.add("closeBurger2");
-      el.item(2).classList.add("closeBurger3");
-    }
-  };
-  useEffect(() => {
-  }, [themes]);
-  const handleEdit = () => {
-    setEdit(true)
-  }
   return (
     <>
       {sideNavbar && <SideNav />}
@@ -381,10 +396,6 @@ export default function NotesRender() {
                   data-noteid={note.noteId}
                 >
                   <h1>{note.title}</h1>
-                  <div
-                    style={{ padding: `${sort === "title" ? `0px` : `10px`}` }}
-                  >
-                  </div>
                   <p style={{ color: `${note.textColor}`}} className="date">{note.date}</p>
                 </div>
               ))}

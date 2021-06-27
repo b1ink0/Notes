@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuth } from "../../context/AuthContext";
-import { StateProvider, useStateContext } from "../../context/StateContext";
+import { useStateContext } from "../../context/StateContext";
 import { database } from "../../firebase";
 import "./nav-sass/Theme.scss";
 
@@ -12,30 +12,32 @@ export default function Theme({
   boxShadow,
   on,
 }) {
-  const { setDefaultTheme, update, setUpdate, setSavingTheme } = useStateContext()
-  const { currentUser } = useAuth()
+  const { update, setUpdate, setSavingTheme } = useStateContext();
+  const { currentUser } = useAuth();
 
+  // 'Theme Update
   const handleTheme = (e) => {
-    setSavingTheme(true)
-    let something = JSON.parse(e.target.id)
+    setSavingTheme(true);
+    let something = JSON.parse(e.target.id);
     if (currentUser) {
       database.users
-      .doc(currentUser.uid)
-      .get()
-      .then((doc) => {
-        database.users.doc(currentUser.uid).update({
-          theme: something,
+        .doc(currentUser.uid)
+        .get()
+        .then((doc) => {
+          database.users.doc(currentUser.uid).update({
+            theme: something,
+          });
+          setUpdate(!update);
+          setSavingTheme(false);
         });
-        setUpdate(!update)
-        setSavingTheme(false)
-      })
     }
-  }
+  };
+
   return (
     <div
       className="themeCon"
       id={theme}
-      value='1'
+      value="1"
       style={{ background: backgroundColor, color: color }}
       onClick={handleTheme}
     >
@@ -56,15 +58,16 @@ export default function Theme({
       >
         Note...
       </div>
-      {
-        on === 'true' ?
-      <div className='theme2'>
-        <div className='theme21'>
-          <div></div>
-          <div></div>
+      {on === "true" ? (
+        <div className="theme2">
+          <div className="theme21">
+            <div></div>
+            <div></div>
+          </div>
         </div>
-      </div> : ''
-      }
+      ) : (
+        ""
+      )}
     </div>
   );
 }
