@@ -16,11 +16,7 @@ export default function Contact() {
     color: defaultTheme[2],
     boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
   };
-  useEffect(() => {
-    document.title = 'Notes Contact 🙃'
-  }, [])
   const handleClose = () => {
-    document.title = 'Notes Navbar'
     setContactClose(true);
     setTimeout(() => {
       setContact(false);

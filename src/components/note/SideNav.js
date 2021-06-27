@@ -25,7 +25,10 @@ export default function SideNav() {
     setProfileEdit,
     profileEdit,
     userName,
+    setUserName,
     defaultProfileImg,
+    setDefaultProfileImg,
+    setDefaultTheme
   } = useStateContext();
   const defaultThemeStyle = {
     background: defaultTheme[1],
@@ -33,7 +36,6 @@ export default function SideNav() {
     boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
   }
   const handleLogOut = async () => {
-    document.title = 'Notes'
     document.querySelector(".delCon").classList.remove("openAnime");
     document.querySelector(".delCon").classList.add("cancelAnime");
     setTimeout(() => {
@@ -41,8 +43,11 @@ export default function SideNav() {
       try {
         setError("");
         setLoading(true);
-        logOut();
+        setUserName('User-420')
         setSideNavbar(false);
+        setDefaultProfileImg(1)
+        setDefaultTheme(["#ececec","#ffffff","#000000","#c3c3c3","#bbbbbb","#c990ff","#00b300","1","#bbbbbb"])
+        logOut();
         auth.onAuthStateChanged((user) => {
           if (!user) {
             history.push("/Notes/login");
@@ -56,7 +61,6 @@ export default function SideNav() {
     }, 300);
   };
   const handleClose = () => {
-    document.title = 'Notes'
     document.querySelector(".sideNav").classList.add("navBarOut");
     setTimeout(() => {
       setSideNavbar(false);
@@ -64,11 +68,9 @@ export default function SideNav() {
   };
   const handleOpen = async () => {
     await setOut(true);
-    document.title = 'Notes LogOut ⚠'
     document.querySelector(".delCon").classList.add("openAnime");
   };
   const handleCancel = async () => {
-    document.title = 'Notes Navbar'
     await document.querySelector(".delCon").classList.remove("openAnime");
     document.querySelector(".delCon").classList.add("cancelAnime");
     setTimeout(() => {

@@ -8,11 +8,7 @@ import LoadingSvg from "../note/img/LoadingSvg";
 export default function Themes() {
   const [themeClose, setThemeClose] = useState(false);
   const { setThemes, defaultTheme, savingTheme } = useStateContext();
-  useEffect(() => {
-    document.title = 'Notes Themes 🎨'
-  }, [])
   const handleClose = () => {
-    document.title = 'Notes Navbar'
     setThemeClose(true);
     setTimeout(() => {
       setThemes(false);

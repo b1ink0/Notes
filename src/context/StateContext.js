@@ -30,7 +30,7 @@ export const StateProvider = ( { children } ) => {
     const [profileExist, setProfileExist] = useState(false)
     const [profileChoose, setProfileChoose] = useState(false)
     const [defaultProfileImg, setDefaultProfileImg] = useState(1)
-    const [defaultTheme, setDefaultTheme] = useState(["#ececec","#ffffff","#000000","#bfbfbf","#bbbbbb","#c990ff","#00b300","1","#bbbbbb",""])
+    const [defaultTheme, setDefaultTheme] = useState(["#ececec","#ffffff","#000000","#c3c3c3","#bbbbbb","#c990ff","#00b300","1","#bbbbbb",""])
 
     const value = {
         addNote,

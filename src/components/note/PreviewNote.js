@@ -9,7 +9,6 @@ export default function PreviewNote( { note } ) {
     const { defaultTheme } = useStateContext()
     useEffect(() => {
         document.querySelector("body").style.background = defaultTheme[0];
-        document.title = `Note Title - ${note.title}`
       }, []);
     useEffect(()=>{
         if(currentUser){

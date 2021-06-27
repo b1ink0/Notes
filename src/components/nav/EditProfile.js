@@ -22,11 +22,7 @@ export default function EditProfile() {
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState(false);
   const [saved, setSaved] = useState(false);
-  useEffect(()=>{
-    document.title = 'Notes Profile Edit 🎨'
-  },[])
   const handleClose = () => {
-    document.title = 'Notes Navbar'
     database.users
     .doc(currentUser.uid)
     .get()
@@ -54,7 +50,6 @@ export default function EditProfile() {
           profileImg: defaultProfileImg
         })
         .then(() => {
-          document.title = 'Notes Navbar'
           setLoading(false);
           setSaved(true);
           setTimeout(() => {

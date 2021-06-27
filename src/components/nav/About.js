@@ -21,11 +21,7 @@ export default function About() {
     color: defaultTheme[2],
     boxShadow: `0px 0px 0px ${defaultTheme[4]}`,
   };
-  useEffect(() => {
-    document.title = 'Notes About 😎'
-  }, [])
   const handleClose = () => {
-    document.title = 'Notes Navbar'
     setAboutClose(true);
     setTimeout(() => {
       setAbout(false);
