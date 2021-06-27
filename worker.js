@@ -1,14 +1,13 @@
 var CACHE_NAME = 'NotesCache';
 var urlsToCache = [
-  '/',
-  '/css/main.ea29826f.chunk.css',
-  '/js/2.e3e7fd3d.chunk.js',
-  'js/main.248890e1.chunk.js',
-  '/favicon.ico',
-  'manifest.json',
-  '/logo192.png',
-  '/media/gIcon.f1089448.svg',
-  
+  '/Notes/index.html',
+//   '/Notes/css/main.ea29826f.chunk.css',
+//   '/Notes/js/2.e3e7fd3d.chunk.js',
+//   '/Notesjs/main.248890e1.chunk.js',
+//   '/Notes/favicon.ico',
+//   '/Notes/manifest.json',
+//   '/Notes/logo192.png',
+//   '/Notes/media/gIcon.f1089448.svg', 
 ];
 
 // Install a service worker
