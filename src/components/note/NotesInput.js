@@ -241,7 +241,7 @@ export default function NotesInput() {
             align_1="0"
             color={noteBackgroundColor}
             setColor={setNoteBackgroundColor}
-            colors={["#ffffff", "#f2cdaf", "#f9e2cf", "#fcd9dd", "#b6dee7"]}
+            colors={["#ffffff",`${defaultTheme[1] === '#ffffff' ? "#f2cdaf" : `${defaultTheme[1]}`}`, "#f9e2cf", "#fcd9dd", "#b6dee7"]}
           />
           <NotesInputSelect
             title="Text Color"

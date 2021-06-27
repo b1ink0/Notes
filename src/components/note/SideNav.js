@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
 import { auth } from "../../firebase";
 import { useAuth } from "../../context/AuthContext";
 import { useStateContext } from "../../context/StateContext";
@@ -12,9 +11,10 @@ export default function SideNav() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [out, setOut] = useState(false);
-  const history = useHistory();
   const { logOut } = useAuth();
   const {
+    setLogInCheck,
+    setNoteData,
     setSideNavbar,
     setThemes,
     defaultTheme,
@@ -43,16 +43,18 @@ export default function SideNav() {
     setTimeout(() => {
       setOut(false);
       try {
+        logOut();
         setError("");
         setLoading(true);
         setUserName('User-420')
         setSideNavbar(false);
         setDefaultProfileImg(1)
         setDefaultTheme(["#ececec","#ffffff","#000000","#c3c3c3","#bbbbbb","#c990ff","#00b300","1","#bbbbbb"])
-        logOut();
+        setLogInCheck(false)
+        setNoteData('');
         auth.onAuthStateChanged((user) => {
           if (!user) {
-            history.push("/Notes/login");
+            setLogInCheck(false)
           }
           return;
         });

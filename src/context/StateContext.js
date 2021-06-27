@@ -7,6 +7,7 @@ export const useStateContext = () => {
 }
 
 export const StateProvider = ( { children } ) => {
+    const [logInCheck, setLogInCheck] = useState(false)
     const [addNote, setAddNote] = useState(false);
     const [text, setText] = useState("");
     const [notes, setNotes] = useState([]);
@@ -25,13 +26,15 @@ export const StateProvider = ( { children } ) => {
     const [profileEdit, setProfileEdit] = useState(false)
     const [update, setUpdate] = useState(false)
     const [savingTheme, setSavingTheme] = useState(false)
-    const [userName, setUserName] = useState('User-420')
+    const [userName, setUserName] = useState(`User-${Math.floor(Math.random()*1000)}`)
     const [profileExist, setProfileExist] = useState(false)
     const [profileChoose, setProfileChoose] = useState(false)
     const [defaultProfileImg, setDefaultProfileImg] = useState(1)
     const [defaultTheme, setDefaultTheme] = useState(["#ececec","#ffffff","#000000","#c3c3c3","#bbbbbb","#c990ff","#00b300","1","#bbbbbb",""])
 
     const value = {
+        logInCheck,
+        setLogInCheck,
         addNote,
         setAddNote,
         text,

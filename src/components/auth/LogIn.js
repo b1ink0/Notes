@@ -1,23 +1,12 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
 import { useAuth } from "../../context/AuthContext";
-import { auth } from "../../firebase";
 import "./Login.scss";
 import gIcon from "./img/gIcon.svg";
 
 export default function LogIn() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
   const { logIn } = useAuth();
-
-  // Loged In ?
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      history.push("/Notes");
-    }
-    return;
-  });
 
   // Log In
   const handleLogIn = async () => {
@@ -25,13 +14,6 @@ export default function LogIn() {
       setError("");
       setLoading(true);
       await logIn();
-
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          history.push("/Notes");
-        }
-        return;
-      });
     } catch {
       setError("Failed to Log in");
       console.log(error);

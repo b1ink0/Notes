@@ -79,6 +79,10 @@ export default function NotesRender() {
             }
             return;
           } else {
+            setNoteData('')
+            setUserName(`User-${Math.floor(Math.random()*1000)}`)
+            setDefaultProfileImg(1)
+            setDefaultTheme(["#ececec","#ffffff","#000000","#c3c3c3","#bbbbbb","#c990ff","#00b300","1","#bbbbbb"])
             setProfileExist(true)
             database.users.doc(currentUser.uid).set({
               note: '',
@@ -91,7 +95,7 @@ export default function NotesRender() {
         });
     }
     return com;
-  },[currentUser , setProfileExist])
+  },[currentUser , setProfileExist, setDefaultProfileImg, setDefaultTheme, setUserName])
 
   // Saving Data
   useEffect(() => {
@@ -100,6 +104,7 @@ export default function NotesRender() {
       .get()
       .then((doc) => {
         if (doc.data()){
+          console.log('yes')
           if (doc.data().theme){
             setDefaultTheme(doc.data().theme)
           }
