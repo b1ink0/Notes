@@ -1,6 +1,11 @@
 {
   "short_name": "Notes",
   "name": "Notes",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#ff6532",
+  "scope":"/",
+  "start_url": "/",
   "icons": [
     {
       "src": "maskable.png",
@@ -23,9 +28,5 @@
       "type": "image/png",
       "sizes": "512x512"
     }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#ffffff",
-  "background_color": "#ff6532"
+  ]
 }
