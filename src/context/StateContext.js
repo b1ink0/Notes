@@ -31,10 +31,16 @@ export const StateProvider = ( { children } ) => {
     const [profileChoose, setProfileChoose] = useState(false)
     const [defaultProfileImg, setDefaultProfileImg] = useState(1)
     const [defaultTheme, setDefaultTheme] = useState(["#ececec","#ffffff","#000000","#c3c3c3","#bbbbbb","#c990ff","#00b300","1","#bbbbbb",""])
+    const [customColor, setCustomColor] = useState('#008eff')
+    const [customThemeOn, setCustomThemeOn] = useState(false)
 
     const value = {
         logInCheck,
         setLogInCheck,
+        customColor,
+        setCustomColor,
+        customThemeOn,
+        setCustomThemeOn,
         addNote,
         setAddNote,
         text,

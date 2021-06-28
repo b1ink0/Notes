@@ -44,7 +44,8 @@ export default function NotesRender() {
     setUserName,
     profileExist,
     setProfileExist,
-    setDefaultProfileImg
+    setDefaultProfileImg,
+    setCustomColor
   } = useStateContext();
 
   // Body Theme
@@ -104,9 +105,9 @@ export default function NotesRender() {
       .get()
       .then((doc) => {
         if (doc.data()){
-          console.log('yes')
           if (doc.data().theme){
             setDefaultTheme(doc.data().theme)
+            setCustomColor(doc.data().theme[0])
           }
           if (doc.data().name){
             setUserName(doc.data().name)
@@ -128,7 +129,7 @@ export default function NotesRender() {
         }
       });
       setFirstLoad(false);
-  }, [addNote, edit, deleting,update, currentUser.uid, setDefaultProfileImg, setDefaultTheme, setNotes, setUserName]);
+  }, [addNote, edit, deleting,update, currentUser.uid, setDefaultProfileImg, setDefaultTheme, setNotes, setUserName,setCustomColor]);
 
   // Ripples
   const handleRipples = (e) => {
