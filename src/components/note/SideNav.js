@@ -5,6 +5,7 @@ import { useStateContext } from "../../context/StateContext";
 import "./note-sass/SideNav.scss";
 import Edit from './img/Edit'
 import EditProfile from "../nav/EditProfile";
+import Offline from "./sub-component/Offline";
 import DefaultProfileImg from "../nav/DefaultProfileImg";
 
 export default function SideNav() {
@@ -26,7 +27,9 @@ export default function SideNav() {
     setUserName,
     defaultProfileImg,
     setDefaultProfileImg,
-    setDefaultTheme
+    setDefaultTheme,
+    setOnlineStatus,
+    onlineStatus
   } = useStateContext();
 
   // Default Style 
@@ -89,8 +92,18 @@ export default function SideNav() {
     }, 300);
   };
 
+  const handleEdit = () => {
+    if (navigator.onLine) {
+      setProfileEdit(true)
+    }
+    if (navigator.onLine === false) {
+      setOnlineStatus(true);
+      console.log("offline");
+    }
+  }
   return (
     <div className="sideNav" style={{ background: defaultTheme[0] }}>
+      {onlineStatus && <Offline/>}
       {out && (
         <div className="delCon">
           <div
@@ -130,7 +143,7 @@ export default function SideNav() {
         </div>
         <div className="profileNameCon">
           <h1 style={{ color: defaultTheme[2] }}>{userName}</h1>
-          <button style={{ background: defaultTheme[8] }} onClick={()=> setProfileEdit(true)}>
+          <button style={{ background: defaultTheme[8] }} onClick={handleEdit}>
             <Edit/>
           </button>
         </div>

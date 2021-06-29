@@ -1,0 +1,41 @@
+@mixin  flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loading
+{
+    @include flex;
+    color: gray;
+    width: 100%;
+    height: 100%;
+    font-size: 35px;
+    position: fixed;
+    top: 0;
+    animation: fadeInLoading 0.2s forwards;
+    @keyframes fadeInLoading
+    {
+        0%{opacity: 0;}
+        100%{opacity: 1;}
+    }
+    .svgLoad1
+    {
+        stroke-dasharray: 250;
+        stroke-dashoffset: 250;
+        animation: load 3s ease infinite;
+        position: absolute;
+    }
+    .svgLoad2
+    {
+        position: absolute;
+        circle
+        {
+            stroke: #dddddd;
+        }
+    }
+    @keyframes load {
+        0%{stroke-dashoffset: 250; transform: rotate(0deg);}
+        50%{stroke-dashoffset: 0; transform: rotate(180deg)}
+        100%{stroke-dashoffset: -250; transform: rotate(0deg)}
+    }
+}

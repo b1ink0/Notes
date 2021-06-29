@@ -31,7 +31,7 @@ export default function CustomTheme() {
     }
     let tempColor = customColor.substring(1);
     setLightHex(LightenDarkenColor(tempColor, 20));
-    setMoreLightHex(LightenDarkenColor(tempColor, 30));
+    setMoreLightHex(LightenDarkenColor(tempColor, 40));
   }, [customColor]);
 
   const handleClose = () => {
@@ -104,7 +104,7 @@ export default function CustomTheme() {
               boxShadow: `0px 0px 10px #00000000,0 10px 5px rgba(0,0,0,0)`,
             }}
           >
-            Click to select custom color for theme
+            Click to select custom color for theme.
           </div>
         </div>
         <div className="btnCon">

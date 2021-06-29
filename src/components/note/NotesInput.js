@@ -6,6 +6,7 @@ import "./note-sass/NotesInput.scss";
 import NoteInputFontSelect from "./notes input selector/NoteInputFontSelect";
 import NoteInputFontSizeSelect from "./notes input selector/NoteInputFontSizeSelect";
 import NotesInputSelect from "./notes input selector/NotesInputColorSelect";
+import Offline from "./sub-component/Offline";
 import { v4 as uuidV4 } from "uuid";
 import LoadingSvg from "./img/LoadingSvg";
 import BackSvg from "./img/BackSvg";
@@ -27,11 +28,13 @@ export default function NotesInput() {
     title,
     setTitle,
     defaultTheme,
+    setFadeOut,
+    setOnlineStatus,
+    onlineStatus
   } = useStateContext();
 
   const [noteHelp, setNoteHelp] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [onlineStatus, setOnlineStatus] = useState(true);
   const { currentUser } = useAuth();
   const id = uuidV4();
 
@@ -135,17 +138,25 @@ export default function NotesInput() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (navigator.onLine) {
+      setFadeOut(false)
       setSaving(true);
       handleUpdate();
     }
     if (navigator.onLine === false) {
-      setOnlineStatus(false);
+      setOnlineStatus(true);
       console.log("offline");
     }
   };
 
   // Close Add Note
   const handleClose = () => {
+    setText("");
+    setTitle("");
+    setFont("Sans-serif");
+    setFontSize("25");
+    setNoteBackgroundColor(defaultTheme[1]);
+    setTextColor(defaultTheme[2]);
+    setFadeOut(false)
     document.querySelector(".formContainer").classList.add("close");
     setTimeout(() => {
       setAddNote(false);
@@ -159,20 +170,7 @@ export default function NotesInput() {
           <LoadingSvg />
         </div>
       )}
-      {!onlineStatus && (
-        <div className="offline">
-          <div
-            style={{
-              background: defaultTheme[1],
-              color: defaultTheme[2],
-              boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
-            }}
-          >
-            <p>Check your internet connection and try again.</p>
-            <button onClick={() => setOnlineStatus(true)}>Close</button>
-          </div>
-        </div>
-      )}
+      {onlineStatus && <Offline />}
       <div
         className="navInput"
         style={{

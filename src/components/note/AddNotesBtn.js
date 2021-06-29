@@ -3,13 +3,16 @@ import { useStateContext } from "../../context/StateContext";
 import "./note-sass/AddNotesBtn.scss";
 
 export default function AddNotesBtn() {
-  const { setAddNote, defaultTheme } = useStateContext();
+  const { setAddNote, defaultTheme, setFadeOut } = useStateContext();
   const [onlineStatus, setOnlineStatus] = useState(true);
 
   // Handle Add Note
   const handleClick = () => {
     if (navigator.onLine) {
-      setAddNote(true);
+      setFadeOut(true)
+      setTimeout(()=>{
+        setAddNote(true);
+      },200)
     }
     if (navigator.onLine === false) {
       setOnlineStatus(false);

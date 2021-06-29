@@ -33,6 +33,9 @@ export const StateProvider = ( { children } ) => {
     const [defaultTheme, setDefaultTheme] = useState(["#ececec","#ffffff","#000000","#c3c3c3","#bbbbbb","#c990ff","#00b300","1","#bbbbbb",""])
     const [customColor, setCustomColor] = useState('#008eff')
     const [customThemeOn, setCustomThemeOn] = useState(false)
+    const [fadeOut, setFadeOut] = useState(false)
+    const [del, setDel] = useState();
+    const [onlineStatus, setOnlineStatus] = useState(false)
 
     const value = {
         logInCheck,
@@ -86,7 +89,13 @@ export const StateProvider = ( { children } ) => {
         profileChoose,
         setProfileChoose,
         defaultProfileImg,
-        setDefaultProfileImg
+        setDefaultProfileImg,
+        fadeOut,
+        setFadeOut,
+        del,
+        setDel,
+        onlineStatus,
+        setOnlineStatus
     }
     
     return (

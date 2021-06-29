@@ -3,6 +3,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useStateContext } from "../../context/StateContext";
 import { database } from "../../firebase";
 import "./nav-sass/Theme.scss";
+import Offline from "../note/sub-component/Offline";
 
 export default function Theme({
   theme,
@@ -11,68 +12,93 @@ export default function Theme({
   color,
   boxShadow,
   on,
-  custom
+  custom,
 }) {
-  const { update, setUpdate, setSavingTheme, customColor, setCustomThemeOn } = useStateContext();
+  const {
+    update,
+    setUpdate,
+    setSavingTheme,
+    customColor,
+    setCustomThemeOn,
+    onlineStatus,
+    setOnlineStatus,
+  } = useStateContext();
   const { currentUser } = useAuth();
+
   // 'Theme Update
   const handleTheme = (e) => {
-    if (custom) {
-      setCustomThemeOn(true)
-    } else if (!custom){
-      setSavingTheme(true);
-      let something = JSON.parse(e.target.id);
-      if (currentUser) {
-        database.users
-          .doc(currentUser.uid)
-          .get()
-          .then((doc) => {
-            database.users.doc(currentUser.uid).update({
-              theme: something,
+    if (navigator.onLine) {
+      if (custom) {
+        setCustomThemeOn(true);
+      } else if (!custom) {
+        setSavingTheme(true);
+        let something = JSON.parse(e.target.id);
+        if (currentUser) {
+          database.users
+            .doc(currentUser.uid)
+            .get()
+            .then((doc) => {
+              database.users.doc(currentUser.uid).update({
+                theme: something,
+              });
+              setUpdate(!update);
+              setSavingTheme(false);
             });
-            setUpdate(!update);
-            setSavingTheme(false);
-          });
+        }
       }
+    }
+    if (navigator.onLine === false) {
+      setOnlineStatus(true);
+      console.log("offline");
     }
   };
 
   return (
-    <div
-      className="themeCon"
-      id={theme}
-      value="1"
-      style={{ background: custom ? customColor : backgroundColor, color: custom ? '#ffffff' : color }}
-      onClick={handleTheme}
-    >
-      <h1
-        className={custom && 'customTheme'}
-        style={{
-          background: custom ? customColor : background,
-          boxShadow: `0px 0px 10px ${custom ? '#00000000' : boxShadow},0 10px 5px rgba(0,0,0,0)`,
-        }}
-      >
-        Notes
-      </h1>
+    <>
+      {onlineStatus && <Offline />}
       <div
-        className={`theme1 ${custom && 'customTheme'}`}
+        className="themeCon"
+        id={theme}
+        value="1"
         style={{
-          background: custom ? customColor : background,
-          boxShadow: `0px 0px 10px ${custom ? '#00000000' : boxShadow},0 10px 5px rgba(0,0,0,0)`,
+          background: custom ? customColor : backgroundColor,
+          color: custom ? "#ffffff" : color,
         }}
+        onClick={handleTheme}
       >
-        { custom ? 'Click to select custom color for theme' : 'Note...'}
-      </div>
-      {on === "true" ? (
-        <div className="theme2">
-          <div className="theme21">
-            <div></div>
-            <div></div>
-          </div>
+        <h1
+          className={custom && "customTheme"}
+          style={{
+            background: custom ? customColor : background,
+            boxShadow: `0px 0px 10px ${
+              custom ? "#00000000" : boxShadow
+            },0 10px 5px rgba(0,0,0,0)`,
+          }}
+        >
+          Notes
+        </h1>
+        <div
+          className={`theme1 ${custom && "customTheme"}`}
+          style={{
+            background: custom ? customColor : background,
+            boxShadow: `0px 0px 10px ${
+              custom ? "#00000000" : boxShadow
+            },0 10px 5px rgba(0,0,0,0)`,
+          }}
+        >
+          {custom ? "Click to select custom color for theme." : "Note..."}
         </div>
-      ) : (
-        ""
-      )}
-    </div>
+        {on === "true" ? (
+          <div className="theme2">
+            <div className="theme21">
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
+    </>
   );
 }

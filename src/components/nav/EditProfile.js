@@ -6,6 +6,7 @@ import Edit from "../note/img/Edit";
 import "./nav-sass/EditProfile.scss";
 import LoadingSvg from "../note/img/LoadingSvg";
 import ProfileImg from "./ProfileImg";
+import Offline from "../note/sub-component/Offline";
 import DefaultProfileImg from "./DefaultProfileImg";
 
 export default function EditProfile() {
@@ -18,6 +19,8 @@ export default function EditProfile() {
     setProfileChoose,
     defaultProfileImg,
     setDefaultProfileImg,
+    onlineStatus,
+    setOnlineStatus
   } = useStateContext();
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState(false);
@@ -26,15 +29,15 @@ export default function EditProfile() {
   // Edit Profile Close
   const handleClose = () => {
     database.users
-    .doc(currentUser.uid)
-    .get()
-    .then((doc) => {
-      if (doc.data()){
-        if (doc.data().profileImg){
-          setDefaultProfileImg(doc.data().profileImg)
+      .doc(currentUser.uid)
+      .get()
+      .then((doc) => {
+        if (doc.data()) {
+          if (doc.data().profileImg) {
+            setDefaultProfileImg(doc.data().profileImg);
+          }
         }
-      }
-    })
+      });
     setSaved(true);
     setTimeout(() => {
       setProfileEdit(false);
@@ -44,26 +47,33 @@ export default function EditProfile() {
   // Profile Update
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    if (currentUser) {
-      database.users
-        .doc(currentUser.uid)
-        .update({
-          name: userName,
-          profileImg: defaultProfileImg
-        })
-        .then(() => {
-          setLoading(false);
-          setSaved(true);
-          setTimeout(() => {
-            setProfileEdit(false);
-          }, 300);
-        });
+    if (navigator.onLine) {
+      setLoading(true);
+      if (currentUser) {
+        database.users
+          .doc(currentUser.uid)
+          .update({
+            name: userName,
+            profileImg: defaultProfileImg,
+          })
+          .then(() => {
+            setLoading(false);
+            setSaved(true);
+            setTimeout(() => {
+              setProfileEdit(false);
+            }, 300);
+          });
+      }
+    }
+    if (navigator.onLine === false) {
+      setOnlineStatus(true);
+      console.log("offline");
     }
   };
 
   return (
     <div className={`profileEditCon ${saved && "fadeOutProfileEdit"}`}>
+      {onlineStatus && <Offline />}
       {loading && (
         <div className="loading">
           <LoadingSvg />
@@ -95,13 +105,13 @@ export default function EditProfile() {
             style={{ background: defaultTheme[1], color: defaultTheme[2] }}
             onChange={(e) => setUserName(e.target.value)}
           />
-          <h1 style={{color: defaultTheme[2] }}>{userName.length}/15</h1>
+          <h1 style={{ color: defaultTheme[2] }}>{userName.length}/15</h1>
         </div>
         <div className="buttonCon">
           <button
             style={{ background: defaultTheme[3], color: defaultTheme[2] }}
             onClick={handleClose}
-            type='button'
+            type="button"
           >
             Cancel
           </button>

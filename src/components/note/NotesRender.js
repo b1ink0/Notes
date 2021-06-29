@@ -7,10 +7,7 @@ import NotesInput from "./NotesInput";
 import "./note-sass/NotesRender.scss";
 import PreviewNote from "./PreviewNote";
 import NotesEdit from "./NotesEdit";
-import Delete from "./img/Delete";
-import Edit from "./img/Edit";
 import SideNav from "./SideNav";
-import BackSvg from "./img/BackSvg";
 import LoadingSvg from "./img/LoadingSvg";
 import Themes from "../nav/Themes";
 import About from "../nav/About";
@@ -19,11 +16,9 @@ import CryptoJS from 'crypto-js'
 import CreateProfile from "./CreateProfile";
 
 export default function NotesRender() {
-  const [firstLoad, setFirstLoad] = useState(true);
+  const [loading, setLoading] = useState(true)
   const [noteData, setNoteData] = useState();
   const [preNote, setPreNote] = useState({});
-  const [deleting, setDeleting] = useState(false);
-  const [del, setDel] = useState(false);
   const { currentUser } = useAuth();
   const {
     addNote,
@@ -32,7 +27,6 @@ export default function NotesRender() {
     preview,
     setPreview,
     edit,
-    setEdit,
     sideNavbar,
     setSideNavbar,
     themes,
@@ -45,13 +39,16 @@ export default function NotesRender() {
     profileExist,
     setProfileExist,
     setDefaultProfileImg,
-    setCustomColor
+    setCustomColor,
+    fadeOut,
+    setFadeOut
   } = useStateContext();
 
   // Body Theme
   useEffect(() => {
+    setFadeOut(false)
     document.querySelector("body").style.background = defaultTheme[0];
-  }, [defaultTheme]);
+  }, [defaultTheme, setFadeOut]);
 
   // ReverseArr
   function reverseArr(input) {
@@ -118,35 +115,19 @@ export default function NotesRender() {
             tempData = reverseArr(decryptedNote);
             setNoteData(tempData);
             setNotes(tempData);
-            setFirstLoad(false);
           } else {
-              setFirstLoad(false);
           }
           if (doc.data().profileImg){
             setDefaultProfileImg(doc.data().profileImg)
           }
-          setFirstLoad(false);
+          setLoading(false)
         }
       });
-      setFirstLoad(false);
-  }, [addNote, edit, deleting,update, currentUser.uid, setDefaultProfileImg, setDefaultTheme, setNotes, setUserName,setCustomColor]);
-
-  // Ripples
-  const handleRipples = (e) => {
-    let ripplesClassName = e.target.className;
-    let x = e.clientX - e.target.offsetLeft;
-    let y = e.clientY - e.target.offsetTop;
-    let ripples = document.createElement("span");
-    ripples.style.left = x + "px";
-    ripples.style.top = y + "px";
-    document.querySelector(`.${ripplesClassName}`).appendChild(ripples);
-    setTimeout(() => {
-      ripples.remove();
-    }, 500);
-  };
+  }, [addNote, edit, update, currentUser.uid, setDefaultProfileImg, setDefaultTheme, setNotes, setUserName,setCustomColor]);
 
   // Preview
   const handleSee = (e) => {
+    setFadeOut(true)
     let show = e.target.id;
     const hShow = document.getElementById(`${show}`).dataset;
     setPreNote({
@@ -169,75 +150,10 @@ export default function NotesRender() {
       date: hShow.date,
       noteId: hShow.noteid,
     });
-    setPreview(true);
+    setTimeout(()=>{
+      setPreview(true);
+    },200)
   };
-
-  // Preview Close
-  const handleBack = () => {
-    document.querySelector(".preCon").classList.add("back1");
-    setTimeout(() => {
-      setPreview(false);
-    }, 400);
-  };
-
-  // Deleting Note
-  const handleDelete = (e) => {
-    handleRipples(e);
-    document.querySelector(".delCon").classList.remove("openAnime");
-    document.querySelector(".delCon").classList.add("cancelAnime");
-    setTimeout(() => {
-      setDel(false);
-    }, 300);
-    setDeleting(true);
-    let delId = e.target.id;
-    database.users
-      .doc(currentUser.uid)
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-          let tempNote = doc.data().note;
-          let decryptedNote = ''
-          if (tempNote !== ''){
-            decryptedNote = JSON.parse(CryptoJS.AES.decrypt(tempNote, doc.data().password).toString(CryptoJS.enc.Utf8))
-            let b = -1;
-            decryptedNote.map((tNote) => {
-              b = b + 1;
-              if (tNote.noteId === delId) {
-                decryptedNote.splice(b, 1);
-                return decryptedNote;
-              }
-              return tNote;
-            });
-            let tempNoteEncrypted = CryptoJS.AES.encrypt(JSON.stringify(decryptedNote), doc.data().password).toString();
-            database.users.doc(currentUser.uid).update({
-              note: tempNoteEncrypted,
-            });
-          }
-          setDeleting(false);
-          setPreview(false);
-        }
-      });
-  };
-
-  // Open Delete Menu
-  const handleOpen = async () => {
-    await setDel(true);
-    document.querySelector(".delCon").classList.add("openAnime");
-  };
-
-  // Close Delete Menu
-  const handleCancel = async () => {
-    await document.querySelector(".delCon").classList.remove("openAnime");
-    document.querySelector(".delCon").classList.add("cancelAnime");
-    setTimeout(() => {
-      setDel(false);
-    }, 300);
-  };
-
-  // Open Edit
-  const handleEdit = () => {
-    setEdit(true)
-  }
 
   // Burger Animation
   let burger = false;
@@ -272,6 +188,7 @@ export default function NotesRender() {
     };
     handleBurgerSub();
   }, [sideNavbar]);
+
   return (
     <>
       {sideNavbar && <SideNav />}
@@ -279,81 +196,12 @@ export default function NotesRender() {
       {about && <About/>}
       {contact && <Contact/>}
       {profileExist && <CreateProfile/>}
-      {preview && !edit && (
-        <div className="preCon" style={{ background: defaultTheme[0] }}>
-          <div
-            className="navPreview"
-            style={{
-              background: defaultTheme[1],
-              boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
-              color:defaultTheme[2]
-            }}
-          >
-            <button
-              className="back"
-              style={{ background: defaultTheme[3] }}
-              onClick={() => handleBack()}
-            >
-              <BackSvg />
-            </button>
-            <h1>Note</h1>
-            <button
-              className="edit"
-              style={{ background: defaultTheme[3] }}
-              onClick={handleEdit}
-            >
-              <Edit />
-            </button>
-            <button
-              className="delete"
-              onClick={handleOpen}
-            >
-              <Delete />
-            </button>
-          </div>
-          {del && (
-            <div className="delCon">
-              <div
-                className="del"
-                style={{ background: defaultTheme[1], color: defaultTheme[2] }}
-              >
-                <h1>Are you sure to delete?</h1>
-                <div>
-                  <button
-                    className="cancelDel"
-                    onClick={handleCancel}
-                    style={{ background: defaultTheme[3] }}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    className="deleteDel"
-                    id={`${preNote.noteId}`}
-                    onClick={handleDelete}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-          {deleting && (
-            <div className="loading">
-              <LoadingSvg />
-            </div>
-          )}
-          <PreviewNote note={preNote} />
-        </div>
-      )}
-      {edit && (
-        <div className="preCon">
-          <NotesEdit />
-        </div>
-      )}
+      {preview && !edit && <PreviewNote note={preNote} />}
+      {edit && <NotesEdit />}
       {addNote && !preview && <NotesInput />}
       {!addNote && !preview && (
         <div
-          className="notesContainer"
+          className={`notesContainer ${fadeOut && 'notesFadeOut'}`}
           style={{ background: defaultTheme[0], color: defaultTheme[2] }}
         >
           <h1
@@ -372,11 +220,8 @@ export default function NotesRender() {
               </div>
             </button>
           </h1>
-          {firstLoad && (
-            <div className="loading">
-              <LoadingSvg />
-            </div>
-          )}
+          {loading && <LoadingSvg />}
+          {navigator.onLine === false && <div style={{background: defaultTheme[1]}} className='offlineAlert'>You are offline ⚠</div>}
           <div className="noteCon">
             {noteData &&
               noteData.map((note) => (
