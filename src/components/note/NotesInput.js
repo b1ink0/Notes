@@ -165,11 +165,7 @@ export default function NotesInput() {
 
   return (
     <div className="formContainer" style={{ background: defaultTheme[0] }}>
-      {saving && (
-        <div className="loading">
-          <LoadingSvg />
-        </div>
-      )}
+      {saving && <LoadingSvg />}
       {onlineStatus && <Offline />}
       <div
         className="navInput"

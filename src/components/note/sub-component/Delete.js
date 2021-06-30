@@ -63,13 +63,13 @@ export default function Delete({ note }) {
                 note: tempNoteEncrypted,
               });
             }
-            setLoading(false);
             handleCancel();
             setUpdate(!update);
             setFadeOut(false);
             setTimeout(() => {
+              setLoading(false);
               setPreview(false);
-            }, 200);
+            }, 500);
           }
         });
     }

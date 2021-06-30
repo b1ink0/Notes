@@ -63,7 +63,7 @@
         @include flex;
         width: 95vw;
         height: 50px;
-        margin-top: 15px;
+        margin-top: 10px;
         background-color: white;
         position: sticky;
         border-radius: 10px;
@@ -103,12 +103,11 @@
                 width: 95vw;
                 height: 50px;
                 background: none;
-                // border: 2px solid gray;
                 border: none;
                 border-radius: 10px;
                 background: white;
                 font-size: 25px;
-                margin-top: 20px;
+                margin-top: 12px;
                 outline: none;
                 padding: 10px;
                 box-shadow: rgb(187, 187, 187) 0px 0px 10px;
@@ -131,9 +130,8 @@
             {
                 width: 95vw;
                 min-height: 450px;
-                margin-top: 20px;
+                margin-top: 12px;
                 background: none;
-                // border: 2px solid gray;
                 border: none;
                 border-radius: 15px;
                 font-size: 10px;
@@ -159,8 +157,8 @@
             width: 95vw;
             height: 80px;
             position: relative;
-            margin-top: 20px;
-            margin-bottom: 15px;
+            margin-top: 12px;
+            margin-bottom: 12px;
         }
         .colorInput
         {
@@ -184,7 +182,7 @@
         button
         {
             background: #c990ff;
-            margin-top: 5px;
+            margin-top: 0px;
             margin-bottom: 10px;    
             border: none;
             width: 95%;

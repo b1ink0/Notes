@@ -1,0 +1,23 @@
+@mixin  flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.emptyNote
+{
+    @include flex();
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    opacity: 0.5;
+    animation: fadeInLoading 0.5s forwards;
+    @keyframes fadeInLoading
+    {
+        0%{opacity: 0;}
+        100%{opacity: 1;}
+    }
+    svg
+    {
+        fill: #a5a5a5 !important;
+    }
+}

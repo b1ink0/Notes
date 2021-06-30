@@ -9,6 +9,7 @@ import PreviewNote from "./PreviewNote";
 import NotesEdit from "./NotesEdit";
 import SideNav from "./SideNav";
 import LoadingSvg from "./img/LoadingSvg";
+import EmptyNote from "./img/EmptyNote";
 import Themes from "../nav/Themes";
 import About from "../nav/About";
 import Contact from "../nav/Contact";
@@ -17,6 +18,7 @@ import CreateProfile from "./CreateProfile";
 
 export default function NotesRender() {
   const [loading, setLoading] = useState(true)
+  const [zeroNote, setZeroNote] = useState(false)
   const [noteData, setNoteData] = useState();
   const [preNote, setPreNote] = useState({});
   const { currentUser } = useAuth();
@@ -97,32 +99,40 @@ export default function NotesRender() {
 
   // Saving Data
   useEffect(() => {
-    database.users
-      .doc(currentUser.uid)
-      .get()
-      .then((doc) => {
-        if (doc.data()){
-          if (doc.data().theme){
-            setDefaultTheme(doc.data().theme)
-            setCustomColor(doc.data().theme[0])
+    setTimeout(() => {
+      database.users
+        .doc(currentUser.uid)
+        .get()
+        .then((doc) => {
+          if (doc.data()){
+            if (doc.data().theme){
+              setDefaultTheme(doc.data().theme)
+              setCustomColor(doc.data().theme[0])
+            }
+            if (doc.data().name){
+              setUserName(doc.data().name)
+            }
+            let tempData = doc.data().note;
+            if (tempData !== ''){
+              let decryptedNote = JSON.parse(CryptoJS.AES.decrypt(tempData, doc.data().password).toString(CryptoJS.enc.Utf8))
+              tempData = reverseArr(decryptedNote);
+              if (tempData.length === 0){
+                setZeroNote(true)
+              } else {
+                setZeroNote(false)
+              }
+              console.log('==',tempData)
+              setNoteData(tempData);
+              setNotes(tempData);
+            } else {
+            }
+            if (doc.data().profileImg){
+              setDefaultProfileImg(doc.data().profileImg)
+            }
+            setLoading(false)
           }
-          if (doc.data().name){
-            setUserName(doc.data().name)
-          }
-          let tempData = doc.data().note;
-          if (tempData !== ''){
-            let decryptedNote = JSON.parse(CryptoJS.AES.decrypt(tempData, doc.data().password).toString(CryptoJS.enc.Utf8))
-            tempData = reverseArr(decryptedNote);
-            setNoteData(tempData);
-            setNotes(tempData);
-          } else {
-          }
-          if (doc.data().profileImg){
-            setDefaultProfileImg(doc.data().profileImg)
-          }
-          setLoading(false)
-        }
-      });
+        });
+    }, 200);
   }, [addNote, edit, update, currentUser.uid, setDefaultProfileImg, setDefaultTheme, setNotes, setUserName,setCustomColor]);
 
   // Preview
@@ -221,6 +231,7 @@ export default function NotesRender() {
             </button>
           </h1>
           {loading && <LoadingSvg />}
+          {zeroNote && <EmptyNote/>}
           {navigator.onLine === false && <div style={{background: defaultTheme[1]}} className='offlineAlert'>You are offline ⚠</div>}
           <div className="noteCon">
             {noteData &&
