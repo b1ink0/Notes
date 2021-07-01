@@ -1,0 +1,111 @@
+@mixin flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.deskTop {
+  display: none;
+}
+@media only screen and (min-width: 792px) {
+  .deskTop {
+    display: flex;
+    background: none !important;
+    flex-direction: row;
+    position: absolute;
+    height: 50px;
+    animation: none;
+    z-index: 1;
+    left: 0;
+    overflow: visible;
+    .navClose {
+      display: none !important;
+    }
+    .profile {
+      position: absolute;
+      height: 50px;
+      width: 50px;
+      margin: 0;
+      right: 0;
+      cursor: pointer;
+      .profileImgCon {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        border: 0px solid white;
+        svg {
+          width: 40px !important;
+          height: 40px !important;
+        }
+      }
+      .profileNameCon {
+        display: none;
+      }
+    }
+    .optionCon {
+      flex-direction: row;
+      justify-content: center;
+      height: 50px;
+      width: 100%;
+      div,
+      button {
+        display: flex !important;
+        position: relative;
+        width: 100px;
+        height: 50px;
+        margin-top: 0;
+        font-size: 23px;
+        background: none;
+        margin-right: 20px !important;
+        margin-left: 20px !important;
+        box-shadow: none !important;
+        transition: all 0.15s;
+        border-radius: 0;
+      }
+      button:nth-child(1) {
+        margin-left: 22% !important;
+      }
+      button:hover {
+        filter: brightness(0.85);
+      }
+    }
+    .profileEditCon {
+      position: fixed;
+      width: 100vw;
+      min-height: 100vh;
+      top: 0;
+      left: 0;
+      form {
+        width: 50vw;
+        height: 300px;
+        div button {
+          display: flex !important;
+          position: relative;
+        }
+      }
+    }
+    .delCon {
+      position: fixed;
+      width: 100vw;
+      min-height: 100vh;
+      top: 0;
+      left: 0;
+      .del {
+        width: 35vw !important;
+        height: 200px !important;
+        h1 {
+          position: relative;
+        }
+        div {
+          height: 50px !important;
+          margin-top: 35px;
+          position: relative !important;
+          button {
+            position: relative;
+            display: flex !important;
+            width: 30% !important;
+          }
+        }
+      }
+    }
+  }
+}

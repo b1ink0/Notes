@@ -7,18 +7,19 @@ import NotesInput from "./NotesInput";
 import "./note-sass/NotesRender.scss";
 import PreviewNote from "./PreviewNote";
 import NotesEdit from "./NotesEdit";
+import DesktopNav from "./DesktopNav";
 import SideNav from "./SideNav";
 import LoadingSvg from "./img/LoadingSvg";
 import EmptyNote from "./img/EmptyNote";
 import Themes from "../nav/Themes";
 import About from "../nav/About";
 import Contact from "../nav/Contact";
-import CryptoJS from 'crypto-js'
+import CryptoJS from "crypto-js";
 import CreateProfile from "./CreateProfile";
 
 export default function NotesRender() {
-  const [loading, setLoading] = useState(true)
-  const [zeroNote, setZeroNote] = useState(false)
+  const [loading, setLoading] = useState(true);
+  const [zeroNote, setZeroNote] = useState(false);
   const [noteData, setNoteData] = useState();
   const [preNote, setPreNote] = useState({});
   const { currentUser } = useAuth();
@@ -43,12 +44,12 @@ export default function NotesRender() {
     setDefaultProfileImg,
     setCustomColor,
     fadeOut,
-    setFadeOut
+    setFadeOut,
   } = useStateContext();
 
   // Body Theme
   useEffect(() => {
-    setFadeOut(false)
+    setFadeOut(false);
     document.querySelector("body").style.background = defaultTheme[0];
   }, [defaultTheme, setFadeOut]);
 
@@ -62,40 +63,66 @@ export default function NotesRender() {
   }
 
   // First load
-  useEffect(()=>{
-    let com
+  useEffect(() => {
+    let com;
     if (currentUser) {
       com = database.users
         .doc(currentUser.uid)
         .get()
         .then((doc) => {
           if (doc.exists) {
-            if (doc.data()){
-              if (doc.data().password){
-                return
-              }else {
-                setProfileExist(true)
+            if (doc.data()) {
+              if (doc.data().password) {
+                return;
+              } else {
+                setProfileExist(true);
               }
             }
             return;
           } else {
-            setNoteData('')
-            setUserName(`User-${Math.floor(Math.random()*1000)}`)
-            setDefaultProfileImg(1)
-            setDefaultTheme(["#ececec","#ffffff","#000000","#c3c3c3","#bbbbbb","#c990ff","#00b300","1","#bbbbbb"])
-            setProfileExist(true)
+            setNoteData("");
+            setUserName(`User-${Math.floor(Math.random() * 1000)}`);
+            setDefaultProfileImg(1);
+            setDefaultTheme([
+              "#ececec",
+              "#ffffff",
+              "#000000",
+              "#c3c3c3",
+              "#bbbbbb",
+              "#c990ff",
+              "#00b300",
+              "1",
+              "#bbbbbb",
+            ]);
+            setProfileExist(true);
             database.users.doc(currentUser.uid).set({
-              note: '',
+              note: "",
               uid: currentUser.uid,
-              theme: ["#ececec","#ffffff","#000000","#c3c3c3","#bbbbbb","#c990ff","#00b300","1","#bbbbbb"],
-              name: `User-${Math.floor(Math.random()*1000)}`,
-              profileImg: 1
+              theme: [
+                "#ececec",
+                "#ffffff",
+                "#000000",
+                "#c3c3c3",
+                "#bbbbbb",
+                "#c990ff",
+                "#00b300",
+                "1",
+                "#bbbbbb",
+              ],
+              name: `User-${Math.floor(Math.random() * 1000)}`,
+              profileImg: 1,
             });
           }
         });
     }
     return com;
-  },[currentUser , setProfileExist, setDefaultProfileImg, setDefaultTheme, setUserName])
+  }, [
+    currentUser,
+    setProfileExist,
+    setDefaultProfileImg,
+    setDefaultTheme,
+    setUserName,
+  ]);
 
   // Saving Data
   useEffect(() => {
@@ -104,40 +131,54 @@ export default function NotesRender() {
         .doc(currentUser.uid)
         .get()
         .then((doc) => {
-          if (doc.data()){
-            if (doc.data().theme){
-              setDefaultTheme(doc.data().theme)
-              setCustomColor(doc.data().theme[0])
+          if (doc.data()) {
+            if (doc.data().theme) {
+              setDefaultTheme(doc.data().theme);
+              setCustomColor(doc.data().theme[0]);
             }
-            if (doc.data().name){
-              setUserName(doc.data().name)
+            if (doc.data().name) {
+              setUserName(doc.data().name);
             }
             let tempData = doc.data().note;
-            if (tempData !== ''){
-              let decryptedNote = JSON.parse(CryptoJS.AES.decrypt(tempData, doc.data().password).toString(CryptoJS.enc.Utf8))
+            if (tempData !== "") {
+              let decryptedNote = JSON.parse(
+                CryptoJS.AES.decrypt(tempData, doc.data().password).toString(
+                  CryptoJS.enc.Utf8
+                )
+              );
               tempData = reverseArr(decryptedNote);
-              if (tempData.length === 0){
-                setZeroNote(true)
+              if (tempData.length === 0) {
+                setZeroNote(true);
               } else {
-                setZeroNote(false)
+                setZeroNote(false);
               }
-              console.log('==',tempData)
+              console.log("==", tempData);
               setNoteData(tempData);
               setNotes(tempData);
             } else {
             }
-            if (doc.data().profileImg){
-              setDefaultProfileImg(doc.data().profileImg)
+            if (doc.data().profileImg) {
+              setDefaultProfileImg(doc.data().profileImg);
             }
-            setLoading(false)
+            setLoading(false);
           }
         });
     }, 200);
-  }, [addNote, edit, update, currentUser.uid, setDefaultProfileImg, setDefaultTheme, setNotes, setUserName,setCustomColor]);
+  }, [
+    addNote,
+    edit,
+    update,
+    currentUser.uid,
+    setDefaultProfileImg,
+    setDefaultTheme,
+    setNotes,
+    setUserName,
+    setCustomColor,
+  ]);
 
   // Preview
   const handleSee = (e) => {
-    setFadeOut(true)
+    setFadeOut(true);
     let show = e.target.id;
     const hShow = document.getElementById(`${show}`).dataset;
     setPreNote({
@@ -160,9 +201,9 @@ export default function NotesRender() {
       date: hShow.date,
       noteId: hShow.noteid,
     });
-    setTimeout(()=>{
+    setTimeout(() => {
       setPreview(true);
-    },200)
+    }, 200);
   };
 
   // Burger Animation
@@ -203,25 +244,26 @@ export default function NotesRender() {
     <>
       {sideNavbar && <SideNav />}
       {themes && <Themes />}
-      {about && <About/>}
-      {contact && <Contact/>}
-      {profileExist && <CreateProfile/>}
+      {about && <About />}
+      {contact && <Contact />}
+      {profileExist && <CreateProfile />}
       {preview && !edit && <PreviewNote note={preNote} />}
       {edit && <NotesEdit />}
       {addNote && !preview && <NotesInput />}
       {!addNote && !preview && (
         <div
-          className={`notesContainer ${fadeOut && 'notesFadeOut'}`}
+          className={`notesContainer ${fadeOut && "notesFadeOut"}`}
           style={{ background: defaultTheme[0], color: defaultTheme[2] }}
         >
-          <h1
+          <div
             className="logo"
             style={{
               background: defaultTheme[1],
               boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
             }}
           >
-            Notes
+            <DesktopNav />
+            <h1>Notes</h1>
             <button onClick={handleBurger}>
               <div className="burger" style={{ background: defaultTheme[3] }}>
                 <div></div>
@@ -229,10 +271,17 @@ export default function NotesRender() {
                 <div></div>
               </div>
             </button>
-          </h1>
+          </div>
           {loading && <LoadingSvg />}
-          {zeroNote && <EmptyNote/>}
-          {navigator.onLine === false && <div style={{background: defaultTheme[1]}} className='offlineAlert'>You are offline ⚠</div>}
+          {zeroNote && <EmptyNote />}
+          {navigator.onLine === false && (
+            <div
+              style={{ background: defaultTheme[1] }}
+              className="offlineAlert"
+            >
+              You are offline ⚠
+            </div>
+          )}
           <div className="noteCon">
             {noteData &&
               noteData.map((note) => (
@@ -258,7 +307,9 @@ export default function NotesRender() {
                   data-noteid={note.noteId}
                 >
                   <h1>{note.title}</h1>
-                  <p style={{ color: `${note.textColor}`}} className="date">{note.date}</p>
+                  <p style={{ color: `${note.textColor}` }} className="date">
+                    {note.date}
+                  </p>
                 </div>
               ))}
           </div>

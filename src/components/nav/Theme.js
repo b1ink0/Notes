@@ -22,6 +22,7 @@ export default function Theme({
     setCustomThemeOn,
     onlineStatus,
     setOnlineStatus,
+    defaultTheme,
   } = useStateContext();
   const { currentUser } = useAuth();
 
@@ -62,14 +63,14 @@ export default function Theme({
         value="1"
         style={{
           background: custom ? customColor : backgroundColor,
-          color: custom ? "#ffffff" : color,
+          color: custom ? defaultTheme[2] : color,
         }}
         onClick={handleTheme}
       >
         <h1
           className={custom && "customTheme"}
           style={{
-            background: custom ? customColor : background,
+            background: custom ? defaultTheme[1] : background,
             boxShadow: `0px 0px 10px ${
               custom ? "#00000000" : boxShadow
             },0 10px 5px rgba(0,0,0,0)`,
@@ -80,7 +81,7 @@ export default function Theme({
         <div
           className={`theme1 ${custom && "customTheme"}`}
           style={{
-            background: custom ? customColor : background,
+            background: custom ? defaultTheme[1] : background,
             boxShadow: `0px 0px 10px ${
               custom ? "#00000000" : boxShadow
             },0 10px 5px rgba(0,0,0,0)`,

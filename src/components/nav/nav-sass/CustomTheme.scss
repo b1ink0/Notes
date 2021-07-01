@@ -1,137 +1,145 @@
-@mixin  flex 
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+@mixin flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.customThemeCon
-{
-    @include flex();
-    position: fixed;
-    width: 100%;
-    min-height: 100%;
-    z-index: 10;
-    background-color: rgba(0, 0, 0, 0.342);
-    animation: fadeInCustomTheme 0.3s forwards;
-    @keyframes fadeInCustomTheme 
-    {
-        0%{opacity: 0;}
-        100%{opacity: 1;}
+.customThemeCon {
+  @include flex();
+  position: fixed;
+  width: 100%;
+  min-height: 100%;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.342);
+  animation: fadeInCustomTheme 0.3s forwards;
+  @keyframes fadeInCustomTheme {
+    0% {
+      opacity: 0;
     }
-    .loading
-    {
-        @include flex;
-        color: gray;
+    100% {
+      opacity: 1;
+    }
+  }
+  .loading {
+    @include flex;
+    color: gray;
+    width: 100%;
+    height: 100%;
+    font-size: 35px;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.342);
+    z-index: 10;
+    .svgLoad1 {
+      stroke-dasharray: 250;
+      stroke-dashoffset: 250;
+      animation: load 3s ease infinite;
+      position: absolute;
+      top: 40vh;
+    }
+    .svgLoad2 {
+      position: absolute;
+      top: 40vh;
+      circle {
+        stroke: #dddddd;
+      }
+    }
+    @keyframes load {
+      0% {
+        stroke-dashoffset: 250;
+        transform: rotate(0deg);
+      }
+      50% {
+        stroke-dashoffset: 0;
+        transform: rotate(180deg);
+      }
+      100% {
+        stroke-dashoffset: -250;
+        transform: rotate(0deg);
+      }
+    }
+  }
+  .customTheme {
+    @include flex();
+    flex-direction: column;
+    width: 90vw;
+    height: 300px;
+    background-color: white;
+    border-radius: 10px;
+    .btnCon {
+      @include flex();
+      width: 100%;
+      height: 50px;
+      margin-top: 10px;
+      button {
+        border-radius: 10px;
+        border: none;
+        width: 45%;
+        height: 30px;
+        color: white;
+        background: red;
+        font-size: 20px;
+        cursor: pointer;
+        margin: 10px;
+      }
+      button:nth-child(2) {
+        background: rgb(32, 212, 47);
+      }
+    }
+    .themeCon {
+      @include flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      width: 85vw;
+      height: 180px;
+      border-radius: 10px;
+      margin-top: 10px;
+      background-color: #ececec;
+      position: relative;
+      border: 1px solid #dbdbdb;
+      input {
+        position: absolute;
+        opacity: 0;
+        outline: none;
         width: 100%;
         height: 100%;
-        font-size: 35px;
-        position: fixed;
-        background-color: rgba(0, 0, 0, 0.342);
-        z-index: 10;
-        .svgLoad1
-        {
-            stroke-dasharray: 250;
-            stroke-dashoffset: 250;
-            animation: load 3s ease infinite;
-            position: absolute;
-            top: 40vh;
-        }
-        .svgLoad2
-        {
-            position: absolute;
-            top: 40vh;
-            circle
-            {
-                stroke: #dddddd;
-            }
-        }
-        @keyframes load {
-            0%{stroke-dashoffset: 250; transform: rotate(0deg);}
-            50%{stroke-dashoffset: 0; transform: rotate(180deg)}
-            100%{stroke-dashoffset: -250; transform: rotate(0deg)}
-        }
-    }
-    .customTheme
-    {
+      }
+      h1,
+      .theme1 {
         @include flex();
-        flex-direction: column;
-        width: 90vw;
-        height: 300px;
-        background-color: white;
+        width: 95%;
         border-radius: 10px;
-        .btnCon
-        {
-            @include flex();
-            width: 100%;
-            height: 50px;
-            margin-top: 10px;
-            button
-            {
-                border-radius: 10px;
-                border: none;
-                width: 45%;
-                height: 30px;
-                color: white;
-                background: red;
-                font-size: 20px;
-                cursor: pointer;
-                margin: 10px;
-            }
-            button:nth-child(2)
-            {
-                background: rgb(32, 212, 47);
-            }
-        }
-        .themeCon
-        {
-            @include flex;
-            justify-content: flex-start;
-            flex-direction: column;
-            width: 85vw;
-            height: 180px;
-            border-radius: 10px;
-            margin-top: 10px;
-            background-color: #ececec;
-            position: relative;
-            border: 1px solid #dbdbdb;
-            input
-            {
-                position: absolute;
-                opacity: 0;
-                outline: none;
-                width: 100%;
-                height: 100%;
-            }
-            h1,.theme1
-            {
-                @include flex();
-                width: 95%;
-                border-radius: 10px;
-                height: 35px;
-                margin-top: 10px;
-                background-color: white;
-                font-size: 20px;
-                box-shadow: 3px 3px 5px #bbb, 
-                0 10px 5px rgba(0,0,0,0);
-                pointer-events: none;
-            }
-            .theme1
-            {
-                @include flex();
-                // justify-content: center !important;
-                // align-items: center !important;
-                padding: 10px;
-                height: 115px;
-            }
-        }
+        height: 35px;
+        margin-top: 10px;
+        background-color: white;
+        font-size: 20px;
+        box-shadow: 3px 3px 5px #bbb, 0 10px 5px rgba(0, 0, 0, 0);
+        pointer-events: none;
+      }
+      .theme1 {
+        @include flex();
+        // justify-content: center !important;
+        // align-items: center !important;
+        padding: 10px;
+        height: 115px;
+      }
     }
+  }
 }
-.fadeOutCustomTheme
-{
-    animation: fadeOutCustomTheme 0.3s forwards;
-    @keyframes fadeOutCustomTheme 
-    {
-        0%{opacity: 1;}
-        100%{opacity: 0;}
+.fadeOutCustomTheme {
+  animation: fadeOutCustomTheme 0.3s forwards;
+  @keyframes fadeOutCustomTheme {
+    0% {
+      opacity: 1;
     }
+    100% {
+      opacity: 0;
+    }
+  }
+}
+@media only screen and (min-width: 792px) {
+  .customThemeCon .customTheme {
+    width: 500px !important;
+    .themeCon {
+      width: 450px !important;
+    }
+  }
 }

@@ -1,227 +1,219 @@
-@mixin  flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+@mixin flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 ::placeholder {
-    color: rgb(214, 214, 214);
+  color: rgb(214, 214, 214);
 }
-.formContainer
-{
+.formContainer {
+  @include flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  position: absolute;
+  background-color: #ececec;
+  top: 0%;
+  animation: intro 0.4s ease forwards;
+  @keyframes intro {
+    0% {
+      left: 100%;
+    }
+    100% {
+      left: 0%;
+    }
+  }
+  .loading {
     @include flex;
+    color: gray;
+    width: 100%;
+    height: 100%;
+    font-size: 35px;
+    top: 0;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.342);
+    z-index: 10;
+    .svgLoad1 {
+      stroke-dasharray: 250;
+      stroke-dashoffset: 250;
+      animation: load 3s ease infinite;
+      position: absolute;
+      top: 40vh;
+    }
+    .svgLoad2 {
+      position: absolute;
+      top: 40vh;
+      circle {
+        stroke: #dddddd;
+      }
+    }
+    @keyframes load {
+      0% {
+        stroke-dashoffset: 250;
+        transform: rotate(0deg);
+      }
+      50% {
+        stroke-dashoffset: 0;
+        transform: rotate(180deg);
+      }
+      100% {
+        stroke-dashoffset: -250;
+        transform: rotate(0deg);
+      }
+    }
+  }
+  .navInput {
+    @include flex;
+    width: 95vw;
+    height: 50px;
+    margin-top: 10px;
+    background-color: white;
+    position: sticky;
+    border-radius: 10px;
+    box-shadow: rgb(187, 187, 187) 0px 0px 10px;
+    overflow: hidden;
+    .backInput {
+      @include flex;
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      left: 0;
+      border: none;
+      background: rgb(223, 223, 223);
+      cursor: pointer;
+      img {
+        width: 30px;
+        height: 30px;
+        pointer-events: none;
+      }
+    }
+  }
+  form {
+    @include flex;
+    justify-content: flex-start;
     flex-direction: column;
     width: 100%;
     min-height: 100vh;
-    position: absolute;
-    background-color: #ececec;
-    top: 0%;
-    animation: intro 0.4s ease forwards;
-    @keyframes intro {
-        0%{
-            left: 100%;
-        }
-        100%{
-            left: 0%;
-        }
-    }
-    .loading
-    {
-        @include flex;
-        color: gray;
-        width: 100%;
-        height: 100%;
-        font-size: 35px;
-        top: 0;
-        position: fixed;
-        background-color: rgba(0, 0, 0, 0.342);
-        z-index: 10;
-        .svgLoad1
-        {
-            stroke-dasharray: 250;
-            stroke-dashoffset: 250;
-            animation: load 3s ease infinite;
-            position: absolute;
-            top: 40vh;
-        }
-        .svgLoad2
-        {
-            position: absolute;
-            top: 40vh;
-            circle
-            {
-                stroke: #dddddd;
-            }
-        }
-        @keyframes load {
-            0%{stroke-dashoffset: 250; transform: rotate(0deg);}
-            50%{stroke-dashoffset: 0; transform: rotate(180deg)}
-            100%{stroke-dashoffset: -250; transform: rotate(0deg)}
-        }
-    }
-    .navInput
-    {
-        @include flex;
+    .inputCon {
+      @include flex;
+      position: relative;
+      .titleInput {
         width: 95vw;
         height: 50px;
-        margin-top: 10px;
-        background-color: white;
-        position: sticky;
+        background: none;
+        border: none;
         border-radius: 10px;
-        box-shadow: rgb(187, 187, 187) 0px 0px 10px; 
-        overflow: hidden;
-        .backInput
-        {
-            @include flex;
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            left: 0;
-            border: none;
-            background: rgb(223, 223, 223);
-            cursor: pointer;
-            img
-            {
-                width: 30px;
-                height: 30px;
-                pointer-events: none;
-            }
-        }
+        background: white;
+        font-size: 25px;
+        margin-top: 12px;
+        outline: none;
+        padding: 10px;
+        box-shadow: rgb(187, 187, 187) 0px 0px 10px;
+      }
+      .chaLimit {
+        position: absolute;
+        right: 6px;
+        bottom: 4px;
+        color: #000000;
+        font-size: 12px;
+        opacity: 0.5;
+      }
     }
-    form
-    {
+    .textareaCon {
+      @include flex;
+      position: relative;
+      textarea {
+        width: 95vw;
+        min-height: 450px;
+        margin-top: 12px;
+        background: none;
+        border: none;
+        border-radius: 15px;
+        font-size: 10px;
+        outline: none;
+        resize: none;
+        padding: 10px;
+        box-shadow: rgb(187, 187, 187) 0px 0px 10px;
+      }
+      .chaLimit {
+        position: absolute;
+        right: 10px;
+        bottom: 6px;
+        color: #000000;
+        font-size: 12px;
+        opacity: 0.5;
+      }
+    }
+    .selectContainer {
+      @include flex;
+      flex-direction: column;
+      width: 95vw;
+      height: 80px;
+      position: relative;
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+    .colorInput {
+      @include flex;
+      justify-content: space-evenly;
+      width: 95%;
+      height: 50px;
+      .colorContainer {
         @include flex;
-        justify-content: flex-start;
-        flex-direction: column;
-        width: 100%;
-        min-height: 100vh;
-        .inputCon
-        {
-            @include flex;
-            position: relative;
-            .titleInput
-            {
-                width: 95vw;
-                height: 50px;
-                background: none;
-                border: none;
-                border-radius: 10px;
-                background: white;
-                font-size: 25px;
-                margin-top: 12px;
-                outline: none;
-                padding: 10px;
-                box-shadow: rgb(187, 187, 187) 0px 0px 10px;
-            }
-            .chaLimit
-            {
-                position: absolute;
-                right: 6px;
-                bottom: 4px;
-                color: #000000;
-                font-size: 12px;
-                opacity: 0.5;
-            }
+        position: relative;
+        div {
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
         }
-        .textareaCon
-        {
-            @include flex;
-            position: relative;
-            textarea 
-            {
-                width: 95vw;
-                min-height: 450px;
-                margin-top: 12px;
-                background: none;
-                border: none;
-                border-radius: 15px;
-                font-size: 10px;
-                outline: none;
-                resize: none;
-                padding: 10px;
-                box-shadow: rgb(187, 187, 187) 0px 0px 10px;
-            }
-            .chaLimit
-            {
-                position: absolute;
-                right: 10px;
-                bottom: 6px;
-                color: #000000;
-                font-size: 12px;
-                opacity: 0.5;
-            }
-        }
-        .selectContainer
-        {
-            @include flex;
-            flex-direction: column;
-            width: 95vw;
-            height: 80px;
-            position: relative;
-            margin-top: 12px;
-            margin-bottom: 12px;
-        }
-        .colorInput
-        {
-            @include flex;
-            justify-content: space-evenly;
-            width: 95%;
-            height: 50px;
-            .colorContainer
-            {
-                @include flex;
-                position: relative;
-                div
-                {
-                    position: absolute;
-                    width: 20px;
-                    height: 20px;
-                    border-radius: 50%;
-                }
-            }
-        }
-        button
-        {
-            background: #c990ff;
-            margin-top: 0px;
-            margin-bottom: 10px;    
-            border: none;
-            width: 95%;
-            height: 40px;
-            font-size: 25px;
-            color: white;
-            border-radius: 10px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: rgb(187, 187, 187) 0px 0px 10px;
-            span
-            {
-            position: absolute;
-            background: #fff;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            border-radius: 50%;
-            animation: animate 0.5s linear infinite;
-            }
-            @keyframes animate {
-                0%{
-                    width: 0;
-                    height: 0;
-                    opacity: 0.5;
-                }
-                100%{
-                    width: 500px;
-                    height: 500px;
-                    opacity: 0;
-                }
-            }
-        }
+      }
     }
+    button {
+      background: #c990ff;
+      margin-top: 0px;
+      margin-bottom: 10px;
+      border: none;
+      width: 95%;
+      height: 40px;
+      font-size: 25px;
+      color: white;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: rgb(187, 187, 187) 0px 0px 10px;
+      span {
+        position: absolute;
+        background: #fff;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        border-radius: 50%;
+        animation: animate 0.5s linear infinite;
+      }
+      @keyframes animate {
+        0% {
+          width: 0;
+          height: 0;
+          opacity: 0.5;
+        }
+        100% {
+          width: 500px;
+          height: 500px;
+          opacity: 0;
+        }
+      }
+    }
+  }
 }
-.close
-{
-    animation: close 0.3s forwards;
+.close {
+  animation: close 0.3s forwards;
 }
 @keyframes close {
-    0%{left: 0;}
-    100%{left: 100%;}
+  0% {
+    left: 0;
+  }
+  100% {
+    left: 100%;
+  }
 }
