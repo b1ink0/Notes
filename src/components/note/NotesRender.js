@@ -152,7 +152,6 @@ export default function NotesRender() {
               } else {
                 setZeroNote(false);
               }
-              console.log("==", tempData);
               setNoteData(tempData);
               setNotes(tempData);
             } else {
