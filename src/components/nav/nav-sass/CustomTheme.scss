@@ -116,8 +116,6 @@
       }
       .theme1 {
         @include flex();
-        // justify-content: center !important;
-        // align-items: center !important;
         padding: 10px;
         height: 115px;
       }
