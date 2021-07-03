@@ -1,1 +1,1 @@
-# https://stupidgaming.github.io/Notes/
+# https://b1ink0.github.io/Notes/
