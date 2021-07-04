@@ -85,7 +85,7 @@ export default function About() {
                 })
               }
             >
-              <img alt='' src={CustomizeImg} />
+              <img alt="" src={CustomizeImg} />
             </div>
           </li>
           <li style={defaultThemeStyleSub}>
@@ -100,7 +100,7 @@ export default function About() {
                 })
               }
             >
-              <img alt='' src={ThemeChange} />
+              <img alt="" src={ThemeChange} />
             </div>
           </li>
           <li style={defaultThemeStyleSub}>
@@ -115,11 +115,17 @@ export default function About() {
                 })
               }
             >
-              <img alt='' src={EncryptedImg} />
+              <img alt="" src={EncryptedImg} />
             </div>
           </li>
           <li style={defaultThemeStyleSub}>
-            <a rel="noreferrer" href="https://github.com/stupidgaming/Notes" target="_blank"> </a>
+            <a
+              rel="noreferrer"
+              href="https://github.com/b1ink0/Notes"
+              target="_blank"
+            >
+              {" "}
+            </a>
             Source Code
             <div
               className="add"
@@ -131,7 +137,7 @@ export default function About() {
                 })
               }
             >
-              <img alt='' src={SourceCodeIcon} />
+              <img alt="" src={SourceCodeIcon} />
             </div>
           </li>
         </ul>
