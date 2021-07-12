@@ -34,7 +34,7 @@ export default function NoteInputFontSelect({ Font }) {
         zIndex: `${fOpen ? "4" : ""}`,
         background: defaultTheme[1],
         color: defaultTheme[2],
-        boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
+        boxShadow: `0px 0px 0px ${defaultTheme[4]}`,
       }}
       onClick={() => setFOpen(!fOpen)}
     >

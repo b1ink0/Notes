@@ -186,7 +186,7 @@ export default function NotesEdit() {
         style={{
           background: defaultTheme[1],
           color: defaultTheme[2],
-          boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
+          boxShadow: `0px 0px 0px ${defaultTheme[4]}`,
         }}
       >
         <button
@@ -213,7 +213,7 @@ export default function NotesEdit() {
               color: `${textColor}`,
               transition: "all 0.35s",
               fontFamily: `${font}`,
-              boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
+              boxShadow: `0px 0px 0px ${defaultTheme[4]}`,
             }}
           />
           <div className="chaLimit">{title.length}/15</div>
@@ -232,7 +232,7 @@ export default function NotesEdit() {
               transition: "all 0.35s",
               fontFamily: `${font}`,
               fontSize: `${fontSize}px`,
-              boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
+              boxShadow: `0px 0px 0px ${defaultTheme[4]}`,
             }}
           />
           <div className="chaLimit">{text.length}/1000</div>
@@ -264,7 +264,7 @@ export default function NotesEdit() {
           className="save"
           style={{
             background: defaultTheme[5],
-            boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
+            boxShadow: `0px 0px 0px ${defaultTheme[4]}`,
           }}
           onClick={handleRipples}
         >

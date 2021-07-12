@@ -66,7 +66,7 @@ export default function NotesInputSelect({
           width: `${bgOpen ? "95vw" : ""}`,
           height: `${bgOpen ? "80px" : ""}`,
           borderRadius: `${bgOpen ? "15px" : ""}`,
-          boxShadow: `0px 0px 10px ${defaultTheme[4]}`,
+          boxShadow: `0px 0px 0px ${defaultTheme[4]}`,
           background:defaultTheme[1],
           color:defaultTheme[2]
         }}
