@@ -15,7 +15,7 @@ var urlsToCache = [
   "/Notes/static/js/2.67015ee5.chunk.js",
   "/Notes/static/js/2.67015ee5.chunk.js.map",
   "/Notes/static/js/main.7bc73389.chunk.js",
-  "/Notes/static/js/main.7bc73389.chunk.js.js.map",
+  "/Notes/static/js/main.7bc73389.chunk.js.map",
   "/Notes/static/js/runtime-main.badecaba.js",
   "/Notes/static/js/runtime-main.badecaba.js.map",
 ];
