@@ -14,21 +14,10 @@ var urlsToCache = [
   "/Notes/static/css/main.f504639e.chunk.css.map",
   "/Notes/static/js/2.67015ee5.chunk.js",
   "/Notes/static/js/2.67015ee5.chunk.js.map",
-  "/Notes/static/js/main.3c9eb6e1.chunk.js",
-  "/Notes/static/js/main.3c9eb6e1.chunk.js.map",
+  "/Notes/static/js/main.7bc73389.chunk.js",
+  "/Notes/static/js/main.7bc73389.chunk.js.js.map",
   "/Notes/static/js/runtime-main.badecaba.js",
   "/Notes/static/js/runtime-main.badecaba.js.map",
-  "/Notes/static/media/ContactImg.b80a2194.jpeg",
-  "/Notes/static/media/CustomizeImg.d1b7aad7.svg",
-  "/Notes/static/media/EncryptedImg.2a82b95d.svg",
-  "/Notes/static/media/GithubIcon.bcbc735a.svg",
-  "/Notes/static/media/InstagramIcon.a9f8538b.svg",
-  "/Notes/static/media/Linkedin.70903239.svg",
-  "/Notes/static/media/SourceCodeIcon.c915e722.svg",
-  "/Notes/static/media/ThemeChange.91d956b8.svg",
-  "/Notes/static/media/bg.b9946741.svg",
-  "/Notes/static/media/YoutubeIcon.632d83c5.svg",
-  "/Notes/static/media/gIcon.f1089448.svg",
 ];
 
 // Install a service worker
